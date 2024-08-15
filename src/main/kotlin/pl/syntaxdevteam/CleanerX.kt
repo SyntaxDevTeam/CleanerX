@@ -30,7 +30,6 @@ class CleanerX : JavaPlugin(), Listener {
 
     override fun onEnable() {
         saveDefaultConfig()
-
         val manager: LifecycleEventManager<Plugin> = this.lifecycleManager
         manager.registerEventHandler(LifecycleEvents.COMMANDS) { event ->
             val commands: Commands = event.registrar()

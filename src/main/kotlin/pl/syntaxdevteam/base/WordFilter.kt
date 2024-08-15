@@ -7,7 +7,7 @@ import java.util.*
 
 class WordFilter(private val plugin: JavaPlugin) {
 
-    var bannedWords: MutableList<String> = mutableListOf()
+    private var bannedWords: MutableList<String> = mutableListOf()
 
     init {
         loadBannedWords()
@@ -16,15 +16,11 @@ class WordFilter(private val plugin: JavaPlugin) {
     private fun loadBannedWords() {
         val file = File(plugin.dataFolder, "banned_words.yml")
         if (!file.exists()) {
-            file.createNewFile()
-            val config = YamlConfiguration()
-            config.set("bannedWords", listOf<String>())
-            config.save(file)
+            plugin.saveResource("banned_words.yml", false)
         }
         val config = YamlConfiguration.loadConfiguration(file)
         bannedWords = config.getStringList("bannedWords").toMutableList()
     }
-
 
     fun containsBannedWord(message: String): Boolean {
         return bannedWords.any { message.contains(it) }
