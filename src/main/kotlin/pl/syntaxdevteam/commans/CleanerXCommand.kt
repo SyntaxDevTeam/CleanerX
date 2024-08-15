@@ -6,12 +6,6 @@ import io.papermc.paper.plugin.lifecycle.event.LifecycleEventOwner
 import org.jetbrains.annotations.NotNull
 import pl.syntaxdevteam.CleanerX
 
-/**
- * CleanerX command
- *
- * @property plugin
- * @constructor Create empty CleanerXCommand
- */
 @Suppress("UnstableApiUsage", "DEPRECATION")
 class CleanerXCommand(private val plugin: CleanerX) : BasicCommand {
 
@@ -22,24 +16,24 @@ class CleanerXCommand(private val plugin: CleanerX) : BasicCommand {
             when {
                 args[0].equals("help", ignoreCase = true) -> {
                     if (stack.sender.hasPermission("CleanerX.help")) {
-                        stack.sender.sendRichMessage("<gray>#######################################\n#\n#  <gold>Dostępne komendy dla " + pluginMeta.name + ":\n<gray>#\n#  <gold>/crx help <gray>- <white>Wyświetla ten monit.<gray>\n<gray>#  <gold>/crx addword <słowo> <gray>- <white>Dodaje wyraz do czarnej listy.\n<gray>#  <gold>/crx version <gray>- <white>Pokazuje info pluginu. \n<gray>#  <gold>/crx reload <gray>- <white>Przeładowuje plik konfiguracyjny\n<gray>#\n#######################################")
+                        stack.sender.sendRichMessage("<gray>#######################################\n#\n#  <gold>Available commands for " + pluginMeta.name + ":\n<gray>#\n#  <gold>/crx help <gray>- <white>Displays this prompt.<gray>\n<gray>#  <gold>/crx addword <word> <gray>- <white>Adds a word to the blacklist.\n<gray>#  <gold>/crx version <gray>- <white>Shows plugin info. \n<gray>#  <gold>/crx reload <gray>- <white>Reloads the configuration file\n<gray>#\n#######################################")
                     } else {
-                        stack.sender.sendMessage("Nie masz uprawnień do tej komendy.")
+                        stack.sender.sendMessage("You do not have permission to use this command.")
                     }
                 }
                 args[0].equals("version", ignoreCase = true) -> {
                     if (stack.sender.hasPermission("CleanerX.version")) {
-                        stack.sender.sendRichMessage("<gray>#######################################\n#\n#   <gold>→ <bold>" + pluginMeta.name + "</bold> ←\n<gray>#   \n<gray>#   <white>Wersja: <bold><gold>" + pluginMeta.version + "(Paper/Folia)</gold></bold><white>Autor: <bold><gold>" + pdf.authors + "</gold></bold>\n<gray>#   <white>WWW: <bold><gold><click:open_url:'" + pdf.website + "'>"  + pdf.website + "</click></gold></bold><gray>\n#\n#######################################")
+                        stack.sender.sendRichMessage("<gray>#######################################\n#\n#   <gold>→ <bold>" + pluginMeta.name + "</bold> ←\n<gray>#   \n<gray>#   <white>Version: <bold><gold>" + pluginMeta.version + "(Paper/Folia)</gold></bold><white>Author: <bold><gold>" + pdf.authors + "</gold></bold>\n<gray>#   <white>Website: <bold><gold><click:open_url:'" + pdf.website + "'>"  + pdf.website + "</click></gold></bold><gray>\n#\n#######################################")
                     } else {
-                        stack.sender.sendRichMessage("Nie masz uprawnień do tej komendy.")
+                        stack.sender.sendRichMessage("You do not have permission to use this command.")
                     }
                 }
                 args[0].equals("reload", ignoreCase = true) -> {
                     if (stack.sender.hasPermission("CleanerX.reload")) {
                         plugin.restartMySentinelTask()
-                        stack.sender.sendRichMessage("<green>Plik konfiguracyjny został przeładowany.</green>")
+                        stack.sender.sendRichMessage("<green>The configuration file has been reloaded.</green>")
                     } else {
-                        stack.sender.sendRichMessage("Nie masz uprawnień do tej komendy.")
+                        stack.sender.sendRichMessage("You do not have permission to use this command.")
                     }
                 }
                 args[0].equals("addword", ignoreCase = true) -> {
@@ -47,20 +41,20 @@ class CleanerXCommand(private val plugin: CleanerX) : BasicCommand {
                         if (args.size > 1) {
                             val newWord = args[1]
                             plugin.addBannedWord(newWord)
-                            stack.sender.sendRichMessage("<green>Dodano nowe zakazane słowo: $newWord</green>")
+                            stack.sender.sendRichMessage("<green>New banned word added: $newWord</green>")
                         } else {
-                            stack.sender.sendRichMessage("<red>Proszę podać słowo do dodania.</red>")
+                            stack.sender.sendRichMessage("<red>Please provide a word to add.</red>")
                         }
                     } else {
-                        stack.sender.sendMessage("Nie masz uprawnień do tej komendy.")
+                        stack.sender.sendMessage("You do not have permission to use this command.")
                     }
                 }
                 else -> {
-                    stack.sender.sendRichMessage("<green>Wpisz /crx help aby sprawdzić dostępne komendy")
+                    stack.sender.sendRichMessage("<green>Type /crx help to check available commands")
                 }
             }
         } else {
-            stack.sender.sendRichMessage("<green>Wpisz /crx help aby sprawdzić dostępne komendy")
+            stack.sender.sendRichMessage("<green>Type /crx help to check available commands")
         }
     }
     override fun suggest(@NotNull stack: CommandSourceStack, @NotNull args: Array<String>): List<String> {

@@ -33,8 +33,8 @@ class CleanerX : JavaPlugin(), Listener {
         val manager: LifecycleEventManager<Plugin> = this.lifecycleManager
         manager.registerEventHandler(LifecycleEvents.COMMANDS) { event ->
             val commands: Commands = event.registrar()
-            commands.register("CleanerX", "Komenda pluginu CleanerX. Wpisz /slx help aby sprawdzic dostępne komendy", CleanerXCommand(this))
-            commands.register("crx", "Komenda pluginu CleanerX. Wpisz /CleanerX help aby sprawdzic dostępne komendy", CleanerXCommand(this))
+            commands.register("CleanerX", "CleanerX plugin command. Type /slx help to check available commands", CleanerXCommand(this))
+            commands.register("crx", "CleanerX plugin command. Type /cleanerx help to check available commands", CleanerXCommand(this))
         }
         this.wordFilter = WordFilter(this)
         this.fullCensorship = config.getBoolean("fullCensorship")
@@ -55,7 +55,7 @@ class CleanerX : JavaPlugin(), Listener {
             super.reloadConfig()
             updateSentinel()
         } catch (e: Exception) {
-            logger.err("Wystąpił błąd podczas przełądowania konfiguracji: " + e.message)
+            logger.err("An error occurred while reloading the configuration: " + e.message)
         }
     }
 
