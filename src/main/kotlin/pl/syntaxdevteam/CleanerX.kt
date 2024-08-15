@@ -33,8 +33,8 @@ class CleanerX : JavaPlugin(), Listener {
         val manager: LifecycleEventManager<Plugin> = this.lifecycleManager
         manager.registerEventHandler(LifecycleEvents.COMMANDS) { event ->
             val commands: Commands = event.registrar()
-            commands.register("CleanerX", "CleanerX plugin command. Type /slx help to check available commands", CleanerXCommand(this))
-            commands.register("crx", "CleanerX plugin command. Type /cleanerx help to check available commands", CleanerXCommand(this))
+            commands.register("CleanerX", "CleanerX plugin command. Type /cleanerx help to check available commands", CleanerXCommand(this))
+            commands.register("crx", "CleanerX plugin command. Type /crx help to check available commands", CleanerXCommand(this))
         }
         this.wordFilter = WordFilter(this)
         this.fullCensorship = config.getBoolean("fullCensorship")
