@@ -3,8 +3,8 @@
 # Ustaw true jeśli chcesz zakrywać w całości cenzurowane słowo.
 fullCensorship: false
 
-# Wy6bór języka pluginu. Możliwe wartości: "PL", "EN"
-# TODO: language: "PL"
+# Wy6bór języka pluginu. Możliwe wartości: "EN", "PL"
+# TODO: language: "EN"
 
 # Ustawienia sprawdzania i automatycznej aktualizacji
 # TODO: checkForUpdates: true
@@ -12,7 +12,3 @@ fullCensorship: false
 
 # Tryb debugowania ustawiony na true daje więcej opisów działań w konsoli
 debug: false
-
-# Czy bStats powinien być włączony?
-bStats:
-  enabled: true
