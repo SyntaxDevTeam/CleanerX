@@ -1,6 +1,3 @@
-# CleanerX
-A sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment.
-
 ![syntaxdevteam_logo.png](assets/syntaxdevteam_logo.png)
 # Welcome to CleanerX
 CleanerX is a sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment.
