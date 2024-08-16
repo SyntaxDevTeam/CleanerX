@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "pl.syntaxdevteam"
-version = "1.0"
+version = "1.0.3"
 
 repositories {
     mavenCentral()
@@ -24,7 +24,7 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
-    implementation("dev.folia:folia-api:1.20.1-R0.1-SNAPSHOT")
+    compileOnly("dev.folia:folia-api:1.20.1-R0.1-SNAPSHOT")
 }
 
 val targetJavaVersion = 21
@@ -44,33 +44,16 @@ tasks.processResources {
         expand(props)
     }
 }
-hangarPublish {
-    publications {
-        register("CleanerX") {
-
-            apiKey.set(System.getenv("6b1b6f54-8a72-4b6d-8aee-dc6caace71e8.e5bbf911-67a3-4bf7-be8a-00f5366251e6"))
-            channel.set("Snapshot")
-            id.set("SyntaxDevTeam/CleanerX")
-            version = project.version.toString()
-            platforms {
-                paper {
-                    jar.set(tasks.jar.flatMap { it.archiveFile })
-                    platformVersions.set(listOf("1.21", "1.21.1"))
-                }
-            }
-        }
-    }
-}
 
 hangarPublish {
     publications.register("Plugin") {
         version.set(project.version as String)
         channel.set("Snapshot")
-        id.set("SyntaxDevTeam/CleanerX")
-        apiKey.set(System.getenv("6b1b6f54-8a72-4b6d-8aee-dc6caace71e8.e5bbf911-67a3-4bf7-be8a-00f5366251e6"))
+        id.set("CleanerX")
+        apiKey.set("6b1b6f54-8a72-4b6d-8aee-dc6caace71e8.e5bbf911-67a3-4bf7-be8a-00f5366251e6")
         platforms {
             register(Platforms.PAPER) {
-                jar.set(tasks.jar.flatMap { it.archiveFile })
+                jar = tasks.jar.flatMap { it.archiveFile }
                 val versions: List<String> = (property("paperVersion") as String)
                     .split(",")
                     .map { it.trim() }
@@ -87,10 +70,3 @@ hangarPublish {
         }
     }
 }
-
-
-
-
-
-
-
