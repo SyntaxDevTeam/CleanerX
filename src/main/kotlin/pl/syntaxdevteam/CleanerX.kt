@@ -15,14 +15,14 @@ import pl.syntaxdevteam.helpers.*
 @Suppress("UnstableApiUsage")
 class CleanerX : JavaPlugin(), Listener {
 
-    private lateinit var logger: Logger
+    lateinit var logger: Logger
     private val pluginMetas = this.pluginMeta
     private var config = getConfig()
     private var debugMode = config.getBoolean("debug")
     private lateinit var wordFilter: WordFilter
     private var fullCensorship: Boolean = false
     private lateinit var pluginManager: PluginManager
-
+    private lateinit var statsCollector: StatsCollector
 
     override fun onLoad() {
         logger = Logger(pluginMetas, debugMode)
@@ -47,6 +47,7 @@ class CleanerX : JavaPlugin(), Listener {
             val syntaxDevTeamPlugins = loadedPlugins.filter { it != pluginMetas.name }
             logger.pluginStart(syntaxDevTeamPlugins)
         }
+        statsCollector = StatsCollector(this)
     }
 
     fun restartMySentinelTask() {

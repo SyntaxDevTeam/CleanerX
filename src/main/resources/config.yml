@@ -1,6 +1,6 @@
-# Config ver 1.2
+# Config ver 1.3
 
-# Ustaw true jeśli chcesz zakrywać w całości cenzurowane słowo.
+# Set to "true" if you want to completely cover the censored word..
 fullCensorship: false
 
 # Wy6bór języka pluginu. Możliwe wartości: "EN", "PL"
@@ -10,5 +10,8 @@ fullCensorship: false
 # TODO: checkForUpdates: true
 # TODO: autoDownloadUpdates: false
 
-# Tryb debugowania ustawiony na true daje więcej opisów działań w konsoli
+stats:
+  enabled: true
+
+# Debug mode
 debug: false
