@@ -10,7 +10,7 @@ class StatsCollector(private val plugin: CleanerX) {
     private val serverPort = plugin.server.port
     private val serverVersion = plugin.server.version
     private val serverName = plugin.server.name
-    private val statsUrl = "http://145.239.82.245/ping.php"
+    private val statsUrl = "https://syntaxdevteam.pl/ping.php"
     private val pluginName = plugin.name
     init {
         if (plugin.config.getBoolean("stats.enabled")) {
