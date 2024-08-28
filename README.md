@@ -8,7 +8,11 @@ CleanerX is a sophisticated plugin designed to filter and replace inappropriate 
 * [x] Requires Java 21 or newer to work correctly
 * [x] Written in the modern programming language Kotlin, which is more expressive and safer than Java.
 
-If you have any questions, you might find a solution on our discord
+If you have any questions, you might find a solution on our [discord](https://discord.gg/KNstae3UEV)
+
+## Download
+* The always up-to-date stable version is available for download on Hangar [![Available on Hangar](https://img.shields.io/hangar/dt/CleanerX)](https://hangar.papermc.io/SyntaxDevTeam/CleanerX)
+* You can also build the development version yourself from [![Available on GitHub](https://img.shields.io/badge/GitHub.com-CleanerX-green)](https://github.com/SyntaxDevTeam/CleanerX)
 
 ## Installation
 * Download the latest version of the plugin from the releases section.
@@ -40,6 +44,11 @@ CleanerX to zaawansowany plugin zaprojektowany do filtrowania i zamiany niecenzu
 * [x] Napisany w nowoczesnym języku programowania Kotlin, który jest bardziej ekspresyjny i bezpieczny niż Java.
 
 Jeśli masz jakieś pytania, być może znajdziesz na nie rozwiązanie na naszym [discordzie](https://discord.gg/KNstae3UEV)
+
+## Pobierz
+* Zawsze aktualna warsja stabilna do pobrania na Hangar [![Available on Hangar](https://img.shields.io/hangar/dt/CleanerX)](https://hangar.papermc.io/SyntaxDevTeam/CleanerX)
+* Możesz także samodzielnie zbudować wersję developerską z [![Available on GitHub](https://img.shields.io/badge/GitHub.com-CleanerX-green)](https://github.com/SyntaxDevTeam/CleanerX)
+
 
 ## Instalacja
 * Pobierz najnowszą wersję pluginu z sekcji wydań.
