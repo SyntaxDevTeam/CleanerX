@@ -3,8 +3,8 @@
 CleanerX is a sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment.
 
 ## Information
-* [x] CleanerX was designed specifically for the latest version of Minecraft 1.20.6-1.21.1
-* [x] Optimized for Paper engines
+* [x] CleanerX was designed specifically for the latest version of Minecraft 1.20.6-1.21+
+* [x] Written and optimized for the Paper engine and its modifications such as Pufferfish and Purpur
 * [x] Requires Java 21 or newer to work correctly
 * [x] Written in the modern programming language Kotlin, which is more expressive and safer than Java.
 
@@ -34,8 +34,8 @@ Thank you for using CleanerX! I hope it meets your expectations. 😊
 CleanerX to zaawansowany plugin zaprojektowany do filtrowania i zamiany niecenzuralnych słów na ocenzurowane odpowiedniki lub ich całkowitego usuwania, zapewniając czyste i szanujące środowisko gry..
 
 ## Informacje
-* [x] CleanerX został zaprojektowany specjalnie pod najnowszą wersję Minecraft 1.20.6-1.21.1
-* [x] Napisany i zoptymalizowano pod silnik Paper
+* [x] CleanerX został zaprojektowany specjalnie pod najnowszą wersję Minecraft od 1.20.6 do 1.21+
+* [x] Napisany i zoptymalizowano pod silnik Paper oraz jego modyfikacje tj. Pufferfish i Purpur
 * [x] Wymaga Javy 21 lub nowszej, aby działać poprawnie
 * [x] Napisany w nowoczesnym języku programowania Kotlin, który jest bardziej ekspresyjny i bezpieczny niż Java.
 
