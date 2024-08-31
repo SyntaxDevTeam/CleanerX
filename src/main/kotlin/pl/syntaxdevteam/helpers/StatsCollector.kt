@@ -4,6 +4,7 @@ import pl.syntaxdevteam.CleanerX
 import java.net.HttpURLConnection
 import java.net.URL
 
+@Suppress("DEPRECATION")
 class StatsCollector(private val plugin: CleanerX) {
 
     private val serverIP = getExternalIP()

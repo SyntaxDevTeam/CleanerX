@@ -47,9 +47,10 @@ class CleanerX : JavaPlugin(), Listener {
         val loadedPlugins = pluginManager.fetchLoadedPlugins()
         val highestPriorityPlugin = pluginManager.getHighestPriorityPlugin(externalPlugins, loadedPlugins)
         if (highestPriorityPlugin == pluginMetas.name) {
-            val syntaxDevTeamPlugins = loadedPlugins.filter { it != pluginMetas.name }
+            val syntaxDevTeamPlugins = loadedPlugins.filter { it.first != pluginMetas.name }
             logger.pluginStart(syntaxDevTeamPlugins)
         }
+
         statsCollector = StatsCollector(this)
     }
 
