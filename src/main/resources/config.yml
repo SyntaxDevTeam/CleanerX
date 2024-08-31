@@ -3,13 +3,11 @@
 # Set to "true" if you want to completely cover the censored word..
 fullCensorship: false
 
-# Wy6bór języka pluginu. Możliwe wartości: "EN", "PL"
-# TODO: language: "EN"
-
-# Ustawienia sprawdzania i automatycznej aktualizacji
-# TODO: checkForUpdates: true
+# Update check and auto-update settings
+checkForUpdates: true
 # TODO: autoDownloadUpdates: false
 
+# Should StatsCollector be enabled? Recommended setting: true
 stats:
   enabled: true
 

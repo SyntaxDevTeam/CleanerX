@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "pl.syntaxdevteam"
-version = "1.0.4"
+version = "1.1.0"
 
 repositories {
     mavenCentral()
@@ -21,6 +21,10 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("dev.folia:folia-api:1.20.6-R0.1-SNAPSHOT")
+
+    implementation("com.googlecode.json-simple:json-simple:1.1.1")
+    implementation("io.ktor:ktor-client-core:3.0.0-beta-2")
+    implementation("io.ktor:ktor-client-cio:3.0.0-beta-2")
 }
 
 val targetJavaVersion = 21

@@ -15,7 +15,7 @@ import pl.syntaxdevteam.helpers.*
 @Suppress("UnstableApiUsage")
 class CleanerX : JavaPlugin(), Listener {
 
-    lateinit var logger: Logger
+    private lateinit var logger: Logger
     private val pluginMetas = this.pluginMeta
     private var config = getConfig()
     private var debugMode = config.getBoolean("debug")
@@ -23,6 +23,7 @@ class CleanerX : JavaPlugin(), Listener {
     private var fullCensorship: Boolean = false
     private lateinit var pluginManager: PluginManager
     private lateinit var statsCollector: StatsCollector
+    private lateinit var updateChecker: UpdateChecker
 
     override fun onLoad() {
         logger = Logger(pluginMetas, debugMode)
@@ -30,6 +31,8 @@ class CleanerX : JavaPlugin(), Listener {
 
     override fun onEnable() {
         saveDefaultConfig()
+        updateChecker = UpdateChecker(pluginMetas, logger)
+        updateChecker.checkForUpdates()
         val manager: LifecycleEventManager<Plugin> = this.lifecycleManager
         manager.registerEventHandler(LifecycleEvents.COMMANDS) { event ->
             val commands: Commands = event.registrar()
