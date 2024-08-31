@@ -9,17 +9,23 @@ import kotlinx.coroutines.runBlocking
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.Bukkit
+import org.bukkit.configuration.file.FileConfiguration
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 
 @Suppress("UnstableApiUsage")
-class UpdateChecker(private val pluginMeta: PluginMeta, private val logger: Logger) {
+class UpdateChecker(private val pluginMeta: PluginMeta, private val logger: Logger, private val config: FileConfiguration) {
 
     private val hangarApiUrl = "https://hangar.papermc.io/api/v1/projects/${pluginMeta.name}/versions"
     private val pluginUrl = "https://hangar.papermc.io/SyntaxDevTeam/${pluginMeta.name}"
 
     fun checkForUpdates() {
+        if (!config.getBoolean("checkForUpdates", true)) {
+            logger.debug("Update check is disabled in the config.")
+            return
+        }
+
         runBlocking {
             val client = HttpClient()
             val response: HttpResponse = client.get(hangarApiUrl)

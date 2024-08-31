@@ -31,12 +31,12 @@ class CleanerX : JavaPlugin(), Listener {
 
     override fun onEnable() {
         saveDefaultConfig()
-        updateChecker = UpdateChecker(pluginMetas, logger)
+        updateChecker = UpdateChecker(pluginMetas, logger, config)
         updateChecker.checkForUpdates()
         val manager: LifecycleEventManager<Plugin> = this.lifecycleManager
         manager.registerEventHandler(LifecycleEvents.COMMANDS) { event ->
             val commands: Commands = event.registrar()
-            commands.register("CleanerX", "CleanerX plugin command. Type /cleanerx help to check available commands", CleanerXCommand(this))
+            commands.register("cleanerx", "CleanerX plugin command. Type /cleanerx help to check available commands", CleanerXCommand(this))
             commands.register("crx", "CleanerX plugin command. Type /crx help to check available commands", CleanerXCommand(this))
         }
         this.wordFilter = WordFilter(this)
