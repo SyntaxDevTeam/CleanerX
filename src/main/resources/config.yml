@@ -5,7 +5,7 @@ fullCensorship: false
 
 # Update check and auto-update settings
 checkForUpdates: true
-# TODO: autoDownloadUpdates: false
+autoDownloadUpdates: false
 
 # Should StatsCollector be enabled? Recommended setting: true
 stats:

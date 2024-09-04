@@ -11,11 +11,12 @@ import pl.syntaxdevteam.base.WordFilter
 import pl.syntaxdevteam.commans.CleanerXCommand
 import pl.syntaxdevteam.eventhandler.*
 import pl.syntaxdevteam.helpers.*
+import java.io.File
 
 @Suppress("UnstableApiUsage")
 class CleanerX : JavaPlugin(), Listener {
 
-    private lateinit var logger: Logger
+    lateinit var logger: Logger
     private val pluginMetas = this.pluginMeta
     private var config = getConfig()
     private var debugMode = config.getBoolean("debug")
@@ -31,8 +32,6 @@ class CleanerX : JavaPlugin(), Listener {
 
     override fun onEnable() {
         saveDefaultConfig()
-        updateChecker = UpdateChecker(pluginMetas, logger, config)
-        updateChecker.checkForUpdates()
         val manager: LifecycleEventManager<Plugin> = this.lifecycleManager
         manager.registerEventHandler(LifecycleEvents.COMMANDS) { event ->
             val commands: Commands = event.registrar()
@@ -50,8 +49,9 @@ class CleanerX : JavaPlugin(), Listener {
             val syntaxDevTeamPlugins = loadedPlugins.filter { it.first != pluginMetas.name }
             logger.pluginStart(syntaxDevTeamPlugins)
         }
-
         statsCollector = StatsCollector(this)
+        updateChecker = UpdateChecker(this, pluginMetas, config)
+        updateChecker.checkForUpdates()
     }
 
     fun restartMySentinelTask() {
@@ -73,6 +73,10 @@ class CleanerX : JavaPlugin(), Listener {
     fun addBannedWord(word: String) {
         wordFilter.addBannedWord(word)
         restartMySentinelTask()
+    }
+
+    fun getPluginFile(): File {
+        return this.file
     }
 
     override fun onDisable() {
