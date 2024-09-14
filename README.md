@@ -27,7 +27,7 @@ This plugin is available under the MIT license. Details can be found in the LICE
 
 Thank you for using CleanerX! I hope it meets your expectations. 😊
 
-
+![syntaxdevteam_logo.png](assets/syntaxdevteam_logo.png)
 ---
 <details>
 <summary>Polska wersja README?</summary>
@@ -64,4 +64,3 @@ Ten plugin jest dostępny na licencji MIT. Szczegóły znajdziesz w pliku LICENS
 
 Dziękuję za korzystanie z CleanerX! Mam nadzieję, że spełni twoje oczekiwania. 😊
 </details>
-![syntaxdevteam_logo.png](assets/syntaxdevteam_logo.png)
