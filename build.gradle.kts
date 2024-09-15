@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "pl.syntaxdevteam"
-version = "1.1.2-SNAPSHOT"
+version = "1.2"
 
 repositories {
     mavenCentral()
@@ -22,10 +22,6 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("dev.folia:folia-api:1.20.6-R0.1-SNAPSHOT")
 
-    implementation("io.ktor:ktor-client-core:3.0.0-beta-2")
-    implementation("io.ktor:ktor-client-cio:3.0.0-beta-2")
-    implementation("io.ktor:ktor-client-content-negotiation:3.0.0-beta-2")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:3.0.0-beta-2")
     implementation("com.googlecode.json-simple:json-simple:1.1.1")
 }
 
