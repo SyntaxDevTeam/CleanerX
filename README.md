@@ -45,7 +45,7 @@ CleanerX to zaawansowany plugin zaprojektowany do filtrowania i zamiany niecenzu
 Jeśli masz jakieś pytania, być może znajdziesz na nie rozwiązanie na naszym [discordzie](https://discord.gg/KNstae3UEV)
 
 ## Pobierz
-* Zawsze aktualna warsja stabilna do pobrania na Hangar [![Available on Hangar](https://img.shields.io/hangar/dt/CleanerX)](https://hangar.papermc.io/SyntaxDevTeam/CleanerX)
+* Zawsze aktualna wersja stabilna do pobrania na Hangar [![Available on Hangar](https://img.shields.io/hangar/dt/CleanerX)](https://hangar.papermc.io/SyntaxDevTeam/CleanerX)
 * Możesz także samodzielnie zbudować wersję developerską z [![Available on GitHub](https://img.shields.io/badge/GitHub.com-CleanerX-green)](https://github.com/SyntaxDevTeam/CleanerX)
 
 
