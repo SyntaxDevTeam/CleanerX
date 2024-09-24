@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "pl.syntaxdevteam"
-version = "1.2.1"
+version = "1.2.1-DEV"
 
 repositories {
     mavenCentral()
@@ -21,7 +21,6 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("dev.folia:folia-api:1.20.6-R0.1-SNAPSHOT")
-
     implementation("com.googlecode.json-simple:json-simple:1.1.1")
 }
 
