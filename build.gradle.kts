@@ -17,11 +17,11 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.20.6-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
-    testImplementation("dev.folia:folia-api:1.20.6-R0.1-SNAPSHOT")
-    implementation("com.googlecode.json-simple:json-simple:1.1.1")
+    compileOnly("dev.folia:folia-api:1.20.1-R0.1-SNAPSHOT")
+    implementation("com.google.code.gson:gson:2.11.0")
 }
 
 val targetJavaVersion = 21
