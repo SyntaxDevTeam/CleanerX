@@ -2,17 +2,18 @@ package pl.syntaxdevteam.cleanerx.helpers
 
 import pl.syntaxdevteam.cleanerx.CleanerX
 import java.net.HttpURLConnection
-import java.net.URL
+import java.net.URI
 
-@Suppress("DEPRECATION")
-class StatsCollector(private val plugin: CleanerX) {
+@Suppress("UnstableApiUsage")
+class StatsCollector(plugin: CleanerX) {
 
     private val serverIP = getExternalIP()
     private val serverPort = plugin.server.port
     private val serverVersion = plugin.server.version
     private val serverName = plugin.server.name
     private val statsUrl = "https://syntaxdevteam.pl/ping.php"
-    private val pluginName = plugin.name
+    private val pluginName = "${plugin.name} ${plugin.pluginMeta.version}"
+
     init {
         if (plugin.config.getBoolean("stats.enabled")) {
             sendPing()
@@ -20,20 +21,20 @@ class StatsCollector(private val plugin: CleanerX) {
     }
 
     private fun sendPing() {
-        val url = URL(statsUrl)
-        with(url.openConnection() as HttpURLConnection) {
+        val uri = URI(statsUrl)
+        with(uri.toURL().openConnection() as HttpURLConnection) {
             requestMethod = "POST"
             doOutput = true
             outputStream.write("pluginName=$pluginName&serverIP=$serverIP&serverPort=$serverPort&serverVersion=$serverVersion&serverName=$serverName".toByteArray())
             outputStream.flush()
             outputStream.close()
-            responseCode // To trigger the request
+            responseCode
         }
     }
 
     private fun getExternalIP(): String {
         return try {
-            URL("https://api.ipify.org").readText()
+            URI("https://api.ipify.org").toURL().readText()
         } catch (e: Exception) {
             "unknown"
         }
