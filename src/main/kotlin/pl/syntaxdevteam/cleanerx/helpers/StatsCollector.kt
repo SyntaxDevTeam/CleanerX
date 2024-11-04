@@ -1,6 +1,6 @@
-package pl.syntaxdevteam.helpers
+package pl.syntaxdevteam.cleanerx.helpers
 
-import pl.syntaxdevteam.CleanerX
+import pl.syntaxdevteam.cleanerx.CleanerX
 import java.net.HttpURLConnection
 import java.net.URL
 

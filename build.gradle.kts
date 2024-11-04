@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "pl.syntaxdevteam"
-version = "1.2.1-DEV"
+version = "1.2.2-DEV"
 
 repositories {
     mavenCentral()
@@ -17,11 +17,13 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.0-RC")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
+
+    compileOnly("io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT")
     compileOnly("dev.folia:folia-api:1.20.1-R0.1-SNAPSHOT")
-    implementation("com.google.code.gson:gson:2.11.0")
+    compileOnly("com.google.code.gson:gson:2.11.0")
+
 }
 
 val targetJavaVersion = 21

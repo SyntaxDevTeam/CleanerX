@@ -1,10 +1,10 @@
-package pl.syntaxdevteam.commans
+package pl.syntaxdevteam.cleanerx.commans
 
 import io.papermc.paper.command.brigadier.BasicCommand
 import io.papermc.paper.command.brigadier.CommandSourceStack
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventOwner
 import org.jetbrains.annotations.NotNull
-import pl.syntaxdevteam.CleanerX
+import pl.syntaxdevteam.cleanerx.CleanerX
 
 @Suppress("UnstableApiUsage", "DEPRECATION")
 class CleanerXCommand(private val plugin: CleanerX) : BasicCommand {

@@ -1,14 +1,12 @@
-package pl.syntaxdevteam.helpers
+package pl.syntaxdevteam.cleanerx.helpers
 
 import com.google.gson.Gson
 import com.google.gson.JsonArray
-import pl.syntaxdevteam.CleanerX
+import pl.syntaxdevteam.cleanerx.CleanerX
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URI
-
-data class PluginInfo(val name: String, val uuid: String, val prior: Int)
 
 @Suppress("UnstableApiUsage")
 class PluginManager(private val plugin: CleanerX) {

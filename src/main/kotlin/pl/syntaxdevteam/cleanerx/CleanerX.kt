@@ -1,4 +1,4 @@
-package pl.syntaxdevteam
+package pl.syntaxdevteam.cleanerx
 
 import io.papermc.paper.command.brigadier.Commands
 import io.papermc.paper.event.player.AsyncChatEvent
@@ -7,10 +7,10 @@ import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents
 import org.bukkit.event.Listener
 import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.JavaPlugin
-import pl.syntaxdevteam.base.WordFilter
-import pl.syntaxdevteam.commans.CleanerXCommand
-import pl.syntaxdevteam.eventhandler.*
-import pl.syntaxdevteam.helpers.*
+import pl.syntaxdevteam.cleanerx.base.WordFilter
+import pl.syntaxdevteam.cleanerx.commans.CleanerXCommand
+import pl.syntaxdevteam.cleanerx.eventhandler.*
+import pl.syntaxdevteam.cleanerx.helpers.*
 import java.io.File
 
 @Suppress("UnstableApiUsage")

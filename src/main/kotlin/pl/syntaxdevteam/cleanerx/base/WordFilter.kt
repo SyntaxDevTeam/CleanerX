@@ -1,4 +1,4 @@
-package pl.syntaxdevteam.base
+package pl.syntaxdevteam.cleanerx.base
 
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.plugin.java.JavaPlugin
