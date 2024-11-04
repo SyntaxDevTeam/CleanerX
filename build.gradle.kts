@@ -5,6 +5,7 @@ plugins {
 
 group = "pl.syntaxdevteam"
 version = "1.2.2-DEV"
+description = "A sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment."
 
 repositories {
     mavenCentral()
@@ -36,7 +37,7 @@ tasks.build {
 }
 
 tasks.processResources {
-    val props = mapOf("version" to version)
+    val props = mapOf("version" to version, "description" to description)
     inputs.properties(props)
     filteringCharset = "UTF-8"
     filesMatching("paper-plugin.yml") {

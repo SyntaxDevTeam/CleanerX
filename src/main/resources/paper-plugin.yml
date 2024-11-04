@@ -1,11 +1,15 @@
 name: CleanerX
 version: '${version}'
 main: pl.syntaxdevteam.cleanerx.CleanerX
-
 api-version: '1.20'
-folia-supported: true
-softdepend: [Folia]
+description: ${description}
 
+prefix: CleanerX
 authors: [SyntaxDevTeam]
-description: A sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment.
 website: https://github.com/SyntaxDevTeam
+
+loader: pl.syntaxdevteam.cleanerx.loader.SyntaxLoader
+has-open-classloader: false
+folia-supported: true
+
+softdepend: [Folia]
