@@ -1,4 +1,4 @@
-package pl.syntaxdevteam.cleanerx.commans
+package pl.syntaxdevteam.cleanerx.commands
 
 import io.papermc.paper.command.brigadier.BasicCommand
 import io.papermc.paper.command.brigadier.CommandSourceStack
