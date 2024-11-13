@@ -8,7 +8,8 @@ import org.bukkit.event.Listener
 import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.JavaPlugin
 import pl.syntaxdevteam.cleanerx.base.WordFilter
-import pl.syntaxdevteam.cleanerx.commans.CleanerXCommand
+import pl.syntaxdevteam.cleanerx.commands.CleanCommand
+import pl.syntaxdevteam.cleanerx.commands.CleanerXCommand
 import pl.syntaxdevteam.cleanerx.eventhandler.*
 import pl.syntaxdevteam.cleanerx.helpers.*
 import java.io.File
@@ -37,6 +38,7 @@ class CleanerX : JavaPlugin(), Listener {
             val commands: Commands = event.registrar()
             commands.register("cleanerx", "CleanerX plugin command. Type /cleanerx help to check available commands", CleanerXCommand(this))
             commands.register("crx", "CleanerX plugin command. Type /crx help to check available commands", CleanerXCommand(this))
+            commands.register("clean", "Clears the chat window.. Type /clean to use commands", CleanCommand(this))
         }
         this.wordFilter = WordFilter(this)
         this.fullCensorship = config.getBoolean("fullCensorship")
