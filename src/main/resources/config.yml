@@ -1,7 +1,10 @@
-# Config ver 1.3
+# Config ver 1.4
 
 # Set to "true" if you want to completely cover the censored word..
 fullCensorship: false
+# Enable link blocking in chat?
+block-links: true
+
 
 # Update check and auto-update settings
 checkForUpdates: true
