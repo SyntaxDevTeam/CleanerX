@@ -5,6 +5,11 @@ fullCensorship: false
 # Enable link blocking in chat?
 block-links: true
 
+use-punishment: true
+swear-word-thresholds:
+  5: "warn {player} 10m 'Too many swear words!'"
+  10: "kick {player} 'Repeated use of swear words!'"
+  15: "ban {player} 1d 'Swear word limit exceeded!'"
 
 # Update check and auto-update settings
 checkForUpdates: true
