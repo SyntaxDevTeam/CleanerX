@@ -4,6 +4,7 @@ import io.papermc.paper.command.brigadier.Commands
 import io.papermc.paper.event.player.AsyncChatEvent
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents
+import org.bukkit.Bukkit
 import org.bukkit.event.Listener
 import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.JavaPlugin
@@ -43,7 +44,7 @@ class CleanerX : JavaPlugin(), Listener {
             commands.register("clean", "Clears the chat window.. Type /clean to use commands", CleanCommand(this))
         }
         server.pluginManager.registerEvents(CleanerXChat(this, wordFilter, fullCensorship, swearCounter), this)
-
+        resetAllSwearCounts()
         pluginManager = PluginManager(this)
         statsCollector = StatsCollector(this)
         updateChecker = UpdateChecker(this, pluginMetas, config)
@@ -62,6 +63,7 @@ class CleanerX : JavaPlugin(), Listener {
 
     private fun updateCleanerX() {
         server.pluginManager.registerEvents(CleanerXChat(this, wordFilter, fullCensorship, swearCounter), this)
+        resetAllSwearCounts()
     }
 
     fun addBannedWord(word: String) {
@@ -74,7 +76,13 @@ class CleanerX : JavaPlugin(), Listener {
     }
 
     override fun onDisable() {
+        resetAllSwearCounts()
         AsyncChatEvent.getHandlerList().unregister(this as Listener)
         AsyncChatEvent.getHandlerList().unregister(this as Plugin)
+    }
+    private fun resetAllSwearCounts() {
+        for (player in Bukkit.getOnlinePlayers()) {
+            swearCounter.resetSwearCount(player)
+        }
     }
 }
