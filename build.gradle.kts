@@ -22,7 +22,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 
     compileOnly("io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT")
-    compileOnly("dev.folia:folia-api:1.20.1-R0.1-SNAPSHOT")
+    compileOnly("dev.folia:folia-api:1.20.4-R0.1-SNAPSHOT")
     compileOnly("com.google.code.gson:gson:2.11.0")
 
 }
