@@ -5,11 +5,14 @@ fullCensorship: false
 # Enable link blocking in chat?
 block-links: true
 
+message:
+  no-link: "<red>Sharing links in the chat is not allowed on this server!"
+
 use-punishment: true
 swear-word-thresholds:
-  5: "warn {player} 10m 'Too many swear words!'"
-  10: "mute {player} 'Repeated use of swear words!'"
-  15: "ban {player} 1d 'Swear word limit exceeded!'"
+  5: "warn {player} 1d Too many swear words!"
+  10: "mute {player} 15m Repeated use of swear words!"
+  15: "ban {player} 1d Swear word limit exceeded!"
 
 # Update check and auto-update settings
 checkForUpdates: true
