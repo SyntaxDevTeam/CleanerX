@@ -10,7 +10,7 @@ import pl.syntaxdevteam.cleanerx.base.WordFilter
 import pl.syntaxdevteam.cleanerx.base.SwearCounter
 
 class CleanerXChat(
-    private var plugin: CleanerX,
+    plugin: CleanerX,
     private val wordFilter: WordFilter,
     private val fullCensorship: Boolean,
     private val swearCounter: SwearCounter
@@ -30,10 +30,19 @@ class CleanerXChat(
             return
         }
 
-        if (wordFilter.containsBannedWord(message)) {
+        var swearWordCount = 0
+
+        val words = message.split("\\s+".toRegex())
+        for (word in words) {
+            if (wordFilter.containsBannedWord(word)) {
+                swearWordCount++
+            }
+        }
+
+        if (swearWordCount > 0) {
             event.message(Component.text(wordFilter.censorMessage(message, fullCensorship)))
-            if(blockLinks) {
-                swearCounter.incrementSwearCount(event.player)
+            if(blockLinks){
+                swearCounter.incrementSwearCount(event.player, swearWordCount)
             }
         }
     }
