@@ -5,11 +5,11 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.TextComponent
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.plugin.java.JavaPlugin
+import pl.syntaxdevteam.cleanerx.CleanerX
 import pl.syntaxdevteam.cleanerx.base.WordFilter
 
 class CleanerXChat(
-    private val plugin: JavaPlugin,
+    private val plugin: CleanerX,
     private val wordFilter: WordFilter,
     private val fullCensorship: Boolean
 ) : Listener {

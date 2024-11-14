@@ -42,7 +42,7 @@ class CleanerX : JavaPlugin(), Listener {
         }
         this.wordFilter = WordFilter(this)
         this.fullCensorship = config.getBoolean("fullCensorship")
-        server.pluginManager.registerEvents(CleanerXChat(wordFilter, fullCensorship), this)
+        server.pluginManager.registerEvents(CleanerXChat(this, wordFilter, fullCensorship), this)
         pluginManager = PluginManager(this)
         val externalPlugins = pluginManager.fetchPluginsFromExternalSource("https://raw.githubusercontent.com/SyntaxDevTeam/plugins-list/main/plugins.json")
         val loadedPlugins = pluginManager.fetchLoadedPlugins()
@@ -69,7 +69,7 @@ class CleanerX : JavaPlugin(), Listener {
     private fun updateSentinel() {
         this.wordFilter = WordFilter(this)
         this.fullCensorship = config.getBoolean("fullCensorship")
-        server.pluginManager.registerEvents(CleanerXChat(wordFilter, fullCensorship), this)
+        server.pluginManager.registerEvents(CleanerXChat(this, wordFilter, fullCensorship), this)
     }
 
     fun addBannedWord(word: String) {
