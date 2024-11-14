@@ -13,9 +13,19 @@ class PluginManager(private val plugin: CleanerX) {
 
     private val gson = Gson()
 
-    fun fetchPluginsFromExternalSource(urlString: String): List<PluginInfo> {
+    init {
+        val externalPlugins = fetchPluginsFromExternalSource()
+        val loadedPlugins = fetchLoadedPlugins()
+        val highestPriorityPlugin = getHighestPriorityPlugin(externalPlugins, loadedPlugins)
+        if (highestPriorityPlugin == plugin.pluginMetas.name) {
+            val syntaxDevTeamPlugins = loadedPlugins.filter { it.first != plugin.pluginMetas.name }
+            plugin.logger.pluginStart(syntaxDevTeamPlugins)
+        }
+    }
+
+    fun fetchPluginsFromExternalSource(): List<PluginInfo> {
         return try {
-            val uri = URI(urlString)
+            val uri = URI("https://raw.githubusercontent.com/SyntaxDevTeam/plugins-list/main/plugins.json")
             val url = uri.toURL()
             val connection = url.openConnection() as HttpURLConnection
             connection.requestMethod = "GET"

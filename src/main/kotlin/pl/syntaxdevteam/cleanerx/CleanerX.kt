@@ -7,6 +7,7 @@ import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents
 import org.bukkit.event.Listener
 import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.JavaPlugin
+import pl.syntaxdevteam.cleanerx.base.SwearCounter
 import pl.syntaxdevteam.cleanerx.base.WordFilter
 import pl.syntaxdevteam.cleanerx.commands.CleanCommand
 import pl.syntaxdevteam.cleanerx.commands.CleanerXCommand
@@ -18,14 +19,15 @@ import java.io.File
 class CleanerX : JavaPlugin(), Listener {
 
     lateinit var logger: Logger
-    private val pluginMetas = this.pluginMeta
+    val pluginMetas = this.pluginMeta
     private var config = getConfig()
     private var debugMode = config.getBoolean("debug")
-    private lateinit var wordFilter: WordFilter
-    private var fullCensorship: Boolean = false
     private lateinit var pluginManager: PluginManager
     private lateinit var statsCollector: StatsCollector
     private lateinit var updateChecker: UpdateChecker
+    private val wordFilter = WordFilter(this)
+    private val fullCensorship: Boolean = config.getBoolean("fullCensorship")
+    private val swearCounter = SwearCounter(this)
 
     override fun onLoad() {
         logger = Logger(pluginMetas, debugMode)
@@ -40,17 +42,9 @@ class CleanerX : JavaPlugin(), Listener {
             commands.register("crx", "CleanerX plugin command. Type /crx help to check available commands", CleanerXCommand(this))
             commands.register("clean", "Clears the chat window.. Type /clean to use commands", CleanCommand(this))
         }
-        this.wordFilter = WordFilter(this)
-        this.fullCensorship = config.getBoolean("fullCensorship")
-        server.pluginManager.registerEvents(CleanerXChat(this, wordFilter, fullCensorship), this)
+        server.pluginManager.registerEvents(CleanerXChat(this, wordFilter, fullCensorship, swearCounter), this)
+
         pluginManager = PluginManager(this)
-        val externalPlugins = pluginManager.fetchPluginsFromExternalSource("https://raw.githubusercontent.com/SyntaxDevTeam/plugins-list/main/plugins.json")
-        val loadedPlugins = pluginManager.fetchLoadedPlugins()
-        val highestPriorityPlugin = pluginManager.getHighestPriorityPlugin(externalPlugins, loadedPlugins)
-        if (highestPriorityPlugin == pluginMetas.name) {
-            val syntaxDevTeamPlugins = loadedPlugins.filter { it.first != pluginMetas.name }
-            logger.pluginStart(syntaxDevTeamPlugins)
-        }
         statsCollector = StatsCollector(this)
         updateChecker = UpdateChecker(this, pluginMetas, config)
         updateChecker.checkForUpdates()
@@ -67,9 +61,7 @@ class CleanerX : JavaPlugin(), Listener {
     }
 
     private fun updateSentinel() {
-        this.wordFilter = WordFilter(this)
-        this.fullCensorship = config.getBoolean("fullCensorship")
-        server.pluginManager.registerEvents(CleanerXChat(this, wordFilter, fullCensorship), this)
+        server.pluginManager.registerEvents(CleanerXChat(this, wordFilter, fullCensorship, swearCounter), this)
     }
 
     fun addBannedWord(word: String) {

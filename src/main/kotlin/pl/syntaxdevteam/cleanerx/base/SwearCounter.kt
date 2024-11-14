@@ -1,10 +1,10 @@
-package pl.syntaxdevteam.cleanerx.basic
+package pl.syntaxdevteam.cleanerx.base
 
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
-import org.bukkit.plugin.java.JavaPlugin
+import pl.syntaxdevteam.cleanerx.CleanerX
 
-class SwearCounter(private val plugin: JavaPlugin) {
+class SwearCounter(private val plugin: CleanerX) {
     private val playerSwearCounts = mutableMapOf<Player, Int>()
     private val thresholds = plugin.config.getConfigurationSection("swear-word-thresholds")?.getKeys(false)
         ?.associateBy({ it.toInt() }, { plugin.config.getString("swear-word-thresholds.$it")!! })
