@@ -19,18 +19,19 @@ class WordFilter(private val plugin: JavaPlugin) {
             plugin.saveResource("banned_words.yml", false)
         }
         val config = YamlConfiguration.loadConfiguration(file)
-        bannedWords = config.getStringList("bannedWords").toMutableList()
+        bannedWords = config.getStringList("bannedWords").map { it.lowercase(Locale.getDefault()) }.toMutableList()
     }
 
     fun containsBannedWord(message: String): Boolean {
-        return bannedWords.any { message.contains(it) }
+        val lowerMessage = message.lowercase(Locale.getDefault())
+        return bannedWords.any { lowerMessage.contains(it) }
     }
 
     fun censorMessage(message: String, fullCensorship: Boolean): String {
         val words = message.split("\\s+".toRegex()).toMutableList()
         for (i in words.indices) {
             for (bannedWord in bannedWords) {
-                if (words[i].lowercase(Locale.getDefault()).contains(bannedWord.lowercase(Locale.getDefault()))) {
+                if (words[i].lowercase(Locale.getDefault()).contains(bannedWord)) {
                     val replacement = if (fullCensorship) "*".repeat(words[i].length) else words[i].substring(0, 2) + "*".repeat(words[i].length - 2)
                     words[i] = replacement
                 }
@@ -40,8 +41,9 @@ class WordFilter(private val plugin: JavaPlugin) {
     }
 
     fun addBannedWord(word: String) {
-        if (!bannedWords.contains(word)) {
-            bannedWords.add(word)
+        val lowerWord = word.lowercase(Locale.getDefault())
+        if (!bannedWords.contains(lowerWord)) {
+            bannedWords.add(lowerWord)
             saveBannedWords()
         }
     }
