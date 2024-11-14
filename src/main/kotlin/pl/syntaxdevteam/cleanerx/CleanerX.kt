@@ -50,23 +50,23 @@ class CleanerX : JavaPlugin(), Listener {
         updateChecker.checkForUpdates()
     }
 
-    fun restartMySentinelTask() {
+    fun restartMyTask() {
         try {
             AsyncChatEvent.getHandlerList().unregister(this as Plugin)
             super.reloadConfig()
-            updateSentinel()
+            updateCleanerX()
         } catch (e: Exception) {
             logger.err("An error occurred while reloading the configuration: " + e.message)
         }
     }
 
-    private fun updateSentinel() {
+    private fun updateCleanerX() {
         server.pluginManager.registerEvents(CleanerXChat(this, wordFilter, fullCensorship, swearCounter), this)
     }
 
     fun addBannedWord(word: String) {
         wordFilter.addBannedWord(word)
-        restartMySentinelTask()
+        restartMyTask()
     }
 
     fun getPluginFile(): File {

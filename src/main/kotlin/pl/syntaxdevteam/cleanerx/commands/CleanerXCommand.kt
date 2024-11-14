@@ -30,7 +30,7 @@ class CleanerXCommand(private val plugin: CleanerX) : BasicCommand {
                 }
                 args[0].equals("reload", ignoreCase = true) -> {
                     if (stack.sender.hasPermission("CleanerX.reload")) {
-                        plugin.restartMySentinelTask()
+                        plugin.restartMyTask()
                         stack.sender.sendRichMessage("<green>The configuration file has been reloaded.</green>")
                     } else {
                         stack.sender.sendRichMessage("You do not have permission to use this command.")
