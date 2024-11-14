@@ -10,14 +10,17 @@ class SwearCounter(private val plugin: CleanerX) {
         ?.associateBy({ it.toInt() }, { plugin.config.getString("swear-word-thresholds.$it")!! })
         ?: emptyMap()
 
-    fun incrementSwearCount(player: Player) {
-        val count = playerSwearCounts.getOrDefault(player, 0) + 1
+    fun incrementSwearCount(player: Player, swearCount: Int) {
+        val count = playerSwearCounts.getOrDefault(player, 0) + swearCount
         playerSwearCounts[player] = count
 
         thresholds.forEach { (threshold, command) ->
             if (count == threshold) {
                 val formattedCommand = command.replace("{player}", player.name)
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), formattedCommand)
+                Bukkit.getScheduler().runTask(plugin, Runnable {
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), formattedCommand)
+                })
+
             }
         }
     }
