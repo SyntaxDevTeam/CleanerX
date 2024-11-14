@@ -14,7 +14,8 @@ class CleanerXChat(
     private val fullCensorship: Boolean
 ) : Listener {
 
-    private val linkRegex = "(https?://\\S+|www\\.\\S+)".toRegex()
+    private val linkRegex = "(https?://\\S+|www\\.\\S+|\\b\\w+\\.(com|net|org|pl|io|co|gov|edu|info|biz)\\b)".toRegex()
+
     private val blockLinks: Boolean = plugin.config.getBoolean("block-links")
 
     @EventHandler
