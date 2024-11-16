@@ -12,8 +12,11 @@ import pl.syntaxdevteam.cleanerx.base.SwearCounter
 import pl.syntaxdevteam.cleanerx.base.WordFilter
 import pl.syntaxdevteam.cleanerx.commands.CleanCommand
 import pl.syntaxdevteam.cleanerx.commands.CleanerXCommand
+import pl.syntaxdevteam.cleanerx.common.Logger
+import pl.syntaxdevteam.cleanerx.common.PluginManager
+import pl.syntaxdevteam.cleanerx.common.StatsCollector
+import pl.syntaxdevteam.cleanerx.common.UpdateChecker
 import pl.syntaxdevteam.cleanerx.eventhandler.*
-import pl.syntaxdevteam.cleanerx.helpers.*
 import java.io.File
 
 @Suppress("UnstableApiUsage")

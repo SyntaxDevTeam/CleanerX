@@ -1,4 +1,4 @@
-package pl.syntaxdevteam.cleanerx.helpers
+package pl.syntaxdevteam.cleanerx.common
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject

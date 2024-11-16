@@ -1,4 +1,4 @@
-package pl.syntaxdevteam.cleanerx.helpers
+package pl.syntaxdevteam.cleanerx.common
 
 import io.papermc.paper.plugin.configuration.PluginMeta
 import org.bukkit.Bukkit
