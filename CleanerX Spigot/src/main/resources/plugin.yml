@@ -1,0 +1,8 @@
+name: CleanerX Spigot
+version: '1.0.0-SNAPSHOT'
+main: pl.syntaxdevteam.cleaner.CleanerX
+api-version: '1.21'
+prefix: CleanerX
+authors: [ SyntaxDevTeam ]
+description: A filtering plugin that censors offensive language, with options to block links and automatically punish offenders.
+website: https://github.com/SyntaxDevTeam
