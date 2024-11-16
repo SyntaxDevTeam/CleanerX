@@ -1,26 +1,27 @@
-# Config ver 1.4
+# Config ver 1.5
 
 # Set to "true" if you want to completely cover the censored word..
 fullCensorship: false
+
 # Enable link blocking in chat?
 block-links: true
 
-message:
-  no-link: "<red>Sharing links in the chat is not allowed on this server!"
-
-use-punishment: true
-swear-word-thresholds:
+use-punishment: true # Use command execution for offensive language?
+swear-word-thresholds:  # Set your own commands to be applied after a specific number of detected swear words. We recommend our punishment plugin – PunisherX.
   5: "warn {player} 1d Too many swear words!"
   10: "mute {player} 15m Repeated use of swear words!"
   15: "ban {player} 1d Swear word limit exceeded!"
+
+message:
+  no-link: "<red>Sharing links in the chat is not allowed on this server!"
 
 # Update check and auto-update settings
 checkForUpdates: true
 autoDownloadUpdates: false
 
+# Debug mode set to true provides more detailed logs in the console. Use only in case of problems!
+debug: false
+
 # Should StatsCollector be enabled? Recommended setting: true
 stats:
   enabled: true
-
-# Debug mode
-debug: false

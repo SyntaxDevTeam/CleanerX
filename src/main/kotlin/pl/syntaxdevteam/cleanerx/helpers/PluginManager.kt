@@ -23,7 +23,7 @@ class PluginManager(private val plugin: CleanerX) {
         }
     }
 
-    fun fetchPluginsFromExternalSource(): List<PluginInfo> {
+    private fun fetchPluginsFromExternalSource(): List<PluginInfo> {
         return try {
             val uri = URI("https://raw.githubusercontent.com/SyntaxDevTeam/plugins-list/main/plugins.json")
             val url = uri.toURL()
@@ -52,7 +52,7 @@ class PluginManager(private val plugin: CleanerX) {
         }
     }
 
-    fun fetchLoadedPlugins(): List<Pair<String, String>> {
+    private fun fetchLoadedPlugins(): List<Pair<String, String>> {
         val plugins = mutableListOf<Pair<String, String>>()
         for (plugin in plugin.server.pluginManager.plugins) {
             if (plugin.pluginMeta.authors.contains("SyntaxDevTeam")) {
@@ -62,7 +62,7 @@ class PluginManager(private val plugin: CleanerX) {
         return plugins
     }
 
-    fun getHighestPriorityPlugin(externalPlugins: List<PluginInfo>, loadedPlugins: List<Pair<String, String>>): String? {
+    private fun getHighestPriorityPlugin(externalPlugins: List<PluginInfo>, loadedPlugins: List<Pair<String, String>>): String? {
         val matchedPlugins = externalPlugins.filter { externalPlugin ->
             loadedPlugins.any { it.first == externalPlugin.name }
         }

@@ -41,7 +41,7 @@ class CleanerX : JavaPlugin(), Listener {
             val commands: Commands = event.registrar()
             commands.register("cleanerx", "CleanerX plugin command. Type /cleanerx help to check available commands", CleanerXCommand(this))
             commands.register("crx", "CleanerX plugin command. Type /crx help to check available commands", CleanerXCommand(this))
-            commands.register("clean", "Clears the chat window.. Type /clean to use commands", CleanCommand(this))
+            commands.register("clean", "Clears the chat window. Type /clean to use commands", CleanCommand(this))
         }
         server.pluginManager.registerEvents(CleanerXChat(this, wordFilter, fullCensorship, swearCounter), this)
         resetAllSwearCounts()

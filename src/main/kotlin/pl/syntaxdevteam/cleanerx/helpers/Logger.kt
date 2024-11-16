@@ -8,7 +8,7 @@ import net.kyori.adventure.text.format.TextDecoration
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
 import net.kyori.adventure.text.minimessage.MiniMessage
 
-@Suppress("UnstableApiUsage")
+@Suppress("UnstableApiUsage", "unused")
 class Logger(pluginMetas: PluginMeta, private val debugMode: Boolean) {
     private val plName = pluginMetas.name
     private val plVer = pluginMetas.version
