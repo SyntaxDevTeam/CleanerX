@@ -82,7 +82,9 @@ class CleanerX : JavaPlugin(), Listener {
         resetAllSwearCounts()
         AsyncChatEvent.getHandlerList().unregister(this as Listener)
         AsyncChatEvent.getHandlerList().unregister(this as Plugin)
+        logger.err(pluginMetas.name + " " + pluginMetas.version + " has been disabled ☹️")
     }
+
     private fun resetAllSwearCounts() {
         for (player in Bukkit.getOnlinePlayers()) {
             swearCounter.resetSwearCount(player)
