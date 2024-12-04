@@ -17,7 +17,7 @@ class CleanerXChat(
     private val swearCounter: SwearCounter
 ) : Listener {
 
-    private val linkRegex = "(https?://\\S+|www\\.\\S+|\\b\\w+\\.(com|net|org|pl|io|co|gov|edu|info|biz)\\b)".toRegex()
+    private val linkRegex = "(https?://\\S+|www\\.\\S+|\\b\\w+\\.(com|net|org|pl|io|co|gov|edu|info|biz|ru|uk|us|de|fr|cn|es|it|au|nl|ca|in|jp|se|ch|br|za|pt|tv|me|xyz|tech|online|store|site|live|app|io|ai|dev|ly|digital|agency|solutions|global|world|studio|cloud|media|network|works)\\b)".toRegex()
     private val blockLinks = plugin.config.getBoolean("block-links")
     private val usePunishment = plugin.config.getBoolean("use-punishment")
     private val noLink: String = plugin.config.getString("message.no-link") ?: "<red>>Sharing links in the chat is not allowed on this server!"
@@ -48,7 +48,7 @@ class CleanerXChat(
                 }
             }
         } catch (e: Exception) {
-            plugin.logger.severe("Error in onChat: ${e.message}")
+            plugin.logger.severe("Error in onChat, report it urgently to the plugin author with the message: ${e.message}")
             e.printStackTrace()
         }
     }
