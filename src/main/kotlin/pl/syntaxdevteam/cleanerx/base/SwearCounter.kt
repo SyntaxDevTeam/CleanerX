@@ -18,6 +18,7 @@ class SwearCounter(private val plugin: CleanerX) {
             if (count == threshold) {
                 val formattedCommand = command.replace("{player}", player.name)
                 Bukkit.getScheduler().runTask(plugin, Runnable {
+                    plugin.logger.debug("Attempting to send command: $formattedCommand")
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(), formattedCommand)
                 })
 
@@ -26,6 +27,7 @@ class SwearCounter(private val plugin: CleanerX) {
     }
 
     fun resetSwearCount(player: Player) {
+        plugin.logger.debug("The words counted have been reset")
         playerSwearCounts.remove(player)
     }
 }
