@@ -68,4 +68,10 @@ class PluginManager(private val plugin: CleanerX) {
         }
         return matchedPlugins.maxByOrNull { it.prior }?.name
     }
+
+    fun getPluginUUID(pluginName: String): String? {
+        val plugins = fetchPluginsFromExternalSource()
+        val plugin = plugins.find { it.name == pluginName }
+        return plugin?.uuid
+    }
 }
