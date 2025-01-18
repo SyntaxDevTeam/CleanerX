@@ -26,7 +26,7 @@ class CleanerX : JavaPlugin(), Listener {
     val pluginMetas = this.pluginMeta
     private var config = getConfig()
     private var debugMode = config.getBoolean("debug")
-    private lateinit var pluginManager: PluginManager
+    lateinit var pluginManager: PluginManager
     private lateinit var statsCollector: StatsCollector
     private lateinit var updateChecker: UpdateChecker
     private val wordFilter = WordFilter(this)
