@@ -1,10 +1,10 @@
 plugins {
     kotlin("jvm") version "2.1.0"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("com.gradleup.shadow") version "9.0.0-beta4"
 }
 
 group = "pl.syntaxdevteam"
-version = "1.3.1-DEV"
+version = "1.3.2-DEV"
 description = "A sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment."
 
 repositories {
@@ -18,13 +18,10 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.0")
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-
-    compileOnly("io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT")
-    compileOnly("dev.folia:folia-api:1.20.4-R0.1-SNAPSHOT")
+    compileOnly("dev.folia:folia-api:1.21.4-R0.1-SNAPSHOT")
+    compileOnly("org.eclipse.aether:aether-api:1.1.0")
+    compileOnly("org.yaml:snakeyaml:2.3")
     compileOnly("com.google.code.gson:gson:2.11.0")
-
 }
 
 val targetJavaVersion = 21
