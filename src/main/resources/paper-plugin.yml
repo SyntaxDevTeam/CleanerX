@@ -11,5 +11,6 @@ website: https://github.com/SyntaxDevTeam
 loader: pl.syntaxdevteam.cleanerx.loader.SyntaxLoader
 has-open-classloader: false
 folia-supported: true
+load before: [LPC]
 
 softdepend: [Folia]
