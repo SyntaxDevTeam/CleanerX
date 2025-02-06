@@ -1,0 +1,15 @@
+name: CleanerX
+version: '1.3.2-DEV'
+main: pl.syntaxdevteam.cleanerx.CleanerX
+api-version: '1.20'
+description: Processes main resources.
+
+prefix: CleanerX
+authors: [SyntaxDevTeam]
+website: https://github.com/SyntaxDevTeam
+
+loader: pl.syntaxdevteam.cleanerx.loader.SyntaxLoader
+has-open-classloader: false
+folia-supported: true
+
+softdepend: [Folia]
