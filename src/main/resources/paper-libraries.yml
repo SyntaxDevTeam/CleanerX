@@ -1,4 +1,4 @@
 libraries:
   - org.eclipse.aether:aether-api:1.1.0
   - org.yaml:snakeyaml:2.3
-  - com.google.code.gson:gson:2.11.0
+  - com.google.code.gson:gson:2.12.1
