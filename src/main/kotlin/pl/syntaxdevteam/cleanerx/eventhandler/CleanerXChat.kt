@@ -10,6 +10,15 @@ import pl.syntaxdevteam.cleanerx.CleanerX
 import pl.syntaxdevteam.cleanerx.base.WordFilter
 import pl.syntaxdevteam.cleanerx.base.SwearCounter
 
+/**
+ * The `CleanerXChat` class is responsible for handling chat messages sent by players.
+ * It listens for chat events and filters out inappropriate language and links from the chat.
+ *
+ * @property plugin The instance of the `CleanerX` plugin, used for logging messages and accessing other plugin functionalities.
+ * @property wordFilter The word filter instance, used for checking and censoring inappropriate language.
+ * @property fullCensorship A boolean value indicating whether the plugin should fully censor inappropriate language.
+ * @property swearCounter The swear counter instance, used for tracking the number of swear words used by players.
+ */
 class CleanerXChat(
     private val plugin: CleanerX,
     private val wordFilter: WordFilter,
@@ -22,6 +31,13 @@ class CleanerXChat(
     private val usePunishment = plugin.config.getBoolean("use-punishment")
     private val noLink: String = plugin.config.getString("message.no-link") ?: "<red>Sharing links in the chat is not allowed on this server!"
 
+    /**
+     * Event handler for chat messages.
+     * This method is triggered when a player sends a chat message.
+     * It cancels the original chat event and filters out inappropriate language and links from the message.
+     *
+     * @param event The `AsyncChatEvent` that contains information about the chat message.
+     */
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     fun onChat(event: AsyncChatEvent) {
         try {
