@@ -19,6 +19,11 @@ reload:
   success: "<green>Pomyślnie przeładowano konfigurację.</green>"
   error: "<red>Wystąpił błąd podczas przeładowania konfiguracji:</red>"
 
+clean:
+  success: "<green>Pomyślnie wyczyszczono czat.</green>"
+  error: "<red>Wystąpił błąd podczas czyszczenia czatu.</red>"
+  log: "<gold>{player} wyczyścił czat.</gold>"
+
 word:
   usage: "<gold>Poprawne użycie to: /word <add|remove|list> <word></gold>"
   word_not_found: "<red>Nie znaleziono wyrazu {word}.</red>"

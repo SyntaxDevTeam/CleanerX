@@ -19,6 +19,11 @@ reload:
   success: "<green>Configuration successfully reloaded.</green>"
   error: "<red>An error occurred while reloading the configuration:</red>"
 
+clean:
+  success: "<green>Chat successfully cleared.</green>"
+  error: "<red>An error occurred while clearing the chat.</red>"
+  log: "<gold>{player} cleared the chat.</gold>"
+
 word:
   usage: "<gold>Correct usage: /word <add|remove|list> <word></gold>"
   word_not_found: "<red>The word {word} was not found.</red>"
