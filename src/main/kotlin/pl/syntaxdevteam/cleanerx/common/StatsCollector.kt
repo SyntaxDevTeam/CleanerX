@@ -15,7 +15,7 @@ class StatsCollector(private var plugin: CleanerX) {
     private val statsUrl = "https://syntaxdevteam.pl/ping.php"
     private val pluginName = "${plugin.name} ${plugin.pluginMeta.version}"
 
-    private val pluginUUID: String = plugin.pluginManager.getPluginUUID(plugin.name) ?: "unknown"
+    private val pluginUUID: String = plugin.pluginsManager.getPluginUUID(plugin.name) ?: "unknown"
 
     init {
         if (plugin.config.getBoolean("stats.enabled")) {
