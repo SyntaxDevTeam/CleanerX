@@ -8,53 +8,62 @@ import pl.syntaxdevteam.cleanerx.CleanerX
 
 @Suppress("UnstableApiUsage", "DEPRECATION")
 class CleanerXCommand(private val plugin: CleanerX) : BasicCommand {
+    private val mH = plugin.messageHandler
 
     override fun execute(@NotNull stack: CommandSourceStack, @NotNull args: Array<String>) {
+        if (!stack.sender.hasPermission("cleanerx.help") ||
+            !stack.sender.hasPermission("cleanerx.version") ||
+            !stack.sender.hasPermission("cleanerx.reload")) {
+            stack.sender.sendMessage(mH.getMessage("error", "no_permission"))
+            return
+        }
         val pluginMeta = (plugin as LifecycleEventOwner).pluginMeta
         val pdf = plugin.description
         if (args.isNotEmpty()) {
             when {
                 args[0].equals("help", ignoreCase = true) -> {
-                    if (stack.sender.hasPermission("CleanerX.help")) {
-                        stack.sender.sendRichMessage("<gray>#######################################\n#\n#  <gold>Available commands for " + pluginMeta.name + ":\n<gray>#\n#  <gold>/crx help <gray>- <white>Displays this prompt.<gray>\n<gray>#  <gold>/crx addword <word> <gray>- <white>Adds a word to the blacklist.\n<gray>#  <gold>/crx version <gray>- <white>Shows plugin info. \n<gray>#  <gold>/crx reload <gray>- <white>Reloads the configuration file\n<gray>#\n#######################################")
+                    if (stack.sender.hasPermission("cleanerx.help")) {
+                        stack.sender.sendMessage(mH.miniMessageFormat(" <gray>+-------------------------------------------------\n" +
+                                " |\n" +
+                                " |  <gold>Available commands for " + pluginMeta.name + ":\n<gray>#\n" +
+                                " |  <gold>/crx help <gray>- <white>Displays this prompt.<gray>\n" +
+                                " <gray>|  <gold>/crx addword <word> <gray>- <white>Adds a word to the blacklist.\n" +
+                                " <gray>|  <gold>/crx version <gray>- <white>Shows plugin info. \n<gray>" +
+                                " |  <gold>/crx reload <gray>- <white>Reloads the configuration file\n" +
+                                " |\n" +
+                                " <gray>|\n<gray>+-------------------------------------------------"))
                     } else {
-                        stack.sender.sendMessage("You do not have permission to use this command.")
+                        stack.sender.sendMessage(mH.getMessage("error", "no_permission"))
                     }
                 }
                 args[0].equals("version", ignoreCase = true) -> {
-                    if (stack.sender.hasPermission("CleanerX.version")) {
-                        stack.sender.sendRichMessage("<gray>#######################################\n#\n#   <gold>→ <bold>" + pluginMeta.name + "</bold> ←\n<gray>#   \n<gray>#   <white>Version: <bold><gold>" + pluginMeta.version + "(Paper/Folia)</gold></bold><white>Author: <bold><gold>" + pdf.authors + "</gold></bold>\n<gray>#   <white>Website: <bold><gold><click:open_url:'" + pdf.website + "'>"  + pdf.website + "</click></gold></bold><gray>\n#\n#######################################")
-                    } else {
-                        stack.sender.sendRichMessage("You do not have permission to use this command.")
+                    if (stack.sender.hasPermission("cleanerx.version")) {
+                    stack.sender.sendMessage(mH.miniMessageFormat("\n<gray>-------------------------------------------------\n" +
+                            " <gray>|\n" +
+                            " <gray>|   <gold>→ <bold>" + pluginMeta.name + "</bold> ←\n" +
+                            " <gray>|   <white>Author: <bold><gold>" + pdf.authors + "</gold></bold>\n" +
+                            " <gray>|   <white>Website: <bold><gold><click:open_url:'" + pdf.website + "'>"  + pdf.website + "</click></gold></bold>\n" +
+                            " <gray>|   <white>Version: <bold><gold>" + pluginMeta.version + "</gold></bold>\n" +
+                            " <gray>|" +
+                            "\n-------------------------------------------------"))
+                } else {
+                        stack.sender.sendMessage(mH.getMessage("error", "no_permission"))
                     }
                 }
                 args[0].equals("reload", ignoreCase = true) -> {
                     if (stack.sender.hasPermission("CleanerX.reload")) {
                         plugin.restartMyTask()
-                        stack.sender.sendRichMessage("<green>The configuration file has been reloaded.</green>")
+                        stack.sender.sendMessage(mH.getMessage("reload", "success"))
                     } else {
-                        stack.sender.sendRichMessage("You do not have permission to use this command.")
-                    }
-                }
-                args[0].equals("addword", ignoreCase = true) -> {
-                    if (stack.sender.hasPermission("CleanerX.addword")) {
-                        if (args.size > 1) {
-                            val newWord = args[1]
-                            plugin.addBannedWord(newWord)
-                            stack.sender.sendRichMessage("<green>New banned word added: $newWord</green>")
-                        } else {
-                            stack.sender.sendRichMessage("<red>Please provide a word to add.</red>")
-                        }
-                    } else {
-                        stack.sender.sendMessage("You do not have permission to use this command.")
+                        stack.sender.sendMessage(mH.getMessage("error", "no_permission"))
                     }
                 }
                 else -> {
-                    stack.sender.sendRichMessage("<green>Type /crx help to check available commands")
+                    stack.sender.sendMessage(mH.getMessage("error", "unknown_command"))
                 }
             }
         } else {
-            stack.sender.sendRichMessage("<green>Type /crx help to check available commands")
+            stack.sender.sendMessage("<green>Type /crx help to check available commands")
         }
     }
     override fun suggest(@NotNull stack: CommandSourceStack, @NotNull args: Array<String>): List<String> {
