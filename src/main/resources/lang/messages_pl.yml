@@ -1,0 +1,31 @@
+# Ver. 1.0.0
+# Formatowanie tekstów wiadomości:
+# Można używać formatowania MiniMessage oraz Legacy (Minecraft).
+# Przykłady stosowania MiniMessage: https://docs.advntr.dev/minimessage/format.html
+# Nie mieszaj formatów w jednej wiadomości. Jeśli używasz Legacy, nie wstawiaj formatowania MiniMessage,
+# w przeciwnym wypadku zostanie użyty tylko ten drugi.
+
+prefix: "<gradient:#ffff55:#9e5006:#ffff55:#9e5006:#ffff55>[<b>CleanerX</b>]</gradient>"
+
+# Wiadomości błędów
+error:
+  no_permission: "<red>Nie masz uprawnień do tej komendy.</red>"
+  player_not_found: "<gold>Nie znaleziono gracza o nicku {player}.</gold>"
+  console: "<red>Tylko gracz może użyć tej komendy.</red>"
+  invalid_usage: "<red>Nieprawidłowe użycie komendy. Użyj: {usage}</red>"
+  unknown_command: "<red>Nieznana komenda. Wpisz <gold>/crx help</gold>, aby sprawdzić listę dostępnych komend.</red>"
+
+reload:
+  success: "<green>Pomyślnie przeładowano konfigurację.</green>"
+  error: "<red>Wystąpił błąd podczas przeładowania konfiguracji:</red>"
+
+word:
+  usage: "<gold>Poprawne użycie to: /word <add|remove|list> <word></gold>"
+  word_not_found: "<red>Nie znaleziono wyrazu {word}.</red>"
+  word_removed: "<green>Pomyślnie usunięto wyraz {word}.</green>"
+  word_added: "<green>Pomyślnie dodano wyraz <gold><i>{word}</i></gold> do listy słów zakazanych.</green>"
+  word_error: "<red>Wystąpił błąd podczas dodawania wyrazu {word}.</red>"
+  no_word_provided: "<red>Proszę podać słowo, które chcesz dodać.</red>"
+  word_already_exists: "<red>Wyraz {word} już istnieje.</red>"
+  banned_words_list: "<gold>Lista zablokowanych wyrazów:</gold>"
+  word_list_empty: "<gold>Lista blokowanych wyrazów jest pusta.</gold>"
