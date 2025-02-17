@@ -24,17 +24,17 @@ class CommandManager(private val plugin: CleanerX) {
                 CleanerXCommand(plugin)
             )
             commands.register(
-                "clean",
+                "cleanx",
                 "Clears the chat window. Type /clean to use commands",
                 CleanCommand(plugin)
             )
             commands.register(
-                "blacklist",
+                "blacklistx",
                 plugin.messageHandler.getSimpleMessage("word", "usage"),
                 BlackListCommand(plugin)
             )
             commands.register(
-                "whitelist",
+                "whitelistx",
                 plugin.messageHandler.getSimpleMessage("word", "usage"),
                 WhiteListCommand(plugin)
             )
