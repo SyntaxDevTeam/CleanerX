@@ -11,7 +11,10 @@ class CleanerXCommand(private val plugin: CleanerX) : BasicCommand {
     private val mH = plugin.messageHandler
 
     override fun execute(@NotNull stack: CommandSourceStack, @NotNull args: Array<String>) {
-        if (!stack.sender.hasPermission("cleanerx.help") ||
+        if (!stack.sender.hasPermission("cleanerx.cmd.help") ||
+            !stack.sender.hasPermission("cleanerx.cmd.version") ||
+            !stack.sender.hasPermission("cleanerx.cmd.reload") ||
+            !stack.sender.hasPermission("cleanerx.help") ||
             !stack.sender.hasPermission("cleanerx.version") ||
             !stack.sender.hasPermission("cleanerx.reload")) {
             stack.sender.sendMessage(mH.getMessage("error", "no_permission"))
@@ -22,7 +25,7 @@ class CleanerXCommand(private val plugin: CleanerX) : BasicCommand {
         if (args.isNotEmpty()) {
             when {
                 args[0].equals("help", ignoreCase = true) -> {
-                    if (stack.sender.hasPermission("cleanerx.help")) {
+                    if (stack.sender.hasPermission("cleanerx.cmd.help") || stack.sender.hasPermission("cleanerx.help")) {
                         stack.sender.sendMessage(mH.miniMessageFormat(" <gray>+-------------------------------------------------\n" +
                                 " |\n" +
                                 " |  <gold>Available commands for " + pluginMeta.name + ":\n<gray>#\n" +
@@ -37,7 +40,7 @@ class CleanerXCommand(private val plugin: CleanerX) : BasicCommand {
                     }
                 }
                 args[0].equals("version", ignoreCase = true) -> {
-                    if (stack.sender.hasPermission("cleanerx.version")) {
+                    if (stack.sender.hasPermission("cleanerx.cmd.version") || stack.sender.hasPermission("cleanerx.version")) {
                     stack.sender.sendMessage(mH.miniMessageFormat("\n<gray>-------------------------------------------------\n" +
                             " <gray>|\n" +
                             " <gray>|   <gold>→ <bold>" + pluginMeta.name + "</bold> ←\n" +
@@ -51,7 +54,7 @@ class CleanerXCommand(private val plugin: CleanerX) : BasicCommand {
                     }
                 }
                 args[0].equals("reload", ignoreCase = true) -> {
-                    if (stack.sender.hasPermission("CleanerX.reload")) {
+                    if (stack.sender.hasPermission("cleanerx.cmd.reload")) {
                         plugin.restartMyTask()
                         stack.sender.sendMessage(mH.getMessage("reload", "success"))
                     } else {
@@ -68,7 +71,7 @@ class CleanerXCommand(private val plugin: CleanerX) : BasicCommand {
     }
     override fun suggest(@NotNull stack: CommandSourceStack, @NotNull args: Array<String>): List<String> {
         return when (args.size) {
-            1 -> listOf("help", "version", "reload", "addword")
+            1 -> listOf("help", "version", "reload")
             else -> emptyList()
         }
     }
