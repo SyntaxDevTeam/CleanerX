@@ -121,7 +121,7 @@ class MessageHandler(private val plugin: CleanerX) {
     *
     * @return A string representing the message prefix.
     */
-    private fun getPrefix(): String {
+    fun getPrefix(): String {
         return messages.getString("prefix") ?: "[${plugin.pluginMeta.name}]"
     }
 
