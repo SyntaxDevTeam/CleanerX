@@ -24,8 +24,11 @@ clean:
   error: "<red>An error occurred while clearing the chat.</red>"
   log: "<gold>{player} cleared the chat.</gold>"
 
+whitelist:
+  usage: "<gold>Correct usage: /whitelistx <add|remove|list> <word></gold>"
+
 word:
-  usage: "<gold>Correct usage: /word <add|remove|list> <word></gold>"
+  usage: "<gold>Correct usage: /blacklistx <add|remove|list> <word></gold>"
   word_not_found: "<red>The word {word} was not found.</red>"
   word_removed: "<green>The word {word} has been successfully removed.</green>"
   word_added: "<green>The word <gold><i>{word}</i></gold> has been successfully added to the banned words list.</green>"

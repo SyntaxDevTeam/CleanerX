@@ -24,8 +24,11 @@ clean:
   error: "<red>Wystąpił błąd podczas czyszczenia czatu.</red>"
   log: "<gold>{player} wyczyścił czat.</gold>"
 
+whitelist:
+  usage: "<gold>Poprawne użycie to: /whitelist <add|remove|list> <player></gold>"
+
 word:
-  usage: "<gold>Poprawne użycie to: /word <add|remove|list> <word></gold>"
+  usage: "<gold>Poprawne użycie to: /blacklist <add|remove|list> <word></gold>"
   word_not_found: "<red>Nie znaleziono wyrazu {word}.</red>"
   word_removed: "<green>Pomyślnie usunięto wyraz {word}.</green>"
   word_added: "<green>Pomyślnie dodano wyraz <gold><i>{word}</i></gold> do listy słów zakazanych.</green>"
