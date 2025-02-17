@@ -30,7 +30,9 @@ class CleanerXCommand(private val plugin: CleanerX) : BasicCommand {
                                 " |\n" +
                                 " |  <gold>Available commands for " + pluginMeta.name + ":\n<gray>#\n" +
                                 " |  <gold>/crx help <gray>- <white>Displays this prompt.<gray>\n" +
-                                " <gray>|  <gold>/crx addword <word> <gray>- <white>Adds a word to the blacklist.\n" +
+                                " <gray>|  <gold>/blacklistx <add/remove/list> <word> <gray>- <white>Adds a word to the blacklist.\n" +
+                                " <gray>|  <gold>/whitelistx <add/remove/list> <word> <gray>- <white>Adds a word to the whitelist.\n" +
+                                " <gray>|  <gold>/cleanx <gray>- <white>Clears the chat window.\n" +
                                 " <gray>|  <gold>/crx version <gray>- <white>Shows plugin info. \n<gray>" +
                                 " |  <gold>/crx reload <gray>- <white>Reloads the configuration file\n" +
                                 " |\n" +
@@ -54,7 +56,7 @@ class CleanerXCommand(private val plugin: CleanerX) : BasicCommand {
                     }
                 }
                 args[0].equals("reload", ignoreCase = true) -> {
-                    if (stack.sender.hasPermission("cleanerx.cmd.reload")) {
+                    if (stack.sender.hasPermission("cleanerx.cmd.reload") || stack.sender.hasPermission("cleanerx.reload")) {
                         plugin.restartMyTask()
                         stack.sender.sendMessage(mH.getMessage("reload", "success"))
                     } else {
