@@ -29,9 +29,14 @@ class CommandManager(private val plugin: CleanerX) {
                 CleanCommand(plugin)
             )
             commands.register(
-                "word",
+                "blacklist",
                 plugin.messageHandler.getSimpleMessage("word", "usage"),
-                WordCommand(plugin)
+                BlackListCommand(plugin)
+            )
+            commands.register(
+                "whitelist",
+                plugin.messageHandler.getSimpleMessage("word", "usage"),
+                WhiteListCommand(plugin)
             )
         }
     }
