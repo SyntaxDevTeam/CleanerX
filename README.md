@@ -90,7 +90,7 @@ Pełny spis komend i uprawnień znajdziesz [tutaj](https://github.com/SyntaxDevT
 * [x] Wymaga Javy 21 lub nowszej, aby działać poprawnie
 * [x] Napisany w nowoczesnym języku programowania Kotlin, który jest bardziej ekspresyjny i bezpieczny niż Java.
 
-Jeśli masz jakieś pytania, być może znajdziesz na nie rozwiązanie na naszym [discordzie](https://discord.gg/KNstae3UEV)
+Jeśli masz jakieś pytania, być może znajdziesz na nie rozwiązanie na naszym [discordzie](https://discord.gg/Q343kjA2YP)
 
 ## Pobierz
 * Zawsze aktualna wersja stabilna do pobrania na Hangar [![Available on Hangar](https://img.shields.io/hangar/dt/CleanerX)](https://hangar.papermc.io/SyntaxDevTeam/CleanerX)
@@ -105,7 +105,7 @@ Jeśli masz jakieś pytania, być może znajdziesz na nie rozwiązanie na naszym
   W pliku config.yml znajdziesz opcje konfiguracyjne, takie jak listę zakazanych słów czy tryb pełnej cenzury.
 
 ## Kontakt
-Jeśli masz pytania lub potrzebujesz pomocy, śmiało skontaktuj się z nami na naszym [discordzie](https://discord.gg/KNstae3UEV) lub napisz bezpośrednio na PM
+Jeśli masz pytania lub potrzebujesz pomocy, śmiało skontaktuj się z nami na naszym [discordzie](https://discord.gg/Q343kjA2YP) lub napisz bezpośrednio na PM
 
 ## Licencja
 Ten plugin jest dostępny na licencji MIT. Szczegóły znajdziesz w pliku LICENSE.
