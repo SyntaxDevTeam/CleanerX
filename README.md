@@ -22,7 +22,7 @@ CleanerX is an advanced plugin designed to filter and replace inappropriate lang
 - 🟢 **Requires Java 21 or newer**
 - 🟢 **Written in Kotlin – a modern, expressive, and safer alternative to Java**
 
-If you have any questions, you might find answers on our [Discord](https://discord.gg/KNstae3UEV).
+If you have any questions, you might find answers on our [Discord](https://discord.gg/Q343kjA2YP).
 
 ## 🛠️ Commands and Permissions
 | Command                               | Permission             | Description                                        |
@@ -49,7 +49,7 @@ If you have any questions, you might find answers on our [Discord](https://disco
 
 ## 📞 Contact
 
-If you have any questions or need support, feel free to reach out on our [Discord](https://discord.gg/KNstae3UEV) or send us a direct message.
+If you have any questions or need support, feel free to reach out on our [Discord](https://discord.gg/Q343kjA2YP) or send us a direct message.
 
 ## 📜 License
 
