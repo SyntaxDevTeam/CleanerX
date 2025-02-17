@@ -1,31 +1,65 @@
-# Welcome to CleanerX
-CleanerX is a sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment.
+# CleanerX
 
-## Information
-* [x] CleanerX was designed specifically for the latest version of Minecraft 1.20.6-1.21+
-* [x] Written and optimized for the Paper engine and its modifications such as Pufferfish and Purpur
-* [x] Requires Java 21 or newer to work correctly
-* [x] Written in the modern programming language Kotlin, which is more expressive and safer than Java.
+CleanerX is an advanced plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment. It allows you to configure automatic execution of commands, for example, to punish players who repeatedly use offensive language after a specified number of infractions. The plugin also blocks the ability to send links in chat, and if needed, you can clear the chat with a simple command.
 
-If you have any questions, you might find a solution on our [discord](https://discord.gg/KNstae3UEV)
 
-## Download
-* The always up-to-date stable version is available for download on Hangar [![Available on Hangar](https://img.shields.io/hangar/dt/CleanerX)](https://hangar.papermc.io/SyntaxDevTeam/CleanerX)
-* You can also build the development version yourself from [![Available on GitHub](https://img.shields.io/badge/GitHub.com-CleanerX-green)](https://github.com/SyntaxDevTeam/CleanerX)
+## 🔹 Features
 
-## Installation
-* Download the latest version of the plugin from the releases section.
-* Place the JAR file in the plugins folder on your server.
-* Start the Minecraft server.
-* Configuration In the config.yml file, you will find configuration options such as the list of banned words or full censorship mode.
+- ✅ Partial or complete word censorship depending on configuration
+- ✅ Ability to block unwanted links
+- ✅ Add custom words to the blacklist via command without needing to restart the server
+- ✅ Add custom words to the whitelist via command without needing to restart the server
+- ✅ Automatic execution of commands based on configuration – recommended integration with PunisherX
+- ✅ Ability to clear chat using a command
+- ✅ Plugin update notifications with an option to enable automatic updates
+- ✅ Extensive configuration file for flexible settings. Check the default settings [here](https://github.com/SyntaxDevTeam/CleanerX/blob/main/src/main/resources/config.yml)
+- ✅ Multi-language support via `messages_xx.yml` files
 
-## Contact
-If you have questions or need help, feel free to contact us on our [discord](https://discord.gg/KNstae3UEV) or write directly on PM
+## ⚙️ Technical Information
 
-## License
-This plugin is available under the MIT license. Details can be found in the LICENSE file.
+- 🟢 **Designed for the latest Minecraft versions 1.20.6–1.21.4+**
+- 🟢 **Optimized for Paper and its forks (Pufferfish, Purpur, Leaves)**
+- 🟢 **Requires Java 21 or newer**
+- 🟢 **Written in Kotlin – a modern, expressive, and safer alternative to Java**
 
-Thank you for using CleanerX! I hope it meets your expectations. 😊
+If you have any questions, you might find answers on our [Discord](https://discord.gg/KNstae3UEV).
+
+## 🛠️ Commands and Permissions
+| Command                               | Permission             | Description                                        |
+|---------------------------------------|------------------------|----------------------------------------------------|
+| `/whitelist <add/remove/list>`        | `cleanerx.cmd.help`    | Adds, removes or displays words from the whitelist |
+| `/blacklist <add/remove/list>`        | `cleanerx.cmd.help`    | Adds, removes or displays words from the blacklist |
+| `/clean`                              | `cleanerx.cmd.help`    | Clears the in-game chat                            |
+| `/cleanerx help` or `/crx help`       | `cleanerx.cmd.help`    | Displays a list of available commands              |
+| `/cleanerx reload` or `/crx reload`   | `cleanerx.cmd.reload`  | Reloads the configuration file.                    |
+| `/cleanerx version` or `/crx version` | `cleanerx.cmd.version` | Shows plugin info                                  |
+
+## 📥 Download
+
+- **The latest stable version is available on Hangar:**  [![Available on Hangar](https://img.shields.io/hangar/dt/CleanerX)](https://hangar.papermc.io/SyntaxDevTeam/CleanerX)
+- **You can also build the latest development version from:**  [![Available on GitHub](https://img.shields.io/badge/GitHub.com-CleanerX-green)](https://github.com/SyntaxDevTeam/CleanerX)
+
+## 🚀 Installation
+
+1. Download the latest version of the plugin from the release section.
+2. Place the JAR file into the `plugins` folder on your server.
+3. Start your Minecraft server.
+4. **Configuration:**  
+   Open the `config.yml` file to customize settings such as the list of banned words or full censorship mode.
+
+## 📞 Contact
+
+If you have any questions or need support, feel free to reach out on our [Discord](https://discord.gg/KNstae3UEV) or send us a direct message.
+
+## 📜 License
+
+This plugin is available under the **MIT License**. You can find the details in the LICENSE file.
+
+---
+
+**Thank you for using CleanerX! I hope it meets your expectations. 😊**
+
+---
 
 ![syntaxdevteam_logo.png](assets/syntaxdevteam_logo.png)
 ---
@@ -34,11 +68,25 @@ Thank you for using CleanerX! I hope it meets your expectations. 😊
 
 # CleanerX
 
-CleanerX to zaawansowany plugin zaprojektowany do filtrowania i zamiany niecenzuralnych słów na ocenzurowane odpowiedniki lub ich całkowitego usuwania, zapewniając czyste i szanujące środowisko gry..
+CleanerX to zaawansowana wtyczka zaprojektowana do filtrowania i zastępowania nieodpowiedniego języka ocenzurowanymi alternatywami lub całkowitego usuwania go, zapewniając czyste i pełne szacunku środowisko gry. Pozwala na skonfigurowanie automatycznego wykonywanie poleceń, na przykład, aby ukarać graczy, którzy wielokrotnie używają obraźliwego języka po określonej liczbie przekleństw. Wtyczka blokuje również, możliwość wysyłania na czacie linków do stron, a w razie potrzeby możesz wyczyścić czat za pomocą polecenia.
 
-## Informacje
-* [x] CleanerX został zaprojektowany specjalnie pod najnowszą wersję Minecraft od 1.20.6 do 1.21+
-* [x] Napisany i zoptymalizowano pod silnik Paper oraz jego modyfikacje tj. Pufferfish i Purpur
+Pełny spis komend i uprawnień znajdziesz [tutaj](https://github.com/SyntaxDevTeam/CleanerX/wiki) 
+
+## Możliwości
+
+* Cenzurowanie częściowe lub całkowite słów w zależności od konfiguracji
+* Możliwość blokowania niechcianych linków
+* Możliwość dodawania własnych słów do blacklisty za pomoca komendy bez konieczności restartu serwera
+* Możliwość dodawania własnych słów do whitelisty za pomoca komendy bez konieczności restartu serwera
+* Automatyczne wykonywanie poleceń w zależności od konfiguracji - zalecana współpraca z PunisherX
+* Możliwość czyszczenia czatu za pomocą polecenia
+* Powiadomienia o aktualizacjach wtyczki z opcją ustawienia automatycznych aktualizacji
+* Rozbudowany plik konfiguracyjny do elastycznych ustawień. Sprawdź domyślne ustawienia [tutaj](https://github.com/SyntaxDevTeam/CleanerX/blob/main/src/main/resources/config.yml)
+* Wsparcie dla wielu języków przez plik messages_xx.yml
+
+## Informacje techniczne
+* [x] CleanerX został zaprojektowany specjalnie pod najnowszą wersję Minecraft 1.20.6-1.21.4+
+* [x] Napisany i zoptymalizowano pod silnik Paper oraz jego modyfikacje tj. Pufferfish, Purpur i Leaves
 * [x] Wymaga Javy 21 lub nowszej, aby działać poprawnie
 * [x] Napisany w nowoczesnym języku programowania Kotlin, który jest bardziej ekspresyjny i bezpieczny niż Java.
 
