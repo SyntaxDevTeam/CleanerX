@@ -25,14 +25,14 @@ CleanerX is an advanced plugin designed to filter and replace inappropriate lang
 If you have any questions, you might find answers on our [Discord](https://discord.gg/Q343kjA2YP).
 
 ## 🛠️ Commands and Permissions
-| Command                               | Permission             | Description                                        |
-|---------------------------------------|------------------------|----------------------------------------------------|
-| `/whitelistx <add/remove/list>`        | `cleanerx.cmd.whitelist`    | Adds, removes or displays words from the whitelist |
-| `/blacklistx <add/remove/list>`        | `cleanerx.cmd.balcklist`    | Adds, removes or displays words from the blacklist |
-| `/cleanx`                              | `cleanerx.cmd.clean`    | Clears the in-game chat                            |
-| `/cleanerx help` or `/crx help`       | `cleanerx.cmd.help`    | Displays a list of available commands              |
-| `/cleanerx reload` or `/crx reload`   | `cleanerx.cmd.reload`  | Reloads the configuration file.                    |
-| `/cleanerx version` or `/crx version` | `cleanerx.cmd.version` | Shows plugin info                                  |
+| Command                               | Permission               | Description                                        |
+|---------------------------------------|--------------------------|----------------------------------------------------|
+| `/whitelistx <add/remove/list>`        | `cleanerx.cmd.whitelist` | Adds, removes or displays words from the whitelist |
+| `/blacklistx <add/remove/list>`        | `cleanerx.cmd.balcklist` | Adds, removes or displays words from the blacklist |
+| `/cleanx`                              | `cleanerx.cmd.clean`     | Clears the in-game chat                            |
+| `/cleanerx help` or `/crx help`       | `cleanerx.cmd.crx`       | Displays a list of available commands              |
+| `/cleanerx reload` or `/crx reload`   | `cleanerx.cmd.crx`    | Reloads the configuration file.                    |
+| `/cleanerx version` or `/crx version` | `cleanerx.cmd.crx`   | Shows plugin info                                  |
 
 ## 📥 Download
 
