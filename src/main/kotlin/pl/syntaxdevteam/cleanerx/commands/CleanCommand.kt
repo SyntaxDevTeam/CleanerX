@@ -13,7 +13,7 @@ import pl.syntaxdevteam.cleanerx.base.ClearChat
 class CleanCommand(private val plugin: CleanerX) : BasicCommand {
 
     override fun execute(@NotNull stack: CommandSourceStack, @NotNull args: Array<String>) {
-        if (stack.sender.hasPermission("cleanerx.clean")) {
+        if (stack.sender.hasPermission("cleanerx.cmd.clean")) {
             val player = stack.sender.name
             val clearChat = ClearChat()
             clearChat.clean()
