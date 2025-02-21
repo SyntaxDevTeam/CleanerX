@@ -29,7 +29,6 @@ class CleanerXChat(
     private val linkRegex = "(https?://\\S+|www\\.\\S+|\\b\\w+\\.(com|net|org|pl|co|gov|edu|info|biz|ru|uk|us|de|fr|cn|es|it|au|nl|ca|in|jp|se|ch|br|za|pt|tv|me|xyz|tech|online|store|site|live|app|io|ai|dev|ly|digital|agency|solutions|global|world|studio|cloud|media|network|works)\\b)".toRegex()
     private val blockLinks = plugin.config.getBoolean("block-links")
     private val usePunishment = plugin.config.getBoolean("use-punishment")
-    private val noLink: String = plugin.config.getString("message.no-link") ?: "<red>Sharing links in the chat is not allowed on this server!"
 
     /**
      * Event handler for chat messages.
@@ -45,7 +44,7 @@ class CleanerXChat(
 
             if (blockLinks && linkRegex.containsMatchIn(message)) {
                 event.isCancelled = true
-                event.player.sendRichMessage(noLink)
+                event.player.sendMessage(plugin.messageHandler.getMessage("error", "no_link"))
                 return
             }
 
@@ -64,7 +63,7 @@ class CleanerXChat(
                 }
             }
         } catch (e: Exception) {
-            plugin.logger.severe("Error in onChat, report it urgently to the plugin author with the message: ${e.message}")
+            plugin.logger.severe("Critical error! Send a message to the plugin author with the subject \"Error in onChat\" and the content: ${e.message}")
             e.printStackTrace()
         }
     }

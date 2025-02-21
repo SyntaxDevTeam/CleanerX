@@ -14,6 +14,7 @@ error:
   console: "<red>Only a player can use this command.</red>"
   invalid_usage: "<red>Invalid command usage. Use: {usage}</red>"
   unknown_command: "<red>Unknown command. Type <gold>/crx help</gold> to see the list of available commands.</red>"
+  no-link: "<red>Sharing links in the chat is not allowed on this server!</red>"
 
 reload:
   success: "<green>Configuration successfully reloaded.</green>"
