@@ -28,7 +28,7 @@ If you have any questions, you might find answers on our [Discord](https://disco
 | Command                               | Permission               | Description                                        |
 |---------------------------------------|--------------------------|----------------------------------------------------|
 | `/whitelistx <add/remove/list>`        | `cleanerx.cmd.whitelist` | Adds, removes or displays words from the whitelist |
-| `/blacklistx <add/remove/list>`        | `cleanerx.cmd.balcklist` | Adds, removes or displays words from the blacklist |
+| `/blacklistx <add/remove/list>`        | `cleanerx.cmd.blacklist` | Adds, removes or displays words from the blacklist |
 | `/cleanx`                              | `cleanerx.cmd.clean`     | Clears the in-game chat                            |
 | `/cleanerx help` or `/crx help`       | `cleanerx.cmd.crx`       | Displays a list of available commands              |
 | `/cleanerx reload` or `/crx reload`   | `cleanerx.cmd.crx`    | Reloads the configuration file.                    |
