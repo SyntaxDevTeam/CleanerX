@@ -4,49 +4,49 @@ import org.bukkit.plugin.java.JavaPlugin
 import pl.syntaxdevteam.cleanerx.base.WordFilter
 
 /**
- * Implementacja interfejsu [CleanerXAPI] pluginu CleanerX.
+ * Implementation of the [CleanerXAPI] interface of the CleanerX plugin.
  *
- * Klasa ta wykorzystuje wewnętrzną logikę zdefiniowaną w klasie [WordFilter],
- * która odpowiada za ładowanie konfiguracji oraz filtrowanie wiadomości.
- * Dzięki tej implementacji metody [containsBannedWord] oraz [censorMessage] działają spójnie
- * z konfiguracją pluginu CleanerX, korzystając z listy słów niecenzuralnych (banned) i białych (whitelist).
+ * This class uses the internal logic defined in the [WordFilter] class,
+ * which is responsible for loading the configuration and filtering messages.
+ * Thanks to this implementation, the methods [containsBannedWord] and [censorMessage]
+ * operate consistently with the CleanerX plugin configuration, using the list of banned
+ * and whitelisted words.
  *
- * @constructor Tworzy instancję API korzystając z podanego obiektu [plugin] klasy [JavaPlugin].
- * W trakcie inicjalizacji tworzony jest obiekt [WordFilter], który automatycznie ładuje
- * konfigurację słów niecenzuralnych oraz słów dozwolonych z plików YAML.
+ * @constructor Creates an API instance using the provided [plugin] object of the [JavaPlugin] class.
+ * During initialization, a [WordFilter] object is created, which automatically loads
+ * the banned and whitelisted words configuration from YAML files.
  *
- * @param plugin Instancja głównego pluginu CleanerX, używana do pobierania konfiguracji,
- *               zapisywania zasobów oraz logowania zdarzeń.
+ * @param plugin The main instance of the CleanerX plugin, used to retrieve configuration,
+ *               save resources, and log events.
  */
 class CleanerXApiImpl(plugin: JavaPlugin) : CleanerXAPI {
     private val wordFilter = WordFilter(plugin)
 
     /**
-     * Sprawdza, czy przekazana wiadomość zawiera niecenzuralne słowa.
+     * Checks if the provided message contains banned words.
      *
-     * Metoda deleguje wywołanie do [WordFilter.containsBannedWord], która analizuje wiadomość
-     * w kontekście załadowanych list słów niecenzuralnych i dozwolonych.
+     * This method delegates the call to [WordFilter.containsBannedWord], which analyzes the message
+     * in the context of the loaded banned and whitelisted words.
      *
-     * @param message Wiadomość, która ma zostać sprawdzona.
-     * @return `true` jeśli wiadomość zawiera niecenzuralne słowa, `false` w przeciwnym przypadku.
+     * @param message The message to be checked.
+     * @return `true` if the message contains banned words, `false` otherwise.
      */
     override fun containsBannedWord(message: String): Boolean {
         return wordFilter.containsBannedWord(message)
     }
 
     /**
-     * Cenzuruje podaną wiadomość, zastępując wykryte niecenzuralne słowa znakami cenzury.
+     * Censors the given message by replacing detected banned words with censorship symbols.
      *
-     * Metoda deleguje wywołanie do [WordFilter.censorMessage], która przetwarza wiadomość
-     * na podstawie konfiguracji pluginu CleanerX. W zależności od wartości parametru [fullCensorship],
-     * metoda dokonuje pełnej lub częściowej cenzury wykrytych słów.
+     * This method delegates the call to [WordFilter.censorMessage], which processes the message
+     * based on the CleanerX plugin configuration. Depending on the [fullCensorship] parameter value,
+     * the method performs full or partial censorship of detected words.
      *
-     * @param message Wiadomość, która ma zostać poddana cenzurze.
-     * @param fullCensorship Określa tryb cenzury:
-     *        - `true` – pełna cenzura, całe słowo zostanie zastąpione,
-     *        - `false` – tylko część słowa zostanie cenzurowana.
-     * @return Zwraca wiadomość po modyfikacji, w której niecenzuralne słowa zostały zastąpione
-     *         znakami cenzury.
+     * @param message The message to be censored.
+     * @param fullCensorship Defines the censorship mode:
+     *        - `true` – full censorship, the entire word is replaced,
+     *        - `false` – only part of the word is censored.
+     * @return Returns the modified message with banned words replaced by censorship symbols.
      */
     override fun censorMessage(message: String, fullCensorship: Boolean): String {
         return wordFilter.censorMessage(message, fullCensorship)
