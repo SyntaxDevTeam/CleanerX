@@ -56,7 +56,6 @@ class BlackListCommand(private var plugin: CleanerX) : BasicCommand {
 
     override fun suggest(@NotNull stack: CommandSourceStack, @NotNull args: Array<String>): List<String> {
         if (!stack.sender.hasPermission("cleanerx.cmd.blacklist")) {
-            stack.sender.sendMessage(plugin.messageHandler.getMessage("error", "no_permission"))
             return emptyList()
         }
         return when (args.size) {

@@ -65,7 +65,6 @@ class CleanerXCommand(private val plugin: CleanerX) : BasicCommand {
     }
     override fun suggest(@NotNull stack: CommandSourceStack, @NotNull args: Array<String>): List<String> {
         if (!stack.sender.hasPermission("cleanerx.cmd.crx")) {
-            stack.sender.sendMessage(mH.getMessage("error", "no_permission"))
             return emptyList()
         }
         return when (args.size) {

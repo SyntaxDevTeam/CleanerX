@@ -16,7 +16,7 @@ class WhiteListCommand(private var plugin: CleanerX) : BasicCommand {
             return
         }
         if (args.isEmpty()) {
-            stack.sender.sendMessage(plugin.messageHandler.getMessage("word", "usage"))
+            stack.sender.sendMessage(plugin.messageHandler.getMessage("whitelist", "usage"))
             return
         }
         when (args[0].lowercase()) {
@@ -55,7 +55,6 @@ class WhiteListCommand(private var plugin: CleanerX) : BasicCommand {
     }
     override fun suggest(@NotNull stack: CommandSourceStack, @NotNull args: Array<String>): List<String> {
         if (!stack.sender.hasPermission("cleanerx.cmd.whitelist")) {
-            stack.sender.sendMessage(plugin.messageHandler.getMessage("error", "no_permission"))
             return emptyList()
         }
         return when (args.size) {
