@@ -26,19 +26,11 @@ import java.io.File
 class MessageHandler(private val plugin: CleanerX) {
     private val language = plugin.config.getString("language") ?: "EN"
     private var messages: FileConfiguration
-
-    /**
-     * Initializes default language settings and loads the message file.
-     */
     init {
         copyDefaultMessages()
         updateLanguageFile()
         messages = loadMessages()
     }
-
-    /**
-     * Displays information about the language file author based on the selected language.
-     */
     fun initial() {
         val author = when (language.lowercase()) {
             "pl" -> "WieszczY"
@@ -47,10 +39,6 @@ class MessageHandler(private val plugin: CleanerX) {
         }
         plugin.logger.log("<gray>Loaded \"$language\" language file by: <white><b>$author</b></white>")
     }
-
-    /**
-     * Copies the default language file if it does not exist in the plugin's data folder.
-     */
     private fun copyDefaultMessages() {
         val messageFile = File(plugin.dataFolder, "lang/messages_${language.lowercase()}.yml")
         if (!messageFile.exists()) {
@@ -58,11 +46,6 @@ class MessageHandler(private val plugin: CleanerX) {
             plugin.saveResource("lang/messages_${language.lowercase()}.yml", false)
         }
     }
-
-    /**
-     * Updates the language file by adding missing entries, synchronizing it with the default version
-     * from the plugin's resources.
-     */
     private fun updateLanguageFile() {
         val langFile = File(plugin.dataFolder, "lang/messages_${language.lowercase()}.yml")
         val defaultLangStream = plugin.getResource("lang/messages_${language.lowercase()}.yml")
@@ -98,41 +81,16 @@ class MessageHandler(private val plugin: CleanerX) {
             currentConfig.save(langFile)
         }
     }
-
-    /**
-     * Loads messages from the language file into the configuration.
-     *
-     * @return A FileConfiguration object containing messages.
-     */
     private fun loadMessages(): FileConfiguration {
         val langFile = File(plugin.dataFolder, "lang/messages_${language.lowercase()}.yml")
         return YamlConfiguration.loadConfiguration(langFile)
     }
-
-    /**
-     * Reloads messages from the language file.
-     */
     fun reloadMessages() {
         messages = loadMessages()
     }
-
-    /**
-    * Retrieves the message prefix.
-    *
-    * @return A string representing the message prefix.
-    */
     fun getPrefix(): String {
         return messages.getString("prefix") ?: "[${plugin.pluginMeta.name}]"
     }
-
-    /**
-     * Retrieves a message formatted as an Adventure Component, including the prefix and placeholders.
-     *
-     * @param category The message category.
-     * @param key The message key.
-     * @param placeholders A map of placeholders to replace in the message.
-     * @return The formatted message as a Component.
-     */
     fun getMessage(category: String, key: String, placeholders: Map<String, String> = emptyMap()): Component {
         val prefix = getPrefix()
         val message = messages.getString("$category.$key") ?: run {
