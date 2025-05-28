@@ -1,3 +1,5 @@
+[![Build Plugin](https://github.com/SyntaxDevTeam/CleanerX/actions/workflows/gradle.yml/badge.svg?branch=main)](https://github.com/SyntaxDevTeam/CleanerX/actions/workflows/gradle.yml) ![GitHub issues](https://img.shields.io/github/issues/SyntaxDevTeam/CleanerX) ![GitHub last commit](https://img.shields.io/github/last-commit/SyntaxDevTeam/CleanerX) ![GitHub Release Date](https://img.shields.io/github/release-date/SyntaxDevTeam/CleanerX) 
+![GitHub commits since latest release (branch)](https://img.shields.io/github/commits-since/SyntaxDevTeam/CleanerX/latest/main) ![Hangar Downloads](https://img.shields.io/hangar/dt/CleanerX?style=flat)
 # CleanerX
 
 CleanerX is an advanced plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment. It allows you to configure automatic execution of commands, for example, to punish players who repeatedly use offensive language after a specified number of infractions. The plugin also blocks the ability to send links in chat, and if needed, you can clear the chat with a simple command.
