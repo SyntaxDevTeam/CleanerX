@@ -1,0 +1,41 @@
+# Author: LegacyHeaven
+# Ver. 1.0.0
+# Berichtopmaak:
+# Je kunt MiniMessage en Legacy (Minecraft) opmaak gebruiken.
+# Voorbeelden van MiniMessage gebruik: https://docs.advntr.dev/minimessage/format.html
+# Meng de formaten niet in één bericht. Als je Legacy gebruikt, voeg dan geen MiniMessage opmaak toe,
+# anders wordt alleen de laatste toegepast.
+
+prefix: "<gradient:#ffff55:#9e5006:#ffff55:#9e5006:#ffff55>[<b>CleanerX</b>]</gradient>"
+
+# Foutmeldingen
+error:
+  no_permission: "<red>Je hebt geen toestemming om dit commando te gebruiken.</red>"
+  player_not_found: "<gold>Speler met de bijnaam {player} werd niet gevonden.</gold>"
+  console: "<red>Alleen een speler kan dit commando gebruiken.</red>"
+  invalid_usage: "<red>Ongeldig gebruik van commando. Gebruik: {usage}</red>"
+  unknown_command: "<red>Onbekend commando. Typ <gold>/crx help</gold> om de lijst van beschikbare commando's te zien.</red>"
+  no-link: "<red>Het delen van links in de chat is niet toegestaan op deze server!</red>"
+
+reload:
+  success: "<green>Configuratie succesvol herladen.</green>"
+  error: "<red>Er is een fout opgetreden bij het herladen van de configuratie:</red>"
+
+clean:
+  success: "<green>Chat succesvol gewist.</green>"
+  error: "<red>Er is een fout opgetreden bij het wissen van de chat.</red>"
+  log: "<gold>{player} heeft de chat gewist.</gold>"
+
+whitelist:
+  usage: "<gold>Correct gebruik: /whitelistx <add|remove|list> <woord></gold>"
+
+word:
+  usage: "<gold>Correct gebruik: /blacklistx <add|remove|list> <woord></gold>"
+  word_not_found: "<red>Het woord {word} werd niet gevonden.</red>"
+  word_removed: "<green>Het woord {word} is succesvol verwijderd.</green>"
+  word_added: "<green>Het woord <gold><i>{word}</i></gold> is succesvol toegevoegd aan de geblokkeerde woordenlijst.</green>"
+  word_error: "<red>Er is een fout opgetreden bij het toevoegen van het woord {word}.</red>"
+  no_word_provided: "<red>Geef een woord op om toe te voegen.</red>"
+  word_already_exists: "<red>Het woord {word} bestaat al.</red>"
+  banned_words_list: "<gold>Geblokkeerde woordenlijst:</gold>"
+  word_list_empty: "<gold>De geblokkeerde woordenlijst is leeg.</gold>"

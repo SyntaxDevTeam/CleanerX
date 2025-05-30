@@ -1,0 +1,38 @@
+name: CleanerX
+version: '1.5.1-DEV'
+main: pl.syntaxdevteam.cleanerx.CleanerX
+api-version: '1.20'
+description: "A sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment."
+
+prefix: CleanerX
+authors: [SyntaxDevTeam]
+website: https://github.com/SyntaxDevTeam
+
+loader: pl.syntaxdevteam.cleanerx.loader.SyntaxLoader
+has-open-classloader: false
+folia-supported: true
+
+softdepend: [Folia]
+
+commands:
+  cleanerx:
+    description: CleanerX plugin command. Type /cleanerx help to check available commands
+    usage: /cleanerx <help/version/reload>
+    permission: cleanerx.cmd.crx
+    aliases: [crx]
+
+  cleanx:
+    description: Clears the chat window.
+    usage: /cleanx
+    permission: cleanerx.cmd.clean
+
+  blacklistx:
+    description: Manage the blacklist of forbidden words.
+    usage: /blacklistx <add/remove/list> <word>
+    permission: cleanerx.cmd.blacklist
+
+  whitelistx:
+    description: Manage the whitelist of allowed words.
+    usage: /whitelistx <add/remove/list> <word>
+    permission: cleanerx.cmd.whitelist
+

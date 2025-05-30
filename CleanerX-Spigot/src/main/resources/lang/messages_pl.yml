@@ -1,0 +1,37 @@
+# Ver. 1.0.0
+# Formatowanie tekstów wiadomości:
+# Można używać formatowania Legacy (Minecraft).
+
+prefix: "<gradient:#ffff55:#9e5006:#ffff55:#9e5006:#ffff55>[<b>CleanerX</b>]</gradient>"
+
+# Wiadomości błędów
+error:
+  no_permission: "&cNie masz uprawnień do tej komendy.&r"
+  player_not_found: "&6Nie znaleziono gracza o nicku {player}.&r"
+  console: "&cTylko gracz może użyć tej komendy.&r"
+  invalid_usage: "&cNieprawidłowe użycie komendy. Użyj: {usage}&r"
+  unknown_command: "&cNieznana komenda. Wpisz &6/crx help&c, aby sprawdzić listę dostępnych komend.&r"
+  no-link: "&cUdostępnianie linków na czacie jest na tym serwerze niedozwolone!&r"
+
+reload:
+  success: "&aPomyślnie przeładowano konfigurację.&r"
+  error: "&cWystąpił błąd podczas przeładowania konfiguracji:&r"
+
+clean:
+  success: "&aPomyślnie wyczyszczono czat.&r"
+  error: "&cWystąpił błąd podczas czyszczenia czatu.&r"
+  log: "&6{player} wyczyścił czat.&r"
+
+whitelist:
+  usage: "&6Poprawne użycie to: /whitelist <add|remove|list> <player>&r"
+
+word:
+  usage: "&6Poprawne użycie to: /blacklist <add|remove|list> <word>&r"
+  word_not_found: "&cNie znaleziono wyrazu {word}.&r"
+  word_removed: "&aPomyślnie usunięto wyraz {word}.&r"
+  word_added: "&aPomyślnie dodano wyraz &6<i>{word}</i>&r do listy słów zakazanych.&r"
+  word_error: "&cWystąpił błąd podczas dodawania wyrazu {word}.&r"
+  no_word_provided: "&cProszę podać słowo, które chcesz dodać.&r"
+  word_already_exists: "&cWyraz {word} już istnieje.&r"
+  banned_words_list: "&6Lista zablokowanych wyrazów:&r"
+  word_list_empty: "&6Lista blokowanych wyrazów jest pusta.&r"

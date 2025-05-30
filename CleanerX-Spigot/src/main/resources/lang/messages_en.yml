@@ -1,0 +1,40 @@
+# Ver. 1.0.0
+# Message formatting:
+# You can use MiniMessage and Legacy (Minecraft) formatting.
+# Examples of MiniMessage usage: https://docs.advntr.dev/minimessage/format.html
+# Do not mix formats in a single message. If you use Legacy, do not include MiniMessage formatting,
+# otherwise, only the latter will be applied.
+
+prefix: "<gradient:#ffff55:#9e5006:#ffff55:#9e5006:#ffff55>[<b>CleanerX</b>]</gradient>"
+
+# Error messages
+error:
+  no_permission: "<red>You do not have permission to use this command.</red>"
+  player_not_found: "<gold>Player with the nickname {player} was not found.</gold>"
+  console: "<red>Only a player can use this command.</red>"
+  invalid_usage: "<red>Invalid command usage. Use: {usage}</red>"
+  unknown_command: "<red>Unknown command. Type <gold>/crx help</gold> to see the list of available commands.</red>"
+  no-link: "<red>Sharing links in the chat is not allowed on this server!</red>"
+
+reload:
+  success: "<green>Configuration successfully reloaded.</green>"
+  error: "<red>An error occurred while reloading the configuration:</red>"
+
+clean:
+  success: "<green>Chat successfully cleared.</green>"
+  error: "<red>An error occurred while clearing the chat.</red>"
+  log: "<gold>{player} cleared the chat.</gold>"
+
+whitelist:
+  usage: "<gold>Correct usage: /whitelistx <add|remove|list> <word></gold>"
+
+word:
+  usage: "<gold>Correct usage: /blacklistx <add|remove|list> <word></gold>"
+  word_not_found: "<red>The word {word} was not found.</red>"
+  word_removed: "<green>The word {word} has been successfully removed.</green>"
+  word_added: "<green>The word <gold><i>{word}</i></gold> has been successfully added to the banned words list.</green>"
+  word_error: "<red>An error occurred while adding the word {word}.</red>"
+  no_word_provided: "<red>Please provide a word to add.</red>"
+  word_already_exists: "<red>The word {word} already exists.</red>"
+  banned_words_list: "<gold>Banned words list:</gold>"
+  word_list_empty: "<gold>The banned words list is empty.</gold>"

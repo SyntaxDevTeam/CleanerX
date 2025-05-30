@@ -35,6 +35,7 @@ class MessageHandler(private val plugin: CleanerX) {
         val author = when (language.lowercase()) {
             "pl" -> "WieszczY"
             "en" -> "Syntaxerr"
+            "nl" -> "LegacyHeaven"
             else -> "OpenAI ChatGPT-4o"
         }
         plugin.logger.log("<gray>Loaded \"$language\" language file by: <white><b>$author</b></white>")
