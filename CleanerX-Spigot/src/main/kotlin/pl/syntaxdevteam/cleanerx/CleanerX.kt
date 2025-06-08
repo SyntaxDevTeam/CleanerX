@@ -109,7 +109,11 @@ class CleanerX : JavaPlugin(), Listener {
      */
     fun restartMyTask() {
         reloadConfig()
-        messageHandler.reloadMessages()
+        try {
+            messageHandler.reloadMessages()
+        } catch (e: Exception) {
+            logger.err("${messageHandler.getMessage("error", "reload")} ${e.message}")
+        }
         try {
             //AsyncChatEvent.getHandlerList().unregister(this as Listener)
         } catch (e: Exception) {
