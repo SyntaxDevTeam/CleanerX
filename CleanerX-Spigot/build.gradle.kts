@@ -23,11 +23,11 @@ dependencies {
     compileOnly("org.eclipse.aether:aether-api:1.1.0")
     compileOnly("org.yaml:snakeyaml:2.4")
     compileOnly("com.google.code.gson:gson:2.13.0")
-    compileOnly("net.kyori:adventure-text-serializer-legacy:4.20.0")
-    compileOnly("net.kyori:adventure-text-minimessage:4.20.0")
-    compileOnly("net.kyori:adventure-text-serializer-gson:4.20.0")
-    compileOnly("net.kyori:adventure-text-serializer-plain:4.20.0")
-    compileOnly("net.kyori:adventure-text-serializer-ansi:4.20.0")
+    compileOnly("net.kyori:adventure-text-serializer-legacy:4.21.0")
+    implementation("net.kyori:adventure-text-minimessage:4.21.0")
+    compileOnly("net.kyori:adventure-text-serializer-gson:4.21.0")
+    compileOnly("net.kyori:adventure-text-serializer-plain:4.21.0")
+    compileOnly("net.kyori:adventure-text-serializer-ansi:4.21.0")
 }
 
 val targetJavaVersion = 21
@@ -43,7 +43,7 @@ tasks.processResources {
     val props = mapOf("version" to version, "description" to description)
     inputs.properties(props)
     filteringCharset = "UTF-8"
-    filesMatching("spigot-plugin.yml") {
+    filesMatching("plugin.yml") {
         expand(props)
     }
 }
