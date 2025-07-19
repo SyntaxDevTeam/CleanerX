@@ -2,7 +2,7 @@
 # Formatowanie tekstów wiadomości:
 # Można używać formatowania Legacy (Minecraft).
 
-prefix: "<gradient:#ffff55:#9e5006:#ffff55:#9e5006:#ffff55>[<b>CleanerX</b>]</gradient>"
+prefix: "&e[&6&lC&c&ll&4&le&e&la&6&ln&c&le&4&lr&e&lX&6]&r"
 
 # Wiadomości błędów
 error:
