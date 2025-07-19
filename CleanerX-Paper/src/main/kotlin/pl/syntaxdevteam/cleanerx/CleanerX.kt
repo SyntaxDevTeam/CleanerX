@@ -31,7 +31,6 @@ import java.io.File
  * @property swearCounter The swear counter instance used for tracking swear words.
  * @property commandManager The manager for handling plugin commands.
  */
-@Suppress("UnstableApiUsage")
 class CleanerX : JavaPlugin(), Listener {
 
     private val config: FileConfiguration = getConfig()

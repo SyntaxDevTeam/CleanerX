@@ -22,7 +22,7 @@ import java.io.File
  *
  * @property plugin Instance of the main FormatterX plugin class.
  */
-@Suppress("UnstableApiUsage", "unused")
+@Suppress("unused")
 class MessageHandler(private val plugin: CleanerX) {
     private val language = plugin.config.getString("language") ?: "EN"
     private var messages: FileConfiguration
