@@ -2,7 +2,6 @@ package pl.syntaxdevteam.cleanerx.eventhandler
 
 import io.papermc.paper.event.player.AsyncChatEvent
 import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.TextComponent
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
@@ -26,48 +25,44 @@ class CleanerXChat(
     private val swearCounter: SwearCounter
 ) : Listener {
 
-    private val linkRegex = "(https?://\\S+|www\\.\\S+|\\b\\w+\\.(com|net|org|pl|co|gov|edu|info|biz|ru|uk|us|de|fr|cn|es|it|au|nl|ca|in|jp|se|ch|br|za|pt|tv|me|xyz|tech|online|store|site|live|app|io|ai|dev|ly|digital|agency|solutions|global|world|studio|cloud|media|network|works)\\b)".toRegex()
-    private val blockLinks = plugin.config.getBoolean("block-links", false)
+    private val blockLinks = plugin.config.getBoolean("block-links", true)
     private val usePunishment = plugin.config.getBoolean("use-punishment", false)
 
-    /**
-     * Event handler for chat messages.
-     * This method is triggered when a player sends a chat message.
-     * It cancels the original chat event and filters out inappropriate language and links from the message.
-     *
-     * @param event The `AsyncChatEvent` that contains information about the chat message.
-     */
+    private val urlDetectors: List<UrlDetector> = listOf(
+        UriUrlDetector(),
+        RegexUrlDetector()
+    )
+
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     fun onChat(event: AsyncChatEvent) {
         try {
-            val message: String = (event.originalMessage() as? TextComponent)?.content() ?: return
+            val message = plugin.messageHandler.getPlainText(event.originalMessage())
 
-            if (blockLinks){
-                if(linkRegex.containsMatchIn(message)) {
-                    event.isCancelled = true
-                    event.player.sendMessage(plugin.messageHandler.getMessage("error", "no_link"))
-                    return
-                }
+            if (blockLinks && urlDetectors.any { it.containsUrl(message) }) {
+                event.isCancelled = true
+                event.player.sendMessage(
+                    plugin.messageHandler.getMessage("error", "no-link")
+                )
+                return
             }
 
-            var swearWordCount = 0
+            // dalej klasyczna cenzura wulgaryzmów
             val words = message.split("\\s+".toRegex())
-            for (word in words) {
-                if (wordFilter.containsBannedWord(word)) {
-                    swearWordCount++
-                }
-            }
+            val swearCount = words.count { wordFilter.containsBannedWord(it) }
 
-            if (swearWordCount > 0) {
-                event.message(Component.text(wordFilter.censorMessage(message, fullCensorship)))
-                if(usePunishment){
-                    swearCounter.incrementSwearCount(event.player, swearWordCount)
+            if (swearCount > 0) {
+                event.message(
+                    Component.text(wordFilter.censorMessage(message, fullCensorship))
+                )
+                if (usePunishment) {
+                    swearCounter.incrementSwearCount(event.player, swearCount)
                 }
             }
         } catch (e: Exception) {
-            plugin.logger.severe("Critical error! Send a message to the plugin author with the subject \"Error in onChat\" and the content: ${e.message}")
+            plugin.logger.severe(
+                "Critical error in onChat: ${e.message}"
+            )
             e.printStackTrace()
         }
     }
-
 }

@@ -1,6 +1,7 @@
 package pl.syntaxdevteam.cleanerx.eventhandler
 
 import net.kyori.adventure.text.Component
+import org.bukkit.ChatColor
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
@@ -16,9 +17,13 @@ class CleanerXChat(
     private val swearCounter: SwearCounter
 ) : Listener {
 
-    private val linkRegex = "(https?://\\S+|www\\.\\S+|\\b\\w+\\.(com|net|org|pl|co|gov|edu|info|biz|ru|uk|us|de|fr|cn|es|it|au|nl|ca|in|jp|se|ch|br|za|pt|tv|me|xyz|tech|online|store|site|live|app|io|ai|dev|ly|digital|agency|solutions|global|world|studio|cloud|media|network|works)\\b)".toRegex()
     private val blockLinks = plugin.config.getBoolean("block-links", false)
     private val usePunishment = plugin.config.getBoolean("use-punishment", false)
+    private val urlDetectors: List<UrlDetector> = listOf(
+        UriUrlDetector(),
+        RegexUrlDetector()
+    )
+
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     fun onChat(event: AsyncPlayerChatEvent) {
@@ -26,9 +31,11 @@ class CleanerXChat(
             var message: String = event.message
 
             // Blokowanie linków
-            if (blockLinks && linkRegex.containsMatchIn(message)) {
+            if (blockLinks && urlDetectors.any { it.containsUrl(message) }) {
                 event.isCancelled = true
-                event.player.sendMessage(plugin.messageHandler.getCleanMessage("error", "no_link"))
+                event.player.sendMessage(
+                    plugin.messageHandler.getCleanMessage("error", "no-link")
+                )
                 return
             }
 
