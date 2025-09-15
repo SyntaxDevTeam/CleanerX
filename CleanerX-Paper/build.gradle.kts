@@ -1,9 +1,11 @@
 import org.gradle.api.publish.maven.MavenPublication
 
 plugins {
-    kotlin("jvm") version "2.2.0"
-    id("com.gradleup.shadow") version "9.0.0-rc1"
+    kotlin("jvm") version "2.2.20"
+    id("com.gradleup.shadow") version "9.1.0"
     `maven-publish`
+    id("xyz.jpenilla.run-paper") version "3.0.0"
+    id("pl.syntaxdevteam.plugindeployer") version "1.0.1"
 }
 
 group = "pl.syntaxdevteam"
@@ -18,18 +20,20 @@ repositories {
     maven("https://oss.sonatype.org/content/groups/public/") {
         name = "sonatype"
     }
+    maven("https://nexus.syntaxdevteam.pl/repository/maven-snapshots/") //SyntaxDevTeam
+    maven("https://nexus.syntaxdevteam.pl/repository/maven-releases/") //SyntaxDevTeam
 }
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
     compileOnly("org.eclipse.aether:aether-api:1.1.0")
-    compileOnly("org.yaml:snakeyaml:2.4")
-    compileOnly("com.google.code.gson:gson:2.13.1")
-    compileOnly("net.kyori:adventure-text-serializer-legacy:4.23.0")
-    compileOnly("net.kyori:adventure-text-minimessage:4.23.0")
-    compileOnly("net.kyori:adventure-text-serializer-gson:4.23.0")
-    compileOnly("net.kyori:adventure-text-serializer-plain:4.23.0")
-    compileOnly("net.kyori:adventure-text-serializer-ansi:4.23.0")
+    compileOnly("org.yaml:snakeyaml:2.5")
+    compileOnly("com.google.code.gson:gson:2.13.2")
+    compileOnly("net.kyori:adventure-text-serializer-legacy:4.24.0")
+    compileOnly("net.kyori:adventure-text-minimessage:4.24.0")
+    compileOnly("net.kyori:adventure-text-serializer-gson:4.24.0")
+    compileOnly("net.kyori:adventure-text-serializer-plain:4.24.0")
+    compileOnly("net.kyori:adventure-text-serializer-ansi:4.24.0")
 }
 
 val targetJavaVersion = 21
@@ -94,4 +98,8 @@ publishing {
             }
         }
     }
+}
+plugindeployer {
+    paper { dir = "/home/debian/poligon/1.21.8/Paper/plugins" }
+    folia { dir = "/home/debian/poligon/1.21.8/Folia/plugins" }
 }

@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "2.2.0"
-    id("com.gradleup.shadow") version "9.0.0-rc1"
+    kotlin("jvm") version "2.2.20"
+    id("com.gradleup.shadow") version "9.1.0"
 }
 
 group = "pl.syntaxdevteam"
@@ -19,15 +19,15 @@ repositories {
 
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.21.8-R0.1-SNAPSHOT")
-    implementation("net.kyori:adventure-platform-bukkit:4.4.0")
+    implementation("net.kyori:adventure-platform-bukkit:4.4.1")
     compileOnly("org.eclipse.aether:aether-api:1.1.0")
-    compileOnly("org.yaml:snakeyaml:2.4")
-    compileOnly("com.google.code.gson:gson:2.13.0")
-    implementation("net.kyori:adventure-text-serializer-legacy:4.23.0")
-    implementation("net.kyori:adventure-text-minimessage:4.23.0")
-    compileOnly("net.kyori:adventure-text-serializer-gson:4.23.0")
-    compileOnly("net.kyori:adventure-text-serializer-plain:4.23.0")
-    compileOnly("net.kyori:adventure-text-serializer-ansi:4.23.0")
+    compileOnly("org.yaml:snakeyaml:2.5")
+    compileOnly("com.google.code.gson:gson:2.13.2")
+    implementation("net.kyori:adventure-text-serializer-legacy:4.24.0")
+    implementation("net.kyori:adventure-text-minimessage:4.24.0")
+    compileOnly("net.kyori:adventure-text-serializer-gson:4.24.0")
+    compileOnly("net.kyori:adventure-text-serializer-plain:4.24.0")
+    compileOnly("net.kyori:adventure-text-serializer-ansi:4.24.0")
 }
 
 val targetJavaVersion = 21
