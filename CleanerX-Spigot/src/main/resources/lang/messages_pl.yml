@@ -1,4 +1,4 @@
-# Ver. 1.0.0
+# Ver. 1.0.1
 # Formatowanie tekstów wiadomości:
 # Można używać formatowania Legacy (Minecraft).
 
@@ -23,15 +23,15 @@ clean:
   log: "&6{player} wyczyścił czat.&r"
 
 whitelist:
-  usage: "&6Poprawne użycie to: /whitelist <add|remove|list> <player>&r"
+  usage: "&6Poprawne użycie to: /whitelistx <add|remove|list> <player>&r"
 
 word:
-  usage: "&6Poprawne użycie to: /blacklist <add|remove|list> <word>&r"
+  usage: "&6Poprawne użycie to: /blacklistx <add|remove|list> <word>&r"
   word_not_found: "&cNie znaleziono wyrazu {word}.&r"
   word_removed: "&aPomyślnie usunięto wyraz {word}.&r"
-  word_added: "&aPomyślnie dodano wyraz &6<i>{word}</i>&r do listy słów zakazanych.&r"
+  word_added: "&aPomyślnie dodano wyraz &o{word}&r&a do listy słów zakazanych.&r"
   word_error: "&cWystąpił błąd podczas dodawania wyrazu {word}.&r"
   no_word_provided: "&cProszę podać słowo, które chcesz dodać.&r"
   word_already_exists: "&cWyraz {word} już istnieje.&r"
-  banned_words_list: "&6Lista zablokowanych wyrazów:&r"
-  word_list_empty: "&6Lista blokowanych wyrazów jest pusta.&r"
+  banned_words_list: "&6Lista zakazanych wyrazów:&r"
+  word_list_empty: "&6Lista zakazanych wyrazów jest pusta.&r"

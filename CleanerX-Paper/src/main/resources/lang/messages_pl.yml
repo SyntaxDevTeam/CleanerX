@@ -1,9 +1,11 @@
-# Ver. 1.0.0
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Autor: WieszczY
+# Ver. 1.0.1
 # Formatowanie tekstów wiadomości:
 # Można używać formatowania MiniMessage oraz Legacy (Minecraft).
 # Przykłady stosowania MiniMessage: https://docs.advntr.dev/minimessage/format.html
-# Nie mieszaj formatów w jednej wiadomości. Jeśli używasz Legacy, nie wstawiaj formatowania MiniMessage,
-# w przeciwnym wypadku zostanie użyty tylko ten drugi.
+# Oficjalne wsparcie: https://syntaxdevteam.pl/discord
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 prefix: "<gradient:#ffff55:#9e5006:#ffff55:#9e5006:#ffff55>[<b>CleanerX</b>]</gradient>"
 
@@ -16,15 +18,18 @@ error:
   unknown_command: "<red>Nieznana komenda. Wpisz <gold>/crx help</gold>, aby sprawdzić listę dostępnych komend.</red>"
   no-link: "<red>Udostępnianie linków na czacie jest na tym serwerze niedozwolone!</red>"
 
+# Reload ustawień
 reload:
   success: "<green>Pomyślnie przeładowano konfigurację.</green>"
   error: "<red>Wystąpił błąd podczas przeładowania konfiguracji:</red>"
 
+# Komenda clean
 clean:
   success: "<green>Pomyślnie wyczyszczono czat.</green>"
   error: "<red>Wystąpił błąd podczas czyszczenia czatu.</red>"
   log: "<gold>{player} wyczyścił czat.</gold>"
 
+# Komenda whitelistx
 whitelist:
   usage: "<gold>Poprawne użycie to: /whitelist <add|remove|list> <player></gold>"
 
