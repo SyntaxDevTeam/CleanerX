@@ -2,9 +2,9 @@ import org.gradle.api.publish.maven.MavenPublication
 
 plugins {
     kotlin("jvm") version "2.2.20"
-    id("com.gradleup.shadow") version "9.1.0"
+    id("com.gradleup.shadow") version "9.2.2"
     `maven-publish`
-    id("xyz.jpenilla.run-paper") version "3.0.0"
+    id("xyz.jpenilla.run-paper") version "3.0.1"
     id("pl.syntaxdevteam.plugindeployer") version "1.0.1"
 }
 
@@ -25,7 +25,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.21.9-R0.1-SNAPSHOT")
     compileOnly("org.eclipse.aether:aether-api:1.1.0")
     compileOnly("org.yaml:snakeyaml:2.5")
     compileOnly("com.google.code.gson:gson:2.13.2")
@@ -100,6 +100,6 @@ publishing {
     }
 }
 plugindeployer {
-    paper { dir = "/home/debian/poligon/1.21.8/Paper/plugins" }
-    folia { dir = "/home/debian/poligon/1.21.8/Folia/plugins" }
+    paper { dir = "/home/debian/poligon/1.21.9/Paper/plugins" }
+    folia { dir = "/home/debian/poligon/1.21.9/Folia/plugins" }
 }
