@@ -13,6 +13,8 @@ version = "1.5.3"
 description = "A sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment."
 
 repositories {
+    maven("https://nexus.syntaxdevteam.pl/repository/maven-snapshots/") //SyntaxDevTeam
+    maven("https://nexus.syntaxdevteam.pl/repository/maven-releases/") //SyntaxDevTeam
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/") {
         name = "papermc-repo"
@@ -20,20 +22,20 @@ repositories {
     maven("https://oss.sonatype.org/content/groups/public/") {
         name = "sonatype"
     }
-    maven("https://nexus.syntaxdevteam.pl/repository/maven-snapshots/") //SyntaxDevTeam
-    maven("https://nexus.syntaxdevteam.pl/repository/maven-releases/") //SyntaxDevTeam
-}
+    }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.9-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.21.10-R0.1-SNAPSHOT")
     compileOnly("org.eclipse.aether:aether-api:1.1.0")
     compileOnly("org.yaml:snakeyaml:2.5")
     compileOnly("com.google.code.gson:gson:2.13.2")
-    compileOnly("net.kyori:adventure-text-serializer-legacy:4.24.0")
-    compileOnly("net.kyori:adventure-text-minimessage:4.24.0")
-    compileOnly("net.kyori:adventure-text-serializer-gson:4.24.0")
-    compileOnly("net.kyori:adventure-text-serializer-plain:4.24.0")
-    compileOnly("net.kyori:adventure-text-serializer-ansi:4.24.0")
+    compileOnly("net.kyori:adventure-text-serializer-legacy:4.25.0")
+    compileOnly("net.kyori:adventure-text-minimessage:4.25.0")
+    compileOnly("net.kyori:adventure-text-serializer-gson:4.25.0")
+    compileOnly("net.kyori:adventure-text-serializer-plain:4.25.0")
+    compileOnly("net.kyori:adventure-text-serializer-ansi:4.25.0")
+    compileOnly("pl.syntaxdevteam:core:1.2.4-SNAPSHOT")
+
 }
 
 val targetJavaVersion = 21
@@ -100,6 +102,6 @@ publishing {
     }
 }
 plugindeployer {
-    paper { dir = "/home/debian/poligon/1.21.9/Paper/plugins" }
-    folia { dir = "/home/debian/poligon/1.21.9/Folia/plugins" }
+    paper { dir = "/home/debian/poligon/1.21.10/Paper/plugins" }
+    folia { dir = "/home/debian/poligon/1.21.10/Folia/plugins" }
 }
