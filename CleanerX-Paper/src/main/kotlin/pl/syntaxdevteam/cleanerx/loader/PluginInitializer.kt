@@ -8,6 +8,7 @@ import pl.syntaxdevteam.cleanerx.api.CleanerXApiImpl
 import pl.syntaxdevteam.cleanerx.base.SwearCounter
 import pl.syntaxdevteam.cleanerx.base.WordFilter
 import pl.syntaxdevteam.cleanerx.commands.CommandManager
+import pl.syntaxdevteam.cleanerx.common.BannedWordsSynchronizer
 import pl.syntaxdevteam.cleanerx.common.ConfigHandler
 import pl.syntaxdevteam.cleanerx.eventhandler.CleanerXChat
 import pl.syntaxdevteam.core.SyntaxCore
@@ -44,6 +45,10 @@ class PluginInitializer(private val plugin: CleanerX) {
         plugin.versionChecker = VersionChecker(plugin)
         plugin.wordFilter = WordFilter(plugin)
         plugin.swearCounter = SwearCounter(plugin)
+        plugin.bannedWordsSynchronizer = BannedWordsSynchronizer(plugin)
+        plugin.bannedWordsSynchronizer.synchronize { words ->
+            plugin.wordFilter.updateBannedWords(words)
+        }
     }
 
     private fun registerCommands(){

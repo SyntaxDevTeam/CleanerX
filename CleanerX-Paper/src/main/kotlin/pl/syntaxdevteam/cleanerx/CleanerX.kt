@@ -38,6 +38,7 @@ class CleanerX : JavaPlugin(), Listener {
     lateinit var swearCounter: SwearCounter
     lateinit var commandManager: CommandManager
     lateinit var api: CleanerXAPI
+    lateinit var bannedWordsSynchronizer: BannedWordsSynchronizer
 
     override fun onEnable() {
         SyntaxCore.registerUpdateSources(

@@ -41,6 +41,7 @@ class CleanerX : JavaPlugin(), Listener {
     lateinit var messageHandler: MessageHandler
     private lateinit var updateChecker: UpdateChecker
     val wordFilter = WordFilter(this)
+    private val bannedWordsSynchronizer = BannedWordsSynchronizer(this)
     private val fullCensorship: Boolean = config.getBoolean("fullCensorship")
     private val swearCounter = SwearCounter(this)
     private lateinit var commandManager: CommandManager
@@ -67,6 +68,10 @@ class CleanerX : JavaPlugin(), Listener {
 
         // Rejestracja API w Services Managerze
         server.servicesManager.register(CleanerXAPI::class.java, api, this, ServicePriority.Normal)
+
+        bannedWordsSynchronizer.synchronize { updatedWords ->
+            wordFilter.updateBannedWords(updatedWords)
+        }
 
     }
 

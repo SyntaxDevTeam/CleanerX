@@ -36,10 +36,7 @@ class WordFilter(private val plugin: CleanerX) {
             plugin.saveResource("banned_words.yml", false)
         }
         val config = YamlConfiguration.loadConfiguration(file)
-        bannedWords = config.getStringList("bannedWords")
-            .map { it.lowercase(Locale.ROOT) }
-            .toMutableList()
-        bannedPatterns = bannedWords.mapNotNull { toFilterPattern(it) }
+        updateBannedWords(config.getStringList("bannedWords"))
     }
 
     /**
@@ -216,6 +213,18 @@ class WordFilter(private val plugin: CleanerX) {
      */
     fun getBannedWords(): List<String> {
         return bannedWords
+    }
+
+    /**
+     * Updates the banned words in memory using the provided list.
+     *
+     * @param words The words that should be considered banned.
+     */
+    fun updateBannedWords(words: List<String>) {
+        bannedWords = words
+            .map { it.lowercase(Locale.ROOT) }
+            .toMutableList()
+        bannedPatterns = bannedWords.mapNotNull { toFilterPattern(it) }
     }
 
     /**
