@@ -1,8 +1,8 @@
 package pl.syntaxdevteam.cleanerx.base
 
-import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import pl.syntaxdevteam.cleanerx.CleanerX
+import pl.syntaxdevteam.cleanerx.util.SchedulerAdapter
 
 /**
  * SwearCounter is responsible for tracking the number of swear words used by players
@@ -31,10 +31,10 @@ class SwearCounter(private val plugin: CleanerX) {
         thresholds.forEach { (threshold, command) ->
             if (count == threshold) {
                 val formattedCommand = command.replace("{player}", player.name)
-                Bukkit.getScheduler().runTask(plugin, Runnable {
+                SchedulerAdapter.runSync(plugin) {
                     plugin.logger.debug("Attempting to send command: $formattedCommand")
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), formattedCommand)
-                })
+                    plugin.server.dispatchCommand(plugin.server.consoleSender, formattedCommand)
+                }
 
             }
         }

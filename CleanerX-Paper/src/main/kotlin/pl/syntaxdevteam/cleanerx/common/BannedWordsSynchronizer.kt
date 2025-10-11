@@ -1,8 +1,8 @@
 package pl.syntaxdevteam.cleanerx.common
 
-import org.bukkit.Bukkit
 import org.bukkit.configuration.file.YamlConfiguration
 import pl.syntaxdevteam.cleanerx.CleanerX
+import pl.syntaxdevteam.cleanerx.util.SchedulerAdapter
 import java.io.File
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
@@ -24,7 +24,7 @@ class BannedWordsSynchronizer(private val plugin: CleanerX) {
      * list of banned words present in the server file.
      */
     fun synchronize(onComplete: ((List<String>) -> Unit)? = null) {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, Runnable {
+        SchedulerAdapter.runAsync(plugin) {
             try {
                 val serverFile = File(plugin.dataFolder, BANNED_WORDS_FILE)
                 if (!serverFile.exists()) {
@@ -38,7 +38,7 @@ class BannedWordsSynchronizer(private val plugin: CleanerX) {
                 if (resourceWords.isEmpty()) {
                     plugin.logger.warning("The resource banned_words.yml file is empty or missing the bannedWords section.")
                     complete(onComplete, serverWords.toList())
-                    return@Runnable
+                    return@runAsync
                 }
 
                 val normalizedExisting = serverWords
@@ -65,7 +65,7 @@ class BannedWordsSynchronizer(private val plugin: CleanerX) {
             } catch (exception: Exception) {
                 plugin.logger.err("Failed to synchronize banned words: ${exception.message}")
             }
-        })
+        }
     }
 
     private fun loadResourceWords(): List<String> {
@@ -87,9 +87,9 @@ class BannedWordsSynchronizer(private val plugin: CleanerX) {
         if (onComplete == null) {
             return
         }
-        Bukkit.getScheduler().runTask(plugin, Runnable {
+        SchedulerAdapter.runSync(plugin) {
             onComplete(result)
-        })
+        }
     }
 
     private companion object {
