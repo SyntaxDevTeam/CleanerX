@@ -1,6 +1,7 @@
 package pl.syntaxdevteam.cleanerx.api
 
 import org.bukkit.plugin.java.JavaPlugin
+import pl.syntaxdevteam.cleanerx.CleanerX
 import pl.syntaxdevteam.cleanerx.base.WordFilter
 
 /**
@@ -19,7 +20,7 @@ import pl.syntaxdevteam.cleanerx.base.WordFilter
  * @param plugin The main instance of the CleanerX plugin, used to retrieve configuration,
  *               save resources, and log events.
  */
-class CleanerXApiImpl(plugin: JavaPlugin) : CleanerXAPI {
+class CleanerXApiImpl(plugin: CleanerX) : CleanerXAPI {
     private val wordFilter = WordFilter(plugin)
 
     /**

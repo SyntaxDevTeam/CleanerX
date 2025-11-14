@@ -1,6 +1,6 @@
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # Autor: WieszczY
-# Ver. 1.0.1
+# Ver. 1.0.2
 # Formatowanie tekstów wiadomości:
 # Można używać formatowania MiniMessage oraz Legacy (Minecraft).
 # Przykłady stosowania MiniMessage: https://docs.advntr.dev/minimessage/format.html
@@ -12,9 +12,9 @@ prefix: "<gradient:#ffff55:#9e5006:#ffff55:#9e5006:#ffff55>[<b>CleanerX</b>]</gr
 # Wiadomości błędów
 error:
   no_permission: "<red>Nie masz uprawnień do tej komendy.</red>"
-  player_not_found: "<gold>Nie znaleziono gracza o nicku {player}.</gold>"
+  player_not_found: "<gold>Nie znaleziono gracza o nicku <player>.</gold>"
   console: "<red>Tylko gracz może użyć tej komendy.</red>"
-  invalid_usage: "<red>Nieprawidłowe użycie komendy. Użyj: {usage}</red>"
+  invalid_usage: "<red>Nieprawidłowe użycie komendy. Użyj: <usage></red>"
   unknown_command: "<red>Nieznana komenda. Wpisz <gold>/crx help</gold>, aby sprawdzić listę dostępnych komend.</red>"
   no-link: "<red>Udostępnianie linków na czacie jest na tym serwerze niedozwolone!</red>"
 
@@ -27,7 +27,7 @@ reload:
 clean:
   success: "<green>Pomyślnie wyczyszczono czat.</green>"
   error: "<red>Wystąpił błąd podczas czyszczenia czatu.</red>"
-  log: "<gold>{player} wyczyścił czat.</gold>"
+  log: "<gold><player> wyczyścił czat.</gold>"
 
 # Komenda whitelistx
 whitelist:
@@ -35,11 +35,11 @@ whitelist:
 
 word:
   usage: "<gold>Poprawne użycie to: /blacklist <add|remove|list> <word></gold>"
-  word_not_found: "<red>Nie znaleziono wyrazu {word}.</red>"
-  word_removed: "<green>Pomyślnie usunięto wyraz {word}.</green>"
-  word_added: "<green>Pomyślnie dodano wyraz <gold><i>{word}</i></gold> do listy słów zakazanych.</green>"
-  word_error: "<red>Wystąpił błąd podczas dodawania wyrazu {word}.</red>"
+  word_not_found: "<red>Nie znaleziono wyrazu <word>.</red>"
+  word_removed: "<green>Pomyślnie usunięto wyraz <word>.</green>"
+  word_added: "<green>Pomyślnie dodano wyraz <gold><i><word></i></gold> do listy słów zakazanych.</green>"
+  word_error: "<red>Wystąpił błąd podczas dodawania wyrazu <word>.</red>"
   no_word_provided: "<red>Proszę podać słowo, które chcesz dodać.</red>"
-  word_already_exists: "<red>Wyraz {word} już istnieje.</red>"
+  word_already_exists: "<red>Wyraz <word> już istnieje.</red>"
   banned_words_list: "<gold>Lista zablokowanych wyrazów:</gold>"
   word_list_empty: "<gold>Lista blokowanych wyrazów jest pusta.</gold>"

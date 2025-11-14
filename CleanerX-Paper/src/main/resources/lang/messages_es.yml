@@ -1,0 +1,41 @@
+# Author: Kevshho
+# Ver. 1.0.0
+# Formato de mensajes:
+# Puedes usar formato MiniMessage y Legacy (Minecraft).
+# Ejemplos de uso de MiniMessage: https://docs.advntr.dev/minimessage/format.html
+# No mezcles formatos en un solo mensaje. Si usas Legacy, no incluyas formato MiniMessage,
+# de lo contrario, solo se aplicará este último.
+
+prefix: "<gradient:#ffff55:#9e5006:#ffff55:#9e5006:#ffff55>[<b>CleanerX</b>]</gradient>"
+
+# Mensajes de error
+error:
+  no_permission: "<red>No tienes permiso para usar este comando.</red>"
+  player_not_found: "<gold>No se encontró al jugador <player>.</gold>"
+  console: "<red>Solo los jugadores pueden usar este comando.</red>"
+  invalid_usage: "<red>Uso incorrecto del comando. Usa: <usage></red>"
+  unknown_command: "<red>Comando desconocido. Usa <gold>/crx help</gold> para ver los disponibles.</red>"
+  no-link: "<red>¡No está permitido compartir enlaces en el chat!</red>"
+
+reload:
+  success: "<green>Configuración recargada correctamente.</green>"
+  error: "<red>Ocurrió un error al recargar la configuración:</red>"
+
+clean:
+  success: "<green>El chat ha sido limpiado correctamente.</green>"
+  error: "<red>Ocurrió un error al intentar limpiar el chat.</red>"
+  log: "<gold><player> ha limpiado el chat.</gold>"
+
+whitelist:
+  usage: "<gold>Uso correcto: /whitelistx <add|remove|list> <word></gold>"
+
+word:
+  usage: "<gold>Uso correcto: /blacklistx <add|remove|list> <word></gold>"
+  word_not_found: "<red>La palabra <word> no fue encontrada.</red>"
+  word_removed: "<green>La palabra <word> ha sido eliminada correctamente.</green>"
+  word_added: "<green>La palabra <gold><i><word></i></gold> fue añadida a la lista de palabras prohibidas.</green>"
+  word_error: "<red>Ocurrió un error al intentar añadir la palabra <word>.</red>"
+  no_word_provided: "<red>Por favor, proporciona una palabra para añadir.</red>"
+  word_already_exists: "<red>La palabra <word> ya está en la lista.</red>"
+  banned_words_list: "<gold>Lista de palabras prohibidas:</gold>"
+  word_list_empty: "<gold>La lista de palabras prohibidas está vacía.</gold>"

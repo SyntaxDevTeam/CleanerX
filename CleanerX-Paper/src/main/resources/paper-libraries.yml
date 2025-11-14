@@ -1,11 +1,15 @@
 libraries:
+  # Basic dependencies
   - org.eclipse.aether:aether-api:1.1.0
   - org.yaml:snakeyaml:2.5
   - com.google.code.gson:gson:2.13.2
+  # Adventure dependencies
   - net.kyori:adventure-text-minimessage:4.25.0
   - net.kyori:adventure-text-serializer-gson:4.25.0
   - net.kyori:adventure-text-serializer-legacy:4.25.0
   - net.kyori:adventure-text-serializer-plain:4.25.0
   - net.kyori:adventure-text-serializer-ansi:4.25.0
-  - com.github.ben-manes.caffeine:caffeine:3.2.2
-  - pl.syntaxdevteam:core:1.2.4-SNAPSHOT
+  # SyntaxCore dependencies
+  - com.github.ben-manes.caffeine:caffeine:3.2.3
+  - pl.syntaxdevteam:core:1.2.5-SNAPSHOT
+  - pl.syntaxdevteam:messageHandler:1.0.3

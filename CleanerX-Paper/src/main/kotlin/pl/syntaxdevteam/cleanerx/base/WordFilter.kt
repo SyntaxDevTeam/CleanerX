@@ -1,7 +1,7 @@
 package pl.syntaxdevteam.cleanerx.base
 
 import org.bukkit.configuration.file.YamlConfiguration
-import org.bukkit.plugin.java.JavaPlugin
+import pl.syntaxdevteam.cleanerx.CleanerX
 import java.io.File
 import java.util.Locale
 
@@ -11,7 +11,7 @@ import java.util.Locale
  * @property plugin The instance of the CleanerX plugin.
  * @constructor Creates an instance of WordFilter.
  */
-class WordFilter(private val plugin: JavaPlugin) {
+class WordFilter(private val plugin: CleanerX) {
 
     private var bannedWords: MutableList<String> = mutableListOf()
     private var whitelistWords: MutableList<String> = mutableListOf()

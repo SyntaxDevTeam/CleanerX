@@ -9,7 +9,6 @@ import pl.syntaxdevteam.cleanerx.base.ClearChat
 /**
  * Command that clears the chat.
  */
-@Suppress("UnstableApiUsage")
 class CleanCommand(private val plugin: CleanerX) : BasicCommand {
 
     override fun execute(@NotNull stack: CommandSourceStack, @NotNull args: Array<String>) {
@@ -17,10 +16,16 @@ class CleanCommand(private val plugin: CleanerX) : BasicCommand {
             val player = stack.sender.name
             val clearChat = ClearChat()
             clearChat.clean()
-            stack.sender.sendMessage(plugin.messageHandler.getMessage("clean", "success"))
-            plugin.logger.log(plugin.messageHandler.getCleanMessage("clean", "log", mapOf("player" to player)))
+            stack.sender.sendMessage(plugin.messageHandler.stringMessageToComponent("clean", "success"))
+            plugin.logger.log(
+                plugin.messageHandler.stringMessageToStringNoPrefix(
+                    "clean",
+                    "log",
+                    mapOf("player" to player)
+                )
+            )
         } else {
-            stack.sender.sendMessage(plugin.messageHandler.getMessage("error", "no_permission"))
+            stack.sender.sendMessage(plugin.messageHandler.stringMessageToComponent("error", "no_permission"))
         }
     }
 }

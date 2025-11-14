@@ -1,4 +1,4 @@
-# Config ver 1.7.0
+# Config ver 1.7.1
 
 # Plugin language selection. Possible values:  EN, PL
 # If you would like to add your own language file, please contact us on Discord (https://discord.gg/Zk6mxv7eMh).
@@ -19,8 +19,12 @@ swear-word-thresholds:  # Set your own commands to be applied after a specific n
 
 
 # Update check and auto-update settings
-checkForUpdates: true
-autoDownloadUpdates: false
+update:
+  check-for-updates: true
+  auto-download: false
+  hangar: true
+  github: true
+  modrinth: true
 
 # Debug mode set to true provides more detailed logs in the console. Use only in case of problems!
 debug: false

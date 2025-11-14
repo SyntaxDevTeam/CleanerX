@@ -1,11 +1,11 @@
 import org.gradle.api.publish.maven.MavenPublication
 
 plugins {
-    kotlin("jvm") version "2.2.20"
+    kotlin("jvm") version "2.2.21"
     id("com.gradleup.shadow") version "9.2.2"
     `maven-publish`
-    id("xyz.jpenilla.run-paper") version "3.0.1"
-    id("pl.syntaxdevteam.plugindeployer") version "1.0.1"
+    id("xyz.jpenilla.run-paper") version "3.0.2"
+    id("pl.syntaxdevteam.plugindeployer") version "1.0.4"
 }
 
 group = "pl.syntaxdevteam"
@@ -34,7 +34,8 @@ dependencies {
     compileOnly("net.kyori:adventure-text-serializer-gson:4.25.0")
     compileOnly("net.kyori:adventure-text-serializer-plain:4.25.0")
     compileOnly("net.kyori:adventure-text-serializer-ansi:4.25.0")
-    compileOnly("pl.syntaxdevteam:core:1.2.4-SNAPSHOT")
+    compileOnly("pl.syntaxdevteam:core:1.2.5-SNAPSHOT")
+    compileOnly("pl.syntaxdevteam:messageHandler:1.0.3")
 
 }
 
@@ -102,6 +103,6 @@ publishing {
     }
 }
 plugindeployer {
-    paper { dir = "/home/debian/poligon/1.21.10/Paper/plugins" }
-    folia { dir = "/home/debian/poligon/1.21.10/Folia/plugins" }
+    paper { dir = "/home/debian/poligon/Paper/1.21.10/plugins" } //ostatnia wersja dla Paper
+    folia { dir = "/home/debian/poligon/Folia/1.21.8/plugins" } //ostatnia wersja dla Folia
 }

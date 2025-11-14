@@ -1,6 +1,7 @@
 package pl.syntaxdevteam.cleanerx
 
 import io.papermc.paper.event.player.AsyncChatEvent
+import net.kyori.adventure.text.Component
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.event.Listener
 import org.bukkit.plugin.Plugin
@@ -14,12 +15,13 @@ import pl.syntaxdevteam.cleanerx.loader.PluginInitializer
 import pl.syntaxdevteam.cleanerx.loader.VersionChecker
 import pl.syntaxdevteam.core.SyntaxCore
 import pl.syntaxdevteam.core.manager.PluginManagerX
-import pl.syntaxdevteam.core.messaging.MessageHandler
 import pl.syntaxdevteam.core.logging.Logger
 import pl.syntaxdevteam.core.stats.StatsCollector
 import pl.syntaxdevteam.core.update.GitHubSource
 import pl.syntaxdevteam.core.update.ModrinthSource
+import pl.syntaxdevteam.message.MessageHandler
 import java.io.File
+import java.util.Locale
 
 class CleanerX : JavaPlugin(), Listener {
 
@@ -48,6 +50,7 @@ class CleanerX : JavaPlugin(), Listener {
         SyntaxCore.init(this)
         pluginInitializer = PluginInitializer(this)
         pluginInitializer.onEnable()
+        placeholderFix()
         versionChecker.checkAndLog()
     }
 
@@ -60,7 +63,7 @@ class CleanerX : JavaPlugin(), Listener {
         try {
             messageHandler.reloadMessages()
         } catch (e: Exception) {
-            logger.err("${messageHandler.getMessage("error", "reload")} ${e.message}")
+            logger.err("${messageHandler.stringMessageToComponent("error", "reload")} ${e.message}")
         }
 
         saveDefaultConfig()
@@ -75,7 +78,28 @@ class CleanerX : JavaPlugin(), Listener {
         }
     }
 
-    fun getPluginFile(): File {
-        return this.file
+    fun placeholderFix() {
+        val lang = config.getString("language")?.lowercase(Locale.getDefault()) ?: "en"
+        val langDir = File(dataFolder, "lang")
+        val candidates = listOf(
+            File(langDir, "messages_$lang.yml"),
+            File(langDir, "message_$lang.yml")
+        )
+        val langFile = candidates.firstOrNull { it.exists() }
+
+        if (langFile == null) {
+            logger.err("Language file for $lang not found.")
+            return
+        }
+        val prefix = messageHandler.getPrefix()
+        try {
+            val content = langFile.readText(Charsets.UTF_8)
+            val updated = content.replace(Regex("\\{(\\w+)}"), "<$1>")
+            langFile.writeText(updated, Charsets.UTF_8)
+
+            logger.success("$prefix Converted placeholders in ${langFile.name}.")
+        } catch (e: Exception) {
+            logger.err("$prefix Failed to convert placeholders: ${e.message}")
+        }
     }
 }

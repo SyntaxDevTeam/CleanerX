@@ -41,7 +41,7 @@ class CleanerXChat(
             if (blockLinks && urlDetectors.any { it.containsUrl(message) }) {
                 event.isCancelled = true
                 event.player.sendMessage(
-                    plugin.messageHandler.getMessage("error", "no-link")
+                    plugin.messageHandler.stringMessageToComponent("error", "no-link")
                 )
                 return
             }
