@@ -46,7 +46,6 @@ class CleanerX : JavaPlugin(), Listener {
     private val swearCounter = SwearCounter(this)
     private lateinit var commandManager: CommandManager
     private var configHandler = ConfigHandler(this)
-    val uuidManager = UUIDManager(this)
 
     lateinit var api: CleanerXAPI
         private set
