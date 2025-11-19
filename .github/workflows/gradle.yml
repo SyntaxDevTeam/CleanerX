@@ -39,7 +39,7 @@ jobs:
             --no-daemon --stacktrace
 
       - name: Upload ${{ matrix.platform }} JAR
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: CleanerX-${{ matrix.platform }}.jar
           path: CleanerX-${{ matrix.platform }}/build/libs/*.jar
