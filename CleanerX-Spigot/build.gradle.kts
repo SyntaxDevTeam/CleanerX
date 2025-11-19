@@ -22,10 +22,16 @@ repositories {
 
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.21.10-R0.1-SNAPSHOT")
-    compileOnly("net.kyori:adventure-platform-bukkit:4.4.1")
     compileOnly("org.eclipse.aether:aether-api:1.1.0")
     compileOnly("org.yaml:snakeyaml:2.5")
     compileOnly("com.google.code.gson:gson:2.13.2")
+    compileOnly("net.kyori:adventure-platform-bukkit:4.4.1")
+    compileOnly("net.kyori:adventure-platform-api:4.4.1")
+    compileOnly("net.kyori:adventure-platform-facet:4.4.1")
+    compileOnly("net.kyori:adventure-api:4.25.0")
+    compileOnly("net.kyori:examination-api:1.3.0")
+    compileOnly("net.kyori:examination-string:1.3.0")
+    compileOnly("net.kyori:adventure-key:4.25.0")
     compileOnly("net.kyori:adventure-text-serializer-legacy:4.25.0")
     compileOnly("net.kyori:adventure-text-minimessage:4.25.0")
     compileOnly("net.kyori:adventure-text-serializer-gson:4.25.0")

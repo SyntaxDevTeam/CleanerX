@@ -19,7 +19,7 @@ class LibraryLoader(private val plugin: JavaPlugin) {
 
     /**
      * Downloads and loads all runtime libraries required by the plugin.
-     * Currently this ensures that MiniMessage is always available on Spigot servers.
+     * Currently, this ensures that MiniMessage is always available on Spigot servers.
      */
     fun loadRuntimeLibraries() {
         libraryManager.addMavenCentral()
