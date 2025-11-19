@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "pl.syntaxdevteam"
-version = "1.5.3"
+version = "1.5.4-DEV"
 description = "A sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment."
 
 repositories {
@@ -34,7 +34,7 @@ dependencies {
     compileOnly("net.kyori:adventure-text-serializer-gson:4.25.0")
     compileOnly("net.kyori:adventure-text-serializer-plain:4.25.0")
     compileOnly("net.kyori:adventure-text-serializer-ansi:4.25.0")
-    compileOnly("pl.syntaxdevteam:core:1.2.5-SNAPSHOT")
+    compileOnly("pl.syntaxdevteam:core:1.2.5")
     compileOnly("pl.syntaxdevteam:messageHandler:1.0.3")
 
 }
@@ -75,7 +75,7 @@ publishing {
             pom {
                 name.set("CleanerX")
                 description.set(project.description)
-                url.set("https://github.com/SyntaxDevTeam/SyntaxCore")
+                url.set("https://github.com/SyntaxDevTeam/CleanerX")
                 licenses {
                     license {
                         name.set("MIT License")
@@ -94,7 +94,9 @@ publishing {
     repositories {
         maven {
             name = "Nexus"
-            url = uri("https://nexus.syntaxdevteam.pl/repository/maven-releases/")
+            val releasesRepoUrl = uri("https://nexus.syntaxdevteam.pl/repository/maven-releases/")
+            val snapshotsRepoUrl = uri("https://nexus.syntaxdevteam.pl/repository/maven-snapshots/")
+            url = if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
             credentials {
                 username = findProperty("nexusUser")?.toString()
                 password = findProperty("nexusPassword")?.toString()

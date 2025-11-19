@@ -1,7 +1,6 @@
 package pl.syntaxdevteam.cleanerx
 
 import io.papermc.paper.event.player.AsyncChatEvent
-import net.kyori.adventure.text.Component
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.event.Listener
 import org.bukkit.plugin.Plugin
