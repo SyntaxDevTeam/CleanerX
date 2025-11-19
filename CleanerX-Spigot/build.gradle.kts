@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "pl.syntaxdevteam"
-version = "1.5.3"
+version = "1.5.4-DEV"
 description = "A sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment."
 
 repositories {
@@ -15,19 +15,23 @@ repositories {
     maven("https://oss.sonatype.org/content/groups/public/") {
         name = "sonatype"
     }
+    maven("https://repo.alessiodp.com/releases/") {
+        name = "alessiodp"
+    }
 }
 
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.21.10-R0.1-SNAPSHOT")
     implementation("net.kyori:adventure-platform-bukkit:4.4.1")
-    compileOnly("org.eclipse.aether:aether-api:1.1.0")
-    compileOnly("org.yaml:snakeyaml:2.5")
-    compileOnly("com.google.code.gson:gson:2.13.2")
+    implementation("org.eclipse.aether:aether-api:1.1.0")
+    implementation("org.yaml:snakeyaml:2.5")
+    implementation("com.google.code.gson:gson:2.13.2")
     implementation("net.kyori:adventure-text-serializer-legacy:4.25.0")
-    implementation("net.kyori:adventure-text-minimessage:4.25.0")
-    compileOnly("net.kyori:adventure-text-serializer-gson:4.25.0")
-    compileOnly("net.kyori:adventure-text-serializer-plain:4.25.0")
-    compileOnly("net.kyori:adventure-text-serializer-ansi:4.25.0")
+    compileOnly("net.kyori:adventure-text-minimessage:4.25.0")
+    implementation("net.kyori:adventure-text-serializer-gson:4.25.0")
+    implementation("net.kyori:adventure-text-serializer-plain:4.25.0")
+    implementation("net.kyori:adventure-text-serializer-ansi:4.25.0")
+    implementation("net.byteflux:libby-bukkit:1.3.1")
 }
 
 val targetJavaVersion = 21

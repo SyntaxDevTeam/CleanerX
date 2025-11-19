@@ -36,6 +36,7 @@ class CleanerX : JavaPlugin(), Listener {
 
     private val config: FileConfiguration = getConfig()
     var logger: Logger = Logger(this, config.getBoolean("debug"))
+    private lateinit var libraryLoader: LibraryLoader
     lateinit var pluginsManager: PluginManager
     private lateinit var statsCollector: StatsCollector
     lateinit var messageHandler: MessageHandler
@@ -49,6 +50,11 @@ class CleanerX : JavaPlugin(), Listener {
 
     lateinit var api: CleanerXAPI
         private set
+
+    override fun onLoad() {
+        libraryLoader = LibraryLoader(this)
+        libraryLoader.loadRuntimeLibraries()
+    }
 
     /**
      * Called when the plugin is enabled.
