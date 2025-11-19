@@ -14,6 +14,7 @@ import pl.syntaxdevteam.cleanerx.base.WordFilter
 import pl.syntaxdevteam.cleanerx.commands.CommandManager
 import pl.syntaxdevteam.cleanerx.common.*
 import pl.syntaxdevteam.cleanerx.eventhandler.*
+import pl.syntaxdevteam.cleanerx.loader.LibraryLoader
 import java.io.File
 
 /**

@@ -1,4 +1,4 @@
-package pl.syntaxdevteam.cleanerx.common
+package pl.syntaxdevteam.cleanerx.loader
 
 import net.byteflux.libby.BukkitLibraryManager
 import net.byteflux.libby.Library
