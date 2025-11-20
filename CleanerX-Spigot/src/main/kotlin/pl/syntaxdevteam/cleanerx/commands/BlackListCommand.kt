@@ -14,11 +14,11 @@ class BlackListCommand(private val plugin: CleanerX, private val audiences: Bukk
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {
         if (!sender.hasPermission("cleanerx.cmd.blacklist")) {
-            sendMessage(sender, mH.getMessage("error", "no_permission"))
+            sendMessage(sender, mH.stringMessageToComponent("error", "no_permission"))
             return true
         }
         if (args.isEmpty()) {
-            sendMessage(sender, mH.getMessage("word", "usage"))
+            sendMessage(sender, mH.stringMessageToComponent("word", "usage"))
             return true
         }
         when (args[0].lowercase()) {
@@ -27,9 +27,9 @@ class BlackListCommand(private val plugin: CleanerX, private val audiences: Bukk
                     val newWord = args[1]
                     plugin.wordFilter.addBannedWord(newWord)
                     plugin.restartMyTask()
-                    sendMessage(sender, mH.getMessage("word", "word_added", mapOf("word" to newWord)))
+                    sendMessage(sender, mH.stringMessageToComponent("word", "word_added", mapOf("word" to newWord)))
                 } else {
-                    sendMessage(sender, mH.getMessage("word", "no_word_provided"))
+                    sendMessage(sender, mH.stringMessageToComponent("word", "no_word_provided"))
                 }
             }
             "remove" -> {
@@ -37,12 +37,18 @@ class BlackListCommand(private val plugin: CleanerX, private val audiences: Bukk
                     val wordToRemove = args[1]
                     if (plugin.wordFilter.removeBannedWord(wordToRemove)) {
                         plugin.restartMyTask()
-                        sendMessage(sender, mH.getMessage("word", "word_removed", mapOf("word" to wordToRemove)))
+                        sendMessage(
+                            sender,
+                            mH.stringMessageToComponent("word", "word_removed", mapOf("word" to wordToRemove))
+                        )
                     } else {
-                        sendMessage(sender, mH.getMessage("word", "word_not_found", mapOf("word" to wordToRemove)))
+                        sendMessage(
+                            sender,
+                            mH.stringMessageToComponent("word", "word_not_found", mapOf("word" to wordToRemove))
+                        )
                     }
                 } else {
-                    sendMessage(sender, mH.getMessage("word", "no_word_provided"))
+                    sendMessage(sender, mH.stringMessageToComponent("word", "no_word_provided"))
                 }
             }
             "list" -> {
@@ -51,7 +57,7 @@ class BlackListCommand(private val plugin: CleanerX, private val audiences: Bukk
                 sendMessage(sender, mH.miniMessageFormat(mH.getPrefix() + " <red>Banned words: <white>$formattedList"))
             }
             else -> {
-                sendMessage(sender, mH.getMessage("word", "usage"))
+                sendMessage(sender, mH.stringMessageToComponent("word", "usage"))
             }
         }
         return true

@@ -1,7 +1,5 @@
 package pl.syntaxdevteam.cleanerx.eventhandler
 
-import net.kyori.adventure.text.Component
-import org.bukkit.ChatColor
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
@@ -34,7 +32,7 @@ class CleanerXChat(
             if (blockLinks && urlDetectors.any { it.containsUrl(message) }) {
                 event.isCancelled = true
                 event.player.sendMessage(
-                    plugin.messageHandler.getCleanMessage("error", "no-link")
+                    plugin.messageHandler.stringMessageToString("error", "no-link")
                 )
                 return
             }

@@ -14,7 +14,7 @@ class CleanCommand(private val plugin: CleanerX, private val audiences: BukkitAu
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {
         if (!sender.hasPermission("cleanerx.cmd.clean")) {
-            audiences.sender(sender).sendMessage(plugin.messageHandler.getMessage("error", "no_permission"))
+            audiences.sender(sender).sendMessage(plugin.messageHandler.stringMessageToComponent("error", "no_permission"))
             return true
         }
 
@@ -22,8 +22,10 @@ class CleanCommand(private val plugin: CleanerX, private val audiences: BukkitAu
         val clearChat = ClearChat()
         clearChat.clean()
 
-        audiences.sender(sender).sendMessage(plugin.messageHandler.getMessage("clean", "success"))
-        plugin.logger.info(plugin.messageHandler.getCleanMessage("clean", "log", mapOf("player" to player)))
+        audiences.sender(sender).sendMessage(plugin.messageHandler.stringMessageToComponent("clean", "success"))
+        plugin.logger.log(
+            plugin.messageHandler.stringMessageToStringNoPrefix("clean", "log", mapOf("player" to player))
+        )
 
         return true
     }

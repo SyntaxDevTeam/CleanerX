@@ -15,11 +15,11 @@ class WhiteListCommand(private val plugin: CleanerX, private val audiences: Bukk
         val audience = audiences.sender(sender)
 
         if (!sender.hasPermission("cleanerx.cmd.whitelist")) {
-            audience.sendMessage(mH.getMessage("error", "no_permission"))
+            audience.sendMessage(mH.stringMessageToComponent("error", "no_permission"))
             return true
         }
         if (args.isEmpty()) {
-            audience.sendMessage(mH.getMessage("whitelist", "usage"))
+            audience.sendMessage(mH.stringMessageToComponent("whitelist", "usage"))
             return true
         }
         when (args[0].lowercase()) {
@@ -28,9 +28,9 @@ class WhiteListCommand(private val plugin: CleanerX, private val audiences: Bukk
                     val newWord = args[1]
                     plugin.wordFilter.addWhitelistWord(newWord)
                     plugin.restartMyTask()
-                    audience.sendMessage(mH.getMessage("word", "word_added", mapOf("word" to newWord)))
+                    audience.sendMessage(mH.stringMessageToComponent("word", "word_added", mapOf("word" to newWord)))
                 } else {
-                    audience.sendMessage(mH.getMessage("word", "no_word_provided"))
+                    audience.sendMessage(mH.stringMessageToComponent("word", "no_word_provided"))
                 }
             }
             "remove" -> {
@@ -38,12 +38,16 @@ class WhiteListCommand(private val plugin: CleanerX, private val audiences: Bukk
                     val wordToRemove = args[1]
                     if (plugin.wordFilter.removeWhitelistWord(wordToRemove)) {
                         plugin.restartMyTask()
-                        audience.sendMessage(mH.getMessage("word", "word_removed", mapOf("word" to wordToRemove)))
+                        audience.sendMessage(
+                            mH.stringMessageToComponent("word", "word_removed", mapOf("word" to wordToRemove))
+                        )
                     } else {
-                        audience.sendMessage(mH.getMessage("word", "word_not_found", mapOf("word" to wordToRemove)))
+                        audience.sendMessage(
+                            mH.stringMessageToComponent("word", "word_not_found", mapOf("word" to wordToRemove))
+                        )
                     }
                 } else {
-                    audience.sendMessage(mH.getMessage("word", "no_word_provided"))
+                    audience.sendMessage(mH.stringMessageToComponent("word", "no_word_provided"))
                 }
             }
             "list" -> {
@@ -52,7 +56,7 @@ class WhiteListCommand(private val plugin: CleanerX, private val audiences: Bukk
                 audience.sendMessage(MiniMessage.miniMessage().deserialize(mH.getPrefix() + " <green>Whitelist words: <white>$formattedList"))
             }
             else -> {
-                audience.sendMessage(mH.getMessage("word", "usage"))
+                audience.sendMessage(mH.stringMessageToComponent("word", "usage"))
             }
         }
         return true

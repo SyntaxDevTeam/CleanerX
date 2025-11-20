@@ -1,32 +1,32 @@
 package pl.syntaxdevteam.cleanerx.commands
 
 import net.kyori.adventure.platform.bukkit.BukkitAudiences
+import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import pl.syntaxdevteam.cleanerx.CleanerX
 
 class CleanerXCommand(private val plugin: CleanerX, private val audiences: BukkitAudiences) : CommandExecutor {
-    private val mH = plugin.messageHandler
     private val pdf = plugin.description
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {
         val audience = audiences.sender(sender)
 
         if (!sender.hasPermission("cleanerx.cmd.crx")) {
-            audience.sendMessage(mH.getMessage("error", "no_permission"))
+            audience.sendMessage(plugin.messageHandler.stringMessageToComponent("error", "no_permission"))
             return true
         }
 
         if (args.isEmpty()) {
-            audience.sendMessage(mH.getMessage("error", "unknown_command"))
+            audience.sendMessage(plugin.messageHandler.stringMessageToComponent("error", "unknown_command"))
             return true
         }
 
         when (args[0].lowercase()) {
-            "help" -> audience.sendMessage(mH.miniMessageFormat("""
+            "help" -> audience.sendMessage(MiniMessage.miniMessage().deserialize("""
                 <gray>+-------------------------------------------------
-                |  
+                |
                 |  <gold>Available commands for ${pdf.name}:
                 <gray>|
                 |  <gold>/crx help <gray>- <white>Displays this prompt.
@@ -41,7 +41,7 @@ class CleanerXCommand(private val plugin: CleanerX, private val audiences: Bukki
                 <gray>+-------------------------------------------------
             """.trimIndent()))
 
-            "version" -> audience.sendMessage(mH.miniMessageFormat("""
+            "version" -> audience.sendMessage(MiniMessage.miniMessage().deserialize("""
                 <gray>-------------------------------------------------
                 <gray>|
                 <gray>|   <gold>→ <bold>${pdf.name}</bold> ←
@@ -54,10 +54,10 @@ class CleanerXCommand(private val plugin: CleanerX, private val audiences: Bukki
 
             "reload" -> {
                 plugin.restartMyTask()
-                audience.sendMessage(mH.getMessage("reload", "success"))
+                audience.sendMessage(plugin.messageHandler.stringMessageToComponent("reload", "success"))
             }
 
-            else -> audience.sendMessage(mH.getMessage("error", "unknown_command"))
+            else -> audience.sendMessage(plugin.messageHandler.stringMessageToComponent("error", "unknown_command"))
         }
         return true
     }
