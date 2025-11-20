@@ -43,8 +43,8 @@ dependencies {
     compileOnly("net.kyori:option:1.1.0")
     //compileOnly("pl.syntaxdevteam:core:1.2.5")
     implementation(files("libs/SyntaxCore-1.2.6c-SNAPSHOT-all.jar"))
-    //compileOnly("pl.syntaxdevteam:messageHandler:1.0.3")
-    implementation(files("libs/MessageHandler-Spigot-1.0.4a-DEV-all.jar"))
+    compileOnly("pl.syntaxdevteam:messageHandler-spigot:1.0.0")
+    //implementation(files("libs/MessageHandler-Spigot-1.0.4a-DEV-all.jar"))
     implementation("net.byteflux:libby-bukkit:1.3.1")
 }
 
