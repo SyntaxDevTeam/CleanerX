@@ -53,7 +53,7 @@ class CleanerX : JavaPlugin(), Listener {
             GitHubSource("SyntaxDevTeam/CleanerX"),
             ModrinthSource("zJ4dsnYc")
         )
-        SyntaxCore.init(this)
+        SyntaxCore.init(this, versionType = "spigot")
         pluginInitializer = PluginInitializer(this)
         pluginInitializer.onEnable()
     }
