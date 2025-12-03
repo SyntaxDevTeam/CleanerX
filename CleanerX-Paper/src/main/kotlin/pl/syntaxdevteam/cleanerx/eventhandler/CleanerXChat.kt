@@ -36,6 +36,9 @@ class CleanerXChat(
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     fun onChat(event: AsyncChatEvent) {
         try {
+            if (shouldSkipCensorship(event.player)) {
+                return
+            }
             val message = plugin.messageHandler.getPlainText(event.originalMessage())
 
             if (blockLinks && urlDetectors.any { it.containsUrl(message) }) {
@@ -63,6 +66,25 @@ class CleanerXChat(
                 "Critical error in onChat: ${e.message}"
             )
             e.printStackTrace()
+        }
+    }
+
+    private fun shouldSkipCensorship(player: org.bukkit.entity.Player): Boolean {
+        val punisherXApi = plugin.punisherXApi ?: return false
+
+        return try {
+            val uuid = player.uniqueId.toString()
+            val isMuted = punisherXApi.isMuted(uuid).join()
+            val isJailed = punisherXApi.isJailed(uuid).join()
+
+            if (isMuted || isJailed) {
+                plugin.logger.debug("Bypassing censor – ${player.name} is muted or in jail in by PunisherX.")
+            }
+
+            isMuted || isJailed
+        } catch (exception: Exception) {
+            plugin.logger.severe("Could not check penalty status for ${player.name}: ${exception.message}")
+            false
         }
     }
 }

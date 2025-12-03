@@ -13,6 +13,7 @@ import pl.syntaxdevteam.cleanerx.common.ConfigHandler
 import pl.syntaxdevteam.cleanerx.eventhandler.CleanerXChat
 import pl.syntaxdevteam.core.SyntaxCore
 import pl.syntaxdevteam.message.SyntaxMessages
+import pl.syntaxdevteam.punisher.api.PunisherXApi
 
 class PluginInitializer(private val plugin: CleanerX) {
 
@@ -54,6 +55,7 @@ class PluginInitializer(private val plugin: CleanerX) {
         plugin.placeholderFix()
 
         plugin.pluginsManager = SyntaxCore.pluginManagerx
+        hookPunisherX()
     }
 
     private fun registerCommands(){
@@ -74,6 +76,14 @@ class PluginInitializer(private val plugin: CleanerX) {
         resetAllSwearCounts()
         plugin.api = CleanerXApiImpl(plugin)
         plugin.server.servicesManager.register(CleanerXAPI::class.java, plugin.api, plugin, ServicePriority.Normal)
+    }
+
+    private fun hookPunisherX() {
+        plugin.punisherXApi = plugin.server.servicesManager.load(PunisherXApi::class.java) ?: run {
+            plugin.logger.severe("Nie znaleziono API PunisherX!")
+            return
+        }
+        plugin.logger.info("Pobrano API PunisherX!")
     }
 
     private fun checkForUpdates() {

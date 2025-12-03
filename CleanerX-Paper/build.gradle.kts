@@ -34,8 +34,9 @@ dependencies {
     compileOnly("net.kyori:adventure-text-serializer-gson:4.25.0")
     compileOnly("net.kyori:adventure-text-serializer-plain:4.25.0")
     compileOnly("net.kyori:adventure-text-serializer-ansi:4.25.0")
-    compileOnly("pl.syntaxdevteam:core:1.2.5")
+    compileOnly("pl.syntaxdevteam:core:1.2.6")
     compileOnly("pl.syntaxdevteam:messageHandler-paper:1.0.0")
+    compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.0-DEV")
 
 }
 
@@ -105,6 +106,6 @@ publishing {
     }
 }
 plugindeployer {
-    paper { dir = "/home/debian/poligon/Paper/1.21.10/plugins" } //ostatnia wersja dla Paper
+    paper { dir = "/home/debian/poligon/Paper/1.21.11/plugins" } //ostatnia wersja dla Paper
     folia { dir = "/home/debian/poligon/Folia/1.21.8/plugins" } //ostatnia wersja dla Folia
 }

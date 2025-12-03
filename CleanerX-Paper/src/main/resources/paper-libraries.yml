@@ -11,5 +11,5 @@ libraries:
   - net.kyori:adventure-text-serializer-ansi:4.25.0
   # SyntaxCore dependencies
   - com.github.ben-manes.caffeine:caffeine:3.2.3
-  - pl.syntaxdevteam:core:1.2.5-SNAPSHOT
+  - pl.syntaxdevteam:core:1.2.6
   - pl.syntaxdevteam:messageHandler:1.0.3

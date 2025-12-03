@@ -12,4 +12,10 @@ loader: pl.syntaxdevteam.cleanerx.loader.SyntaxLoader
 has-open-classloader: false
 folia-supported: true
 
-softdepend: [Folia]
+softdepend: [Folia, PunisherX]
+
+dependencies:
+  server:
+    PunisherX:
+      load: BEFORE
+      required: false

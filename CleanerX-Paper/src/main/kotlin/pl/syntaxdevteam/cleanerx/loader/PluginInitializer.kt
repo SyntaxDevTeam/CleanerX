@@ -14,6 +14,7 @@ import pl.syntaxdevteam.cleanerx.eventhandler.CleanerXChat
 import pl.syntaxdevteam.cleanerx.eventhandler.PlayerJoinListener
 import pl.syntaxdevteam.core.SyntaxCore
 import pl.syntaxdevteam.message.SyntaxMessages
+import pl.syntaxdevteam.punisher.api.PunisherXApi
 
 class PluginInitializer(private val plugin: CleanerX) {
 
@@ -53,6 +54,7 @@ class PluginInitializer(private val plugin: CleanerX) {
         plugin.bannedWordsSynchronizer.synchronize { words ->
             plugin.wordFilter.updateBannedWords(words)
         }
+        hookPunisherX()
     }
 
     private fun registerCommands(){
@@ -68,6 +70,14 @@ class PluginInitializer(private val plugin: CleanerX) {
         // Rejestracja API w Services Managerze
         plugin.server.servicesManager.register(CleanerXAPI::class.java, plugin.api, plugin, ServicePriority.Normal)
         plugin.server.pluginManager.registerEvents(PlayerJoinListener(plugin), plugin)
+    }
+
+    private fun hookPunisherX() {
+        plugin.punisherXApi = plugin.server.servicesManager.load(PunisherXApi::class.java) ?: run {
+            plugin.logger.severe("Nie znaleziono API PunisherX!")
+            return
+        }
+        plugin.logger.info("Pobrano API PunisherX!")
     }
 
     private fun checkForUpdates() {

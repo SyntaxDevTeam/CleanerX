@@ -4,7 +4,6 @@ import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 import pl.syntaxdevteam.cleanerx.api.CleanerXAPI
-import pl.syntaxdevteam.cleanerx.api.CleanerXApiImpl
 import pl.syntaxdevteam.cleanerx.base.SwearCounter
 import pl.syntaxdevteam.cleanerx.base.WordFilter
 import pl.syntaxdevteam.cleanerx.commands.CommandManager
@@ -20,6 +19,7 @@ import pl.syntaxdevteam.core.stats.StatsCollector
 import pl.syntaxdevteam.core.update.GitHubSource
 import pl.syntaxdevteam.core.update.ModrinthSource
 import pl.syntaxdevteam.message.MessageHandler
+import pl.syntaxdevteam.punisher.api.PunisherXApi
 import java.io.File
 import java.util.Locale
 
@@ -42,6 +42,7 @@ class CleanerX : JavaPlugin(), Listener {
     lateinit var commandManager: CommandManager
     lateinit var api: CleanerXAPI
     lateinit var bannedWordsSynchronizer: BannedWordsSynchronizer
+    var punisherXApi: PunisherXApi? = null
 
     override fun onLoad() {
         libraryLoader = LibraryLoader(this)
