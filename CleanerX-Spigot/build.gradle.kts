@@ -41,7 +41,7 @@ dependencies {
     compileOnly("net.kyori:examination-api:1.3.0")
     compileOnly("net.kyori:examination-string:1.3.0")
     compileOnly("net.kyori:option:1.1.0")
-    compileOnly("pl.syntaxdevteam:core:1.2.6")
+    compileOnly("pl.syntaxdevteam:core:1.2.7-SNAPSHOT")
     compileOnly("pl.syntaxdevteam:messageHandler-spigot:1.0.0")
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.0-DEV")
     //implementation(files("libs/SyntaxCore-1.2.6n-SNAPSHOT-all.jar"))
