@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "pl.syntaxdevteam"
-version = "1.5.4"
+version = "1.5.5"
 description = "A sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment."
 
 repositories {
@@ -35,7 +35,7 @@ dependencies {
     compileOnly("net.kyori:adventure-text-serializer-plain:4.25.0")
     compileOnly("net.kyori:adventure-text-serializer-ansi:4.25.0")
     compileOnly("pl.syntaxdevteam:core:1.2.7-SNAPSHOT")
-    compileOnly("pl.syntaxdevteam:messageHandler-paper:1.0.0")
+    compileOnly("pl.syntaxdevteam:messageHandler-paper:1.0.2-SNAPSHOT")
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.0-DEV")
 
 }
