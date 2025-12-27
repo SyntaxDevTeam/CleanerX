@@ -36,7 +36,7 @@ jobs:
       - name: Build ${{ matrix.platform }}
         run: |
           ./gradlew :CleanerX-${{ matrix.platform }}:build \
-            --no-daemon --stacktrace
+            --no-daemon --stacktrace --refresh-dependencies
 
       - name: Upload ${{ matrix.platform }} JAR
         uses: actions/upload-artifact@v5
