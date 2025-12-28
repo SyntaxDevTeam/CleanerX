@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "2.2.21"
+    kotlin("jvm") version "2.3.0"
     id("com.gradleup.shadow") version "9.2.2"
 }
 
@@ -42,7 +42,7 @@ dependencies {
     compileOnly("net.kyori:examination-string:1.3.0")
     compileOnly("net.kyori:option:1.1.0")
     compileOnly("pl.syntaxdevteam:core:1.2.7-SNAPSHOT")
-    compileOnly("pl.syntaxdevteam:messageHandler-paper:1.0.2-SNAPSHOT")
+    compileOnly("pl.syntaxdevteam:messageHandler-spigot:1.1.0-SNAPSHOT")
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.0-DEV")
     //implementation(files("libs/SyntaxCore-1.2.6n-SNAPSHOT-all.jar"))
     //implementation(files("libs/MessageHandler-Spigot-1.0.4a-DEV-all.jar"))

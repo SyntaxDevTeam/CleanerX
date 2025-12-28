@@ -18,7 +18,7 @@ libraries:
   - com.github.ben-manes.caffeine:caffeine:3.2.3
   - dev.dejvokep:boosted-yaml:1.3.7
   - pl.syntaxdevteam:core:1.2.7-SNAPSHOT
-  - pl.syntaxdevteam:messageHandler-paper:1.0.2-SNAPSHOT
+  - pl.syntaxdevteam:messageHandler-spigot:1.1.0-SNAPSHOT
   # Utility libraries
   - com.google.code.gson:gson:2.13.2
   - org.yaml:snakeyaml:2.5
