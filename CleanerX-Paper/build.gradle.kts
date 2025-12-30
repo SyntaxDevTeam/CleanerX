@@ -2,7 +2,7 @@ import org.gradle.api.publish.maven.MavenPublication
 
 plugins {
     kotlin("jvm") version "2.3.0"
-    id("com.gradleup.shadow") version "9.2.2"
+    id("com.gradleup.shadow") version "9.3.0"
     `maven-publish`
     id("xyz.jpenilla.run-paper") version "3.0.2"
     id("pl.syntaxdevteam.plugindeployer") version "1.0.4"
@@ -29,12 +29,12 @@ dependencies {
     compileOnly("org.eclipse.aether:aether-api:1.1.0")
     compileOnly("org.yaml:snakeyaml:2.5")
     compileOnly("com.google.code.gson:gson:2.13.2")
-    compileOnly("net.kyori:adventure-text-serializer-legacy:4.25.0")
-    compileOnly("net.kyori:adventure-text-minimessage:4.25.0")
-    compileOnly("net.kyori:adventure-text-serializer-gson:4.25.0")
-    compileOnly("net.kyori:adventure-text-serializer-plain:4.25.0")
-    compileOnly("net.kyori:adventure-text-serializer-ansi:4.25.0")
-    compileOnly("pl.syntaxdevteam:core:1.2.7-SNAPSHOT")
+    compileOnly("net.kyori:adventure-text-serializer-legacy:4.26.1")
+    compileOnly("net.kyori:adventure-text-minimessage:4.26.1")
+    compileOnly("net.kyori:adventure-text-serializer-gson:4.26.1")
+    compileOnly("net.kyori:adventure-text-serializer-plain:4.26.1")
+    compileOnly("net.kyori:adventure-text-serializer-ansi:4.26.1")
+    compileOnly("pl.syntaxdevteam:core:1.2.8-R0.1-SNAPSHOT")
     compileOnly("pl.syntaxdevteam:messageHandler-paper:1.1.0-SNAPSHOT")
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.0-DEV")
 

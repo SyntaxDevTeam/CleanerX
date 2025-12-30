@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm") version "2.3.0"
-    id("com.gradleup.shadow") version "9.2.2"
+    id("com.gradleup.shadow") version "9.3.0"
 }
 
 group = "pl.syntaxdevteam"
@@ -31,17 +31,17 @@ dependencies {
     compileOnly("net.kyori:adventure-platform-bukkit:4.4.1")
     compileOnly("net.kyori:adventure-platform-api:4.4.1")
     compileOnly("net.kyori:adventure-platform-facet:4.4.1")
-    compileOnly("net.kyori:adventure-api:4.25.0")
-    compileOnly("net.kyori:adventure-text-serializer-json:4.25.0")
-    compileOnly("net.kyori:adventure-text-serializer-legacy:4.25.0")
-    compileOnly("net.kyori:adventure-text-minimessage:4.25.0")
-    compileOnly("net.kyori:adventure-text-serializer-gson:4.25.0")
-    compileOnly("net.kyori:adventure-text-serializer-plain:4.25.0")
-    compileOnly("net.kyori:adventure-text-serializer-ansi:4.25.0")
+    compileOnly("net.kyori:adventure-api:4.26.1")
+    compileOnly("net.kyori:adventure-text-serializer-json:4.26.1")
+    compileOnly("net.kyori:adventure-text-serializer-legacy:4.26.1")
+    compileOnly("net.kyori:adventure-text-minimessage:4.26.1")
+    compileOnly("net.kyori:adventure-text-serializer-gson:4.26.1")
+    compileOnly("net.kyori:adventure-text-serializer-plain:4.26.1")
+    compileOnly("net.kyori:adventure-text-serializer-ansi:4.26.1")
     compileOnly("net.kyori:examination-api:1.3.0")
     compileOnly("net.kyori:examination-string:1.3.0")
     compileOnly("net.kyori:option:1.1.0")
-    compileOnly("pl.syntaxdevteam:core:1.2.7-SNAPSHOT")
+    compileOnly("pl.syntaxdevteam:core:1.2.8-R0.1-SNAPSHOT")
     compileOnly("pl.syntaxdevteam:messageHandler-spigot:1.1.0-SNAPSHOT")
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.0-DEV")
     //implementation(files("libs/SyntaxCore-1.2.6n-SNAPSHOT-all.jar"))
