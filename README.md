@@ -19,7 +19,7 @@ CleanerX is an advanced plugin designed to filter and replace inappropriate lang
 
 ## ⚙️ Technical Information
 
-- 🟢 **Designed for the latest Minecraft versions 1.20.6–1.21.4+**
+- 🟢 **Designed for the latest Minecraft versions 1.20.6–1.21.11**
 - 🟢 **Optimized for Paper and its forks (Pufferfish, Purpur, Leaves)**
 - 🟢 **Requires Java 21 or newer**
 - 🟢 **Written in Kotlin – a modern, expressive, and safer alternative to Java**
