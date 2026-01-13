@@ -35,7 +35,7 @@ dependencies {
     compileOnly("net.kyori:adventure-text-serializer-plain:4.26.1")
     compileOnly("net.kyori:adventure-text-serializer-ansi:4.26.1")
     compileOnly("pl.syntaxdevteam:core:1.2.8-R0.1-SNAPSHOT")
-    compileOnly("pl.syntaxdevteam:messageHandler-paper:1.1.0-SNAPSHOT")
+    compileOnly("pl.syntaxdevteam:messageHandler-paper:1.1.0-R0.1-SNAPSHOT")
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.0-DEV")
 
 }

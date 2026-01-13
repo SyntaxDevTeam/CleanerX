@@ -73,15 +73,27 @@ class PluginInitializer(private val plugin: CleanerX) {
 
     private fun hookPunisherX() {
         val punisherPlugin = plugin.server.pluginManager.getPlugin("PunisherX") ?: return
-        val apiClass = try {
-            Class.forName("pl.syntaxdevteam.punisher.api.PunisherXApi", false, punisherPlugin.javaClass.classLoader)
-        } catch (exception: ClassNotFoundException) {
-            plugin.logger.debug("PunisherX wykryty, ale brakuje API (PunisherXApi). Pomijam integrację.")
+        if (!punisherPlugin.isEnabled) {
             return
         }
 
-        plugin.punisherXApi = plugin.server.servicesManager.load(apiClass) ?: run {
-            plugin.logger.debug("PunisherX wykryty, ale nie udostępnia API. Pomijam integrację.")
+        val apiClass = try {
+            Class.forName("pl.syntaxdevteam.punisher.api.PunisherXApi", false, punisherPlugin.javaClass.classLoader)
+        } catch (exception: ClassNotFoundException) {
+            plugin.logger.warning("PunisherX wykryty, ale brakuje API (PunisherXApi). Pomijam integrację.")
+            return
+        } catch (exception: Throwable) {
+            plugin.logger.warning("PunisherX wykryty, ale API jest niedostępne (${exception.javaClass.simpleName}). Pomijam integrację.")
+            return
+        }
+
+        plugin.punisherXApi = try {
+            plugin.server.servicesManager.load(apiClass)
+        } catch (exception: Throwable) {
+            plugin.logger.warning("PunisherX wykryty, ale nie udało się pobrać API (${exception.javaClass.simpleName}). Pomijam integrację.")
+            return
+        } ?: run {
+            plugin.logger.warning("PunisherX wykryty, ale nie udostępnia API. Pomijam integrację.")
             return
         }
         plugin.logger.info("Pobrano API PunisherX!")
