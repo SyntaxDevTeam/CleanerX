@@ -19,7 +19,6 @@ import pl.syntaxdevteam.core.stats.StatsCollector
 import pl.syntaxdevteam.core.update.GitHubSource
 import pl.syntaxdevteam.core.update.ModrinthSource
 import pl.syntaxdevteam.message.MessageHandler
-import pl.syntaxdevteam.punisher.api.PunisherXApi
 import java.io.File
 import java.util.Locale
 
@@ -41,7 +40,7 @@ class CleanerX : JavaPlugin(), Listener {
     lateinit var commandManager: CommandManager
     lateinit var api: CleanerXAPI
     lateinit var bannedWordsSynchronizer: BannedWordsSynchronizer
-    var punisherXApi: PunisherXApi? = null
+    var punisherXApi: Any? = null
 
     override fun onEnable() {
         SyntaxCore.registerUpdateSources(

@@ -13,7 +13,6 @@ import pl.syntaxdevteam.cleanerx.common.ConfigHandler
 import pl.syntaxdevteam.cleanerx.eventhandler.CleanerXChat
 import pl.syntaxdevteam.core.SyntaxCore
 import pl.syntaxdevteam.message.SyntaxMessages
-import pl.syntaxdevteam.punisher.api.PunisherXApi
 
 class PluginInitializer(private val plugin: CleanerX) {
 
@@ -79,8 +78,16 @@ class PluginInitializer(private val plugin: CleanerX) {
     }
 
     private fun hookPunisherX() {
-        plugin.punisherXApi = plugin.server.servicesManager.load(PunisherXApi::class.java) ?: run {
-            plugin.logger.severe("Nie znaleziono API PunisherX!")
+        val punisherPlugin = plugin.server.pluginManager.getPlugin("PunisherX") ?: return
+        val apiClass = try {
+            Class.forName("pl.syntaxdevteam.punisher.api.PunisherXApi", false, punisherPlugin.javaClass.classLoader)
+        } catch (exception: ClassNotFoundException) {
+            plugin.logger.debug("PunisherX wykryty, ale brakuje API (PunisherXApi). Pomijam integrację.")
+            return
+        }
+
+        plugin.punisherXApi = plugin.server.servicesManager.load(apiClass) ?: run {
+            plugin.logger.debug("PunisherX wykryty, ale nie udostępnia API. Pomijam integrację.")
             return
         }
         plugin.logger.info("Pobrano API PunisherX!")

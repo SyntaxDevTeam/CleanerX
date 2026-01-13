@@ -69,8 +69,8 @@ class CleanerXChat(
 
         return try {
             val uuid = player.uniqueId.toString()
-            val isMuted = punisherXApi.isMuted(uuid).join()
-            val isJailed = punisherXApi.isJailed(uuid).join()
+            val isMuted = callPunisherXFlag(punisherXApi, "isMuted", uuid)
+            val isJailed = callPunisherXFlag(punisherXApi, "isJailed", uuid)
 
             if (isMuted || isJailed) {
                 plugin.logger.debug("Bypassing censor – ${player.name} is muted or in jail in by PunisherX.")
@@ -80,6 +80,22 @@ class CleanerXChat(
         } catch (exception: Exception) {
             plugin.logger.severe("Could not check penalty status for ${player.name}: ${exception.message}")
             false
+        }
+    }
+
+    private fun callPunisherXFlag(api: Any, methodName: String, uuid: String): Boolean {
+        val method = api.javaClass.getMethod(methodName, String::class.java)
+        val result = method.invoke(api, uuid) ?: return false
+
+        return when (result) {
+            is java.util.concurrent.CompletionStage<*> -> {
+                result.toCompletableFuture().join() as? Boolean ?: false
+            }
+            is java.util.concurrent.Future<*> -> {
+                result.get() as? Boolean ?: false
+            }
+            is Boolean -> result
+            else -> false
         }
     }
 }
