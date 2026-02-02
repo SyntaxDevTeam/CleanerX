@@ -107,8 +107,12 @@ class PluginInitializer(private val plugin: CleanerX) {
 
     private fun checkForUpdates() {
         plugin.statsCollector = SyntaxCore.statsCollector
-        SyntaxCore.updateChecker.checkAsync()
-
+        val updateChecker = runCatching { SyntaxCore.updateChecker }.getOrNull()
+        if (updateChecker == null) {
+            plugin.logger.warning("Update checker nie został zainicjalizowany w SyntaxCore. Pomijam sprawdzanie aktualizacji.")
+            return
+        }
+        updateChecker.checkAsync()
     }
 
     fun resetAllSwearCounts() {

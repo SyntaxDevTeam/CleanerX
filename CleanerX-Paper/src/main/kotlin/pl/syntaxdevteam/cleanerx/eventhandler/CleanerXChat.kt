@@ -33,13 +33,13 @@ class CleanerXChat(
         RegexUrlDetector()
     )
 
-    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
     fun onChat(event: AsyncChatEvent) {
         try {
             if (shouldSkipCensorship(event.player)) {
                 return
             }
-            val message = plugin.messageHandler.getPlainText(event.originalMessage())
+            val message = plugin.messageHandler.getPlainText(event.message())
 
             if (blockLinks && urlDetectors.any { it.containsUrl(message) }) {
                 event.isCancelled = true
