@@ -1,7 +1,7 @@
 import org.gradle.api.publish.maven.MavenPublication
 
 plugins {
-    kotlin("jvm") version "2.3.0"
+    kotlin("jvm") version "2.3.10"
     id("com.gradleup.shadow") version "9.3.1"
     `maven-publish`
     id("xyz.jpenilla.run-paper") version "3.0.2"
@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "pl.syntaxdevteam"
-version = "1.5.5-DEV"
+version = "1.5.4-SNAPSHOT"
 description = "A sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment."
 
 repositories {
@@ -35,7 +35,7 @@ dependencies {
     compileOnly("net.kyori:adventure-text-serializer-plain:4.26.1")
     compileOnly("net.kyori:adventure-text-serializer-ansi:4.26.1")
     compileOnly("pl.syntaxdevteam:core:1.2.8-R0.2-SNAPSHOT")
-    compileOnly("pl.syntaxdevteam:messageHandler-paper:1.1.0-R0.1-SNAPSHOT")
+    compileOnly("pl.syntaxdevteam:messageHandler-paper:1.1.0-R0.2-SNAPSHOT")
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.0-DEV")
 
 }

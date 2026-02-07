@@ -1,9 +1,9 @@
 plugins {
-    kotlin("jvm") version "2.3.0"
+    kotlin("jvm") version "2.3.10"
 }
 
 group = "pl.syntaxdevteam"
-version = "1.5.5-DEV"
+version = "1.5.4-SNAPSHOT"
 
 allprojects {
     repositories {

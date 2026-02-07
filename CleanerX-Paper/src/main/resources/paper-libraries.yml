@@ -12,4 +12,4 @@ libraries:
   # SyntaxCore dependencies
   - com.github.ben-manes.caffeine:caffeine:3.2.3
   - pl.syntaxdevteam:core:1.2.8-R0.2-SNAPSHOT
-  - pl.syntaxdevteam:messageHandler-paper:1.1.0-SNAPSHOT
+  - pl.syntaxdevteam:messageHandler-paper:1.1.0-R0.2-SNAPSHOT
