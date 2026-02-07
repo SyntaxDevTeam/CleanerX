@@ -26,6 +26,9 @@ clean:
   error: "<red>Ocurrió un error al intentar limpiar el chat.</red>"
   log: "<gold><player> ha limpiado el chat.</gold>"
 
+swear_counter:
+  reset_success: "<green>El contador de palabrotas de <player> ha sido reiniciado.</green>"
+
 whitelist:
   usage: "<gold>Uso correcto: /whitelistx <add|remove|list> <word></gold>"
 

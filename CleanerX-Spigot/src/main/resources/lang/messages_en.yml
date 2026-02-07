@@ -25,6 +25,9 @@ clean:
   error: "<red>An error occurred while clearing the chat.</red>"
   log: "<gold><player> cleared the chat.</gold>"
 
+swear_counter:
+  reset_success: "<green>Swear counter for <player> has been reset.</green>"
+
 whitelist:
   usage: "<gold>Correct usage: /whitelistx <add|remove|list> <word></gold>"
 

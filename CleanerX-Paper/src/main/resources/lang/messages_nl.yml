@@ -26,6 +26,9 @@ clean:
   error: "<red>Er is een fout opgetreden bij het wissen van de chat.</red>"
   log: "<gold><player> heeft de chat gewist.</gold>"
 
+swear_counter:
+  reset_success: "<green>De scheldwoordenteller voor <player> is gereset.</green>"
+
 whitelist:
   usage: "<gold>Correct gebruik: /whitelistx <add|remove|list> <woord></gold>"
 

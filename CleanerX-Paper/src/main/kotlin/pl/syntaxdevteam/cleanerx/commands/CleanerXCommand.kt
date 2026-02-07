@@ -31,11 +31,43 @@ class CleanerXCommand(private val plugin: CleanerX) : BasicCommand {
                                 " <gray>|  <gold>/whitelistx <add/remove/list> <word> \n" +
                                 " <gray>|                      <gray>- <white>Adds a word to the whitelist.\n" +
                                 " <gray>|  <gold>/cleanx <gray>- <white>Clears the chat window.\n" +
+                                " <gray>|  <gold>/crx reset <player> <gray>- <white>Resets swear counter for player.\n" +
                                 " <gray>|  <gold>/crx version <gray>- <white>Shows plugin info. \n" +
                                 " <gray>|  <gold>/crx reload <gray>- <white>Reloads the configuration file\n" +
                                 " |\n" +
                                 " <gray>|\n<gray>+-------------------------------------------------"))
 
+                }
+                args[0].equals("reset", ignoreCase = true) -> {
+                    if (args.size < 2) {
+                        stack.sender.sendMessage(
+                            mH.stringMessageToComponent(
+                                "error",
+                                "invalid_usage",
+                                mapOf("usage" to "/crx reset <player>")
+                            )
+                        )
+                        return
+                    }
+                    val target = plugin.server.getPlayer(args[1])
+                    if (target == null) {
+                        stack.sender.sendMessage(
+                            mH.stringMessageToComponent(
+                                "error",
+                                "player_not_found",
+                                mapOf("player" to args[1])
+                            )
+                        )
+                        return
+                    }
+                    plugin.swearCounter.resetSwearCount(target)
+                    stack.sender.sendMessage(
+                        mH.stringMessageToComponent(
+                            "swear_counter",
+                            "reset_success",
+                            mapOf("player" to target.name)
+                        )
+                    )
                 }
                 args[0].equals("version", ignoreCase = true) -> {
 
@@ -68,7 +100,12 @@ class CleanerXCommand(private val plugin: CleanerX) : BasicCommand {
             return emptyList()
         }
         return when (args.size) {
-            1 -> listOf("help", "version", "reload")
+            1 -> listOf("help", "version", "reload", "reset")
+            2 -> if (args[0].equals("reset", ignoreCase = true)) {
+                plugin.server.onlinePlayers.map { it.name }
+            } else {
+                emptyList()
+            }
             else -> emptyList()
         }
     }

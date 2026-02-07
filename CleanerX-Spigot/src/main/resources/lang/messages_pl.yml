@@ -29,6 +29,9 @@ clean:
   error: "<red>Wystąpił błąd podczas czyszczenia czatu.</red>"
   log: "<gold><player> wyczyścił czat.</gold>"
 
+swear_counter:
+  reset_success: "<green>Zresetowano licznik przekleństw dla gracza <player>.</green>"
+
 # Komenda whitelistx
 whitelist:
   usage: "<gold>Poprawne użycie to: /whitelist <add|remove|list> <player></gold>"

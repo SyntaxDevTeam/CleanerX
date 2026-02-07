@@ -35,6 +35,7 @@ class CleanerXCommand(private val plugin: CleanerX, private val audiences: Bukki
                 <gray>|  <gold>/whitelistx <add/remove/list> <word> 
                 <gray>|                      <gray>- <white>Adds a word to the whitelist.
                 <gray>|  <gold>/cleanx <gray>- <white>Clears the chat window.
+                <gray>|  <gold>/crx reset <player> <gray>- <white>Resets swear counter for player.
                 <gray>|  <gold>/crx version <gray>- <white>Shows plugin info. 
                 <gray>|  <gold>/crx reload <gray>- <white>Reloads the configuration file
                 |
@@ -55,6 +56,37 @@ class CleanerXCommand(private val plugin: CleanerX, private val audiences: Bukki
             "reload" -> {
                 plugin.restartMyTask()
                 audience.sendMessage(plugin.messageHandler.stringMessageToComponent("reload", "success"))
+            }
+            "reset" -> {
+                if (args.size < 2) {
+                    audience.sendMessage(
+                        plugin.messageHandler.stringMessageToComponent(
+                            "error",
+                            "invalid_usage",
+                            mapOf("usage" to "/crx reset <player>")
+                        )
+                    )
+                    return true
+                }
+                val target = plugin.server.getPlayer(args[1])
+                if (target == null) {
+                    audience.sendMessage(
+                        plugin.messageHandler.stringMessageToComponent(
+                            "error",
+                            "player_not_found",
+                            mapOf("player" to args[1])
+                        )
+                    )
+                    return true
+                }
+                plugin.swearCounter.resetSwearCount(target)
+                audience.sendMessage(
+                    plugin.messageHandler.stringMessageToComponent(
+                        "swear_counter",
+                        "reset_success",
+                        mapOf("player" to target.name)
+                    )
+                )
             }
 
             else -> audience.sendMessage(plugin.messageHandler.stringMessageToComponent("error", "unknown_command"))
