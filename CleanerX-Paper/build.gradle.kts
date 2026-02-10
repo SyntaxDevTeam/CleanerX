@@ -25,6 +25,7 @@ repositories {
     }
 
 dependencies {
+    testImplementation(kotlin("test"))
     compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
     compileOnly("org.eclipse.aether:aether-api:1.1.0")
     compileOnly("org.yaml:snakeyaml:2.5")
@@ -116,4 +117,8 @@ publishing {
 plugindeployer {
     paper { dir = "/home/debian/poligon/Paper/1.21.11/plugins" } //ostatnia wersja dla Paper
     folia { dir = "/home/debian/poligon/Folia/1.21.11/plugins" } //ostatnia wersja dla Folia
+}
+
+tasks.test {
+    useJUnitPlatform()
 }

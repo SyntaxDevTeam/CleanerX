@@ -23,6 +23,7 @@ repositories {
 }
 
 dependencies {
+    testImplementation(kotlin("test"))
     compileOnly("org.spigotmc:spigot-api:1.21.11-R0.2-SNAPSHOT")
     compileOnly("org.eclipse.aether:aether-api:1.1.0")
     compileOnly("org.yaml:snakeyaml:2.5")
@@ -69,3 +70,8 @@ tasks.processResources {
 
 
 
+
+
+tasks.test {
+    useJUnitPlatform()
+}

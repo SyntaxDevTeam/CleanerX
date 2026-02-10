@@ -10,6 +10,7 @@ import pl.syntaxdevteam.cleanerx.base.WordFilter
 import pl.syntaxdevteam.cleanerx.commands.CommandManager
 import pl.syntaxdevteam.cleanerx.common.BannedWordsSynchronizer
 import pl.syntaxdevteam.cleanerx.common.ConfigHandler
+import pl.syntaxdevteam.cleanerx.common.ListenerRegistrationMetrics
 import pl.syntaxdevteam.cleanerx.eventhandler.CleanerXChat
 import pl.syntaxdevteam.core.SyntaxCore
 import pl.syntaxdevteam.message.SyntaxMessages
@@ -64,6 +65,8 @@ class PluginInitializer(private val plugin: CleanerX) {
     }
 
     fun registerEvents() {
+        val registrationCount = ListenerRegistrationMetrics.increment()
+        plugin.logger.info("Listener registration count: $registrationCount")
         plugin.server.pluginManager.registerEvents(
             CleanerXChat(
                 plugin,

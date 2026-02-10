@@ -2,6 +2,7 @@ package pl.syntaxdevteam.cleanerx
 
 import io.papermc.paper.event.player.AsyncChatEvent
 import org.bukkit.configuration.file.FileConfiguration
+import org.bukkit.event.HandlerList
 import org.bukkit.event.Listener
 import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.JavaPlugin
@@ -73,6 +74,7 @@ class CleanerX : JavaPlugin(), Listener {
         configHandler.verifyAndUpdateConfig()
 
         try{
+            HandlerList.unregisterAll(this as org.bukkit.plugin.Plugin)
             pluginInitializer.registerEvents()
         } catch (ee: Exception) {
             logger.err("An error occurred while reloading the configuration: " + ee.message)

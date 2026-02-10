@@ -1,6 +1,7 @@
 package pl.syntaxdevteam.cleanerx
 
 import org.bukkit.configuration.file.FileConfiguration
+import org.bukkit.event.HandlerList
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 import pl.syntaxdevteam.cleanerx.api.CleanerXAPI
@@ -76,6 +77,7 @@ class CleanerX : JavaPlugin(), Listener {
         configHandler.verifyAndUpdateConfig()
 
         try {
+            HandlerList.unregisterAll(this as org.bukkit.plugin.Plugin)
             pluginInitializer.registerEvents()
         } catch (ee: Exception) {
             logger.err("An error occurred while reloading the configuration: " + ee.message)
