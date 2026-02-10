@@ -25,7 +25,6 @@ repositories {
     }
 
 dependencies {
-    testImplementation(kotlin("test"))
     compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
     compileOnly("org.eclipse.aether:aether-api:1.1.0")
     compileOnly("org.yaml:snakeyaml:2.5")
@@ -38,6 +37,13 @@ dependencies {
     compileOnly("pl.syntaxdevteam:core:1.2.8-R0.2-SNAPSHOT")
     compileOnly("pl.syntaxdevteam:messageHandler-paper:1.1.0-R0.2-SNAPSHOT")
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.0-DEV")
+
+    testImplementation(kotlin("test"))
+    testImplementation("org.junit.jupiter:junit-jupiter:5.13.4")
+    testImplementation("io.mockk:mockk:1.14.5")
+    testImplementation("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
+    testImplementation("pl.syntaxdevteam:core:1.2.8-R0.2-SNAPSHOT")
+    testImplementation("pl.syntaxdevteam:messageHandler-paper:1.1.0-R0.2-SNAPSHOT")
 
 }
 
@@ -55,6 +61,10 @@ tasks{
         runDirectory(file("run/paper"))
     }
     runPaper.folia.registerTask()
+
+    test {
+        useJUnitPlatform()
+    }
 }
 
 
@@ -117,8 +127,4 @@ publishing {
 plugindeployer {
     paper { dir = "/home/debian/poligon/Paper/1.21.11/plugins" } //ostatnia wersja dla Paper
     folia { dir = "/home/debian/poligon/Folia/1.21.11/plugins" } //ostatnia wersja dla Folia
-}
-
-tasks.test {
-    useJUnitPlatform()
 }

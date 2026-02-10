@@ -64,7 +64,7 @@ class CleanerXChat(
 
         } catch (e: Exception) {
             plugin.logger.severe("Critical error! Send a message to the plugin author with the subject \"Error in onChat\" and the content: ${e.message}")
-            e.printStackTrace()
+            plugin.logger.severe("[CLX-CHAT-001] Stacktrace: ${e.stackTraceToString()}")
         }
     }
 

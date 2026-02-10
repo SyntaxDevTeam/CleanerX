@@ -9,9 +9,15 @@ import org.eclipse.aether.repository.RemoteRepository
 import org.yaml.snakeyaml.Yaml
 import java.io.IOException
 import java.io.InputStream
+import java.util.logging.Level
+import java.util.logging.Logger
 
 @Suppress("UnstableApiUsage", "unused")
 class SyntaxLoader : PluginLoader {
+
+    companion object {
+        private val LOGGER: Logger = Logger.getLogger(SyntaxLoader::class.java.name)
+    }
 
     override fun classloader(pluginClasspath: PluginClasspathBuilder) {
         val resolver = MavenLibraryResolver()
@@ -32,7 +38,7 @@ class SyntaxLoader : PluginLoader {
         return try {
             readLibraryListFromYaml()
         } catch (e: IOException) {
-            e.printStackTrace()
+            LOGGER.log(Level.SEVERE, "Failed to resolve libraries from paper-libraries.yml", e)
             emptyList()
         }
     }
@@ -42,7 +48,7 @@ class SyntaxLoader : PluginLoader {
         val inputStream: InputStream? = SyntaxLoader::class.java.classLoader.getResourceAsStream("paper-libraries.yml")
 
         if (inputStream == null) {
-            System.err.println("paper-libraries.yml not found in the classpath.")
+            LOGGER.warning("paper-libraries.yml not found in the classpath.")
             return emptyList()
         }
 
