@@ -23,8 +23,12 @@ class CleanerXChat(
     )
 
 
-    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     fun onChat(event: AsyncPlayerChatEvent) {
+        handleChat(event)
+    }
+
+    private fun handleChat(event: AsyncPlayerChatEvent) {
         try {
             if (shouldSkipCensorship(event.player)) {
                 return

@@ -55,6 +55,7 @@ class PluginInitializer(private val plugin: CleanerX) {
 
         plugin.pluginsManager = SyntaxCore.pluginManagerx
         hookPunisherX()
+        detectLpc()
     }
 
     private fun registerCommands(){
@@ -103,6 +104,14 @@ class PluginInitializer(private val plugin: CleanerX) {
             return
         }
         plugin.logger.info("Pobrano API PunisherX!")
+    }
+
+    private fun detectLpc() {
+        val lpcPlugin = plugin.server.pluginManager.getPlugin("LPC")
+        plugin.lpcMode = lpcPlugin != null && lpcPlugin.isEnabled
+        if (plugin.lpcMode) {
+            plugin.logger.info("LPC detected - enabling chat compatibility mode.")
+        }
     }
 
     private fun checkForUpdates() {

@@ -41,6 +41,7 @@ class CleanerX : JavaPlugin(), Listener {
     lateinit var api: CleanerXAPI
     lateinit var bannedWordsSynchronizer: BannedWordsSynchronizer
     var punisherXApi: Any? = null
+    var lpcMode: Boolean = false
 
     override fun onEnable() {
         SyntaxCore.registerUpdateSources(

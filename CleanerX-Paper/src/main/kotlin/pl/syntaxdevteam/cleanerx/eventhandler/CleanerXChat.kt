@@ -5,6 +5,7 @@ import net.kyori.adventure.text.Component
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
+import org.bukkit.event.player.AsyncPlayerChatEvent
 import pl.syntaxdevteam.cleanerx.CleanerX
 import pl.syntaxdevteam.cleanerx.base.WordFilter
 import pl.syntaxdevteam.cleanerx.base.SwearCounter
@@ -22,7 +23,8 @@ class CleanerXChat(
     private val plugin: CleanerX,
     private val wordFilter: WordFilter,
     private val fullCensorship: Boolean,
-    private val swearCounter: SwearCounter
+    private val swearCounter: SwearCounter,
+    private val lpcMode: Boolean
 ) : Listener {
 
     private val blockLinks = plugin.config.getBoolean("block-links", true)
@@ -33,8 +35,47 @@ class CleanerXChat(
         RegexUrlDetector()
     )
 
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+    fun onLegacyChat(event: AsyncPlayerChatEvent) {
+        if (!lpcMode) {
+            return
+        }
+        try {
+            if (shouldSkipCensorship(event.player)) {
+                return
+            }
+            val message = event.message
+
+            if (blockLinks && urlDetectors.any { it.containsUrl(message) }) {
+                event.isCancelled = true
+                event.player.sendMessage(
+                    plugin.messageHandler.stringMessageToString("error", "no-link")
+                )
+                return
+            }
+
+            val words = message.split("\\s+".toRegex())
+            val swearCount = words.count { wordFilter.containsBannedWord(it) }
+
+            if (swearCount > 0) {
+                event.message = wordFilter.censorMessage(message, fullCensorship)
+                if (usePunishment) {
+                    swearCounter.incrementSwearCount(event.player, swearCount)
+                }
+            }
+        } catch (e: Exception) {
+            plugin.logger.severe(
+                "Critical error in onLegacyChat: ${e.message}"
+            )
+            e.printStackTrace()
+        }
+    }
+
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     fun onChat(event: AsyncChatEvent) {
+        if (lpcMode) {
+            return
+        }
         try {
             if (shouldSkipCensorship(event.player)) {
                 return

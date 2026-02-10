@@ -54,6 +54,7 @@ class PluginInitializer(private val plugin: CleanerX) {
             plugin.wordFilter.updateBannedWords(words)
         }
         hookPunisherX()
+        detectLpc()
     }
 
     private fun registerCommands(){
@@ -62,7 +63,16 @@ class PluginInitializer(private val plugin: CleanerX) {
     }
 
     fun registerEvents() {
-        plugin.server.pluginManager.registerEvents(CleanerXChat(plugin, plugin.wordFilter, plugin.config.getBoolean("fullCensorship"), plugin.swearCounter), plugin)
+        plugin.server.pluginManager.registerEvents(
+            CleanerXChat(
+                plugin,
+                plugin.wordFilter,
+                plugin.config.getBoolean("fullCensorship"),
+                plugin.swearCounter,
+                plugin.lpcMode
+            ),
+            plugin
+        )
         resetAllSwearCounts()
         plugin.api = CleanerXApiImpl(plugin)
 
@@ -97,6 +107,14 @@ class PluginInitializer(private val plugin: CleanerX) {
             return
         }
         plugin.logger.info("Pobrano API PunisherX!")
+    }
+
+    private fun detectLpc() {
+        val lpcPlugin = plugin.server.pluginManager.getPlugin("LPC")
+        plugin.lpcMode = lpcPlugin != null && lpcPlugin.isEnabled
+        if (plugin.lpcMode) {
+            plugin.logger.info("LPC detected - enabling chat compatibility mode.")
+        }
     }
 
     private fun checkForUpdates() {
