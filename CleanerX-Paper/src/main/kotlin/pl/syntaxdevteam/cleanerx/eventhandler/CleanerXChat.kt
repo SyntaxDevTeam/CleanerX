@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package pl.syntaxdevteam.cleanerx.eventhandler
 
 import io.papermc.paper.event.player.AsyncChatEvent

@@ -44,6 +44,7 @@ dependencies {
     testImplementation("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
     testImplementation("pl.syntaxdevteam:core:1.2.8-R0.2-SNAPSHOT")
     testImplementation("pl.syntaxdevteam:messageHandler-paper:1.1.0-R0.2-SNAPSHOT")
+    testRuntimeOnly("org.slf4j:slf4j-simple:2.0.17")
 
 }
 
@@ -64,6 +65,7 @@ tasks{
 
     test {
         useJUnitPlatform()
+        jvmArgs("-XX:+EnableDynamicAgentLoading", "-Xshare:off")
     }
 }
 
