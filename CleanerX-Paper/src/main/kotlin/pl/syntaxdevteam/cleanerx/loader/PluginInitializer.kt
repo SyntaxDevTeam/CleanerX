@@ -12,6 +12,7 @@ import pl.syntaxdevteam.cleanerx.common.BannedWordsSynchronizer
 import pl.syntaxdevteam.cleanerx.common.ConfigHandler
 import pl.syntaxdevteam.cleanerx.common.ListenerRegistrationMetrics
 import pl.syntaxdevteam.cleanerx.eventhandler.CleanerXChat
+import pl.syntaxdevteam.cleanerx.eventhandler.PlayerQuitListener
 import pl.syntaxdevteam.cleanerx.eventhandler.PlayerJoinListener
 import pl.syntaxdevteam.core.SyntaxCore
 import pl.syntaxdevteam.message.SyntaxMessages
@@ -82,6 +83,7 @@ class PluginInitializer(private val plugin: CleanerX) {
 
         // Rejestracja API w Services Managerze
         plugin.server.servicesManager.register(CleanerXAPI::class.java, plugin.api, plugin, ServicePriority.Normal)
+        plugin.server.pluginManager.registerEvents(PlayerQuitListener(plugin), plugin)
         plugin.server.pluginManager.registerEvents(PlayerJoinListener(plugin), plugin)
     }
 
