@@ -1,15 +1,15 @@
 import org.gradle.api.publish.maven.MavenPublication
 
 plugins {
-    kotlin("jvm") version "2.3.10"
-    id("com.gradleup.shadow") version "9.3.1"
+    kotlin("jvm") version "2.3.20-RC3"
+    id("com.gradleup.shadow") version "9.3.2"
     `maven-publish`
     id("xyz.jpenilla.run-paper") version "3.0.2"
     id("pl.syntaxdevteam.plugindeployer") version "1.0.4"
 }
 
 group = "pl.syntaxdevteam"
-version = "1.5.4-SNAPSHOT"
+version = "1.5.5-DEV"
 description = "A sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment."
 
 repositories {
@@ -27,7 +27,7 @@ repositories {
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
     compileOnly("org.eclipse.aether:aether-api:1.1.0")
-    compileOnly("org.yaml:snakeyaml:2.5")
+    compileOnly("org.yaml:snakeyaml:2.6")
     compileOnly("com.google.code.gson:gson:2.13.2")
     compileOnly("net.kyori:adventure-text-serializer-legacy:4.26.1")
     compileOnly("net.kyori:adventure-text-minimessage:4.26.1")
@@ -35,12 +35,12 @@ dependencies {
     compileOnly("net.kyori:adventure-text-serializer-plain:4.26.1")
     compileOnly("net.kyori:adventure-text-serializer-ansi:4.26.1")
     compileOnly("pl.syntaxdevteam:core:1.2.8-R0.2-SNAPSHOT")
-    compileOnly("pl.syntaxdevteam:messageHandler-paper:1.1.0-R0.2-SNAPSHOT")
-    compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.0-DEV")
+    compileOnly("pl.syntaxdevteam:messageHandler-paper:1.1.1-R0.1-SNAPSHOT")
+    compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.1")
 
     testImplementation(kotlin("test"))
-    testImplementation("org.junit.jupiter:junit-jupiter:5.13.4")
-    testImplementation("io.mockk:mockk:1.14.5")
+    testImplementation("org.junit.jupiter:junit-jupiter:6.0.0")
+    testImplementation("io.mockk:mockk:1.14.9")
     testImplementation("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
     testImplementation("pl.syntaxdevteam:core:1.2.8-R0.2-SNAPSHOT")
     testImplementation("pl.syntaxdevteam:messageHandler-paper:1.1.0-R0.2-SNAPSHOT")
@@ -127,6 +127,6 @@ publishing {
     }
 }
 plugindeployer {
-    paper { dir = "/home/debian/poligon/Paper/1.21.11/plugins" } //ostatnia wersja dla Paper
-    folia { dir = "/home/debian/poligon/Folia/1.21.11/plugins" } //ostatnia wersja dla Folia
+    paper { dir = "/home/debian/server/Paper/1.21.11/plugins" } //ostatnia wersja dla Paper
+    folia { dir = "/home/debian/server/Folia/1.21.11/plugins" } //ostatnia wersja dla Folia
 }

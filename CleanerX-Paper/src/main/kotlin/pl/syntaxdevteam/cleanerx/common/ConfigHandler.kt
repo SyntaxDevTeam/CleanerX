@@ -20,16 +20,24 @@ class ConfigHandler(private val plugin: CleanerX) {
         val currentConfig = YamlConfiguration.loadConfiguration(confFile)
 
         var updated = false
+        val nonMergeableSections = setOf("swear-word-thresholds")
 
-        fun synchronizeSections(defaultSection: ConfigurationSection, currentSection: ConfigurationSection) {
+        fun synchronizeSections(defaultSection: ConfigurationSection, currentSection: ConfigurationSection, path: String = "") {
             for (key in defaultSection.getKeys(false)) {
+                val currentPath = if (path.isEmpty()) key else "$path.$key"
+
                 if (!currentSection.contains(key)) {
                     currentSection[key] = defaultSection[key]
                     updated = true
                 } else if (defaultSection.isConfigurationSection(key)) {
+                    if (currentPath in nonMergeableSections) {
+                        continue
+                    }
+
                     synchronizeSections(
                         defaultSection.getConfigurationSection(key)!!,
-                        currentSection.getConfigurationSection(key)!!
+                        currentSection.getConfigurationSection(key)!!,
+                        currentPath
                     )
                 }
             }

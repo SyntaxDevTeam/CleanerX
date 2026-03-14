@@ -51,4 +51,40 @@ class ConfigHandlerTest {
         assertTrue(updated.getBoolean("block-links"))
         assertEquals(3, updated.getInt("settings.punish-after"))
     }
+
+    @Test
+    fun `verifyAndUpdateConfig nie miesza domyslnych progow swear word gdy sekcja istnieje`() {
+        val dataDir = tempDir.toFile()
+        val configFile = dataDir.resolve("config.yml")
+        configFile.writeText(
+            """
+            swear-word-thresholds:
+              1: custom-warn
+              6: custom-mute
+            """.trimIndent()
+        )
+
+        val defaultConfig =
+            """
+            swear-word-thresholds:
+              5: default-warn
+              15: default-ban
+            settings:
+              punish-after: 3
+            """.trimIndent()
+
+        val plugin = mockk<CleanerX>(relaxed = true)
+        every { plugin.dataFolder } returns dataDir
+        every { plugin.getResource("config.yml") } returns ByteArrayInputStream(defaultConfig.toByteArray())
+        every { plugin.logger } returns mockk<Logger>(relaxed = true)
+
+        ConfigHandler(plugin).verifyAndUpdateConfig()
+
+        val updated = YamlConfiguration.loadConfiguration(configFile)
+        val thresholds = updated.getConfigurationSection("swear-word-thresholds")!!.getValues(false)
+
+        assertEquals(mapOf("1" to "custom-warn", "6" to "custom-mute"), thresholds)
+        assertEquals(3, updated.getInt("settings.punish-after"))
+    }
+
 }

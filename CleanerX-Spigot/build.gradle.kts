@@ -1,10 +1,10 @@
 plugins {
-    kotlin("jvm") version "2.3.10"
-    id("com.gradleup.shadow") version "9.3.1"
+    kotlin("jvm") version "2.3.20-RC3"
+    id("com.gradleup.shadow") version "9.3.2"
 }
 
 group = "pl.syntaxdevteam"
-version = "1.5.4-SNAPSHOT"
+version = "1.5.5-SNAPSHOT"
 description = "A sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment."
 
 repositories {
@@ -26,7 +26,7 @@ dependencies {
     testImplementation(kotlin("test"))
     compileOnly("org.spigotmc:spigot-api:1.21.11-R0.2-SNAPSHOT")
     compileOnly("org.eclipse.aether:aether-api:1.1.0")
-    compileOnly("org.yaml:snakeyaml:2.5")
+    compileOnly("org.yaml:snakeyaml:2.6")
     compileOnly("com.google.code.gson:gson:2.13.2")
     compileOnly("net.kyori:adventure-key:4.26.1")
     compileOnly("net.kyori:adventure-platform-bukkit:4.4.1")
@@ -43,8 +43,8 @@ dependencies {
     compileOnly("net.kyori:examination-string:1.3.0")
     compileOnly("net.kyori:option:1.1.0")
     compileOnly("pl.syntaxdevteam:core:1.2.8-R0.2-SNAPSHOT")
-    compileOnly("pl.syntaxdevteam:messageHandler-spigot:1.1.0-R0.2-SNAPSHOT")
-    compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.0-DEV")
+    compileOnly("pl.syntaxdevteam:messageHandler-spigot:1.1.1-R0.1-SNAPSHOT")
+    compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.1")
     //implementation(files("libs/SyntaxCore-1.2.6n-SNAPSHOT-all.jar"))
     //implementation(files("libs/MessageHandler-Spigot-1.0.4a-DEV-all.jar"))
     implementation("net.byteflux:libby-bukkit:1.3.1")

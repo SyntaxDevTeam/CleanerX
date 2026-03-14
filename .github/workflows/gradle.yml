@@ -39,7 +39,7 @@ jobs:
             --no-daemon --stacktrace --refresh-dependencies
 
       - name: Upload ${{ matrix.platform }} JAR
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: CleanerX-${{ matrix.platform }}.jar
           path: CleanerX-${{ matrix.platform }}/build/libs/*.jar
