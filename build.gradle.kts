@@ -1,5 +1,7 @@
 plugins {
-    kotlin("jvm") version "2.3.20-RC3"
+    kotlin("jvm") version "2.3.20" apply false
+    id("com.gradleup.shadow") version "9.4.0" apply false
+    id("pl.syntaxdevteam.plugindeployer") version "1.0.5-R0.1-SNAPSHOT" apply false
 }
 
 group = "pl.syntaxdevteam"
@@ -16,4 +18,3 @@ tasks.register("buildAll") {
     description = "Builds both Paper and Spigot versions of the plugin"
     dependsOn(":CleanerX-Paper:build", ":CleanerX-Spigot:build")
 }
-

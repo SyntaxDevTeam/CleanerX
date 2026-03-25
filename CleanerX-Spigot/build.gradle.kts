@@ -1,10 +1,11 @@
 plugins {
-    kotlin("jvm") version "2.3.20-RC3"
-    id("com.gradleup.shadow") version "9.3.2"
+    kotlin("jvm")
+    id("com.gradleup.shadow")
+    id("pl.syntaxdevteam.plugindeployer")
 }
 
 group = "pl.syntaxdevteam"
-version = "1.5.5-SNAPSHOT"
+version = "1.5.5-DEV"
 description = "A sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment."
 
 repositories {
@@ -42,7 +43,7 @@ dependencies {
     compileOnly("net.kyori:examination-api:1.3.0")
     compileOnly("net.kyori:examination-string:1.3.0")
     compileOnly("net.kyori:option:1.1.0")
-    compileOnly("pl.syntaxdevteam:core:1.2.8-R0.2-SNAPSHOT")
+    compileOnly("pl.syntaxdevteam:core:1.3.0-R0.1-SNAPSHOT")
     compileOnly("pl.syntaxdevteam:messageHandler-spigot:1.1.1-R0.1-SNAPSHOT")
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.1")
     //implementation(files("libs/SyntaxCore-1.2.6n-SNAPSHOT-all.jar"))
@@ -55,8 +56,13 @@ kotlin {
     jvmToolchain(targetJavaVersion)
 }
 
-tasks.build {
-    dependsOn("shadowJar")
+tasks {
+    build {
+        dependsOn("shadowJar")
+    }
+    test {
+        useJUnitPlatform()
+    }
 }
 
 tasks.processResources {
@@ -68,10 +74,8 @@ tasks.processResources {
     }
 }
 
-
-
-
-
-tasks.test {
-    useJUnitPlatform()
+plugindeployer {
+    paper { dir = "/home/debian/server/Paper/1.21.11/plugins" } //ostatnia wersja dla Paper
+    folia { dir = "/home/debian/server/Folia/1.21.11/plugins" } //ostatnia wersja dla Folia
+    spigot { dir = "/home/debian/server/Spigot/26.1/plugins" } //ostatnia wersja dla Spigot
 }
