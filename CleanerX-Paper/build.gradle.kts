@@ -43,7 +43,7 @@ dependencies {
     testImplementation("io.mockk:mockk:1.14.9")
     testImplementation("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
     testImplementation("pl.syntaxdevteam:core:1.3.0-R0.1-SNAPSHOT")
-    testImplementation("pl.syntaxdevteam:messageHandler-paper:1.1.1-R0.1-SNAPSHOT")
+    testImplementation("pl.syntaxdevteam:messageHandler-paper:1.1.2-R0.1-SNAPSHOT")
     testRuntimeOnly("org.slf4j:slf4j-simple:2.0.17")
 
 }
