@@ -18,3 +18,15 @@ tasks.register("buildAll") {
     description = "Builds both Paper and Spigot versions of the plugin"
     dependsOn(":CleanerX-Paper:build", ":CleanerX-Spigot:build")
 }
+
+tasks.register("deploySpigotOnly") {
+    group = "deployment"
+    description = "Deploys only the Spigot module artifact"
+    dependsOn(":CleanerX-Spigot:deployPluginToSpigot")
+}
+
+tasks.register("deployPaperOnly") {
+    group = "deployment"
+    description = "Deploys only the Paper module artifact"
+    dependsOn(":CleanerX-Paper:deployPluginToPaper")
+}

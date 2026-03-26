@@ -24,8 +24,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
-    compileOnly("org.spigotmc:spigot-api:1.21.11-R0.2-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot-api:26.1-R0.1-SNAPSHOT")
     compileOnly("org.eclipse.aether:aether-api:1.1.0")
     compileOnly("org.yaml:snakeyaml:2.6")
     compileOnly("com.google.code.gson:gson:2.13.2")
@@ -44,11 +43,16 @@ dependencies {
     compileOnly("net.kyori:examination-string:1.3.0")
     compileOnly("net.kyori:option:1.1.0")
     compileOnly("pl.syntaxdevteam:core:1.3.0-R0.1-SNAPSHOT")
-    compileOnly("pl.syntaxdevteam:messageHandler-spigot:1.1.1-R0.1-SNAPSHOT")
+    compileOnly("pl.syntaxdevteam:messageHandler-spigot:1.1.2-R0.1-SNAPSHOT")
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.1")
     //implementation(files("libs/SyntaxCore-1.2.6n-SNAPSHOT-all.jar"))
     //implementation(files("libs/MessageHandler-Spigot-1.0.4a-DEV-all.jar"))
     implementation("net.byteflux:libby-bukkit:1.3.1")
+
+    testImplementation(kotlin("test"))
+    testImplementation("org.mockito:mockito-core:5.23.0")
+    testImplementation("org.mockito:mockito-inline:5.2.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:6.2.3")
 }
 
 val targetJavaVersion = 21
