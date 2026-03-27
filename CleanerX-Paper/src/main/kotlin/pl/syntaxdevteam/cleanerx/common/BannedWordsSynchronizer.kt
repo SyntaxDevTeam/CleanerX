@@ -5,7 +5,13 @@ import pl.syntaxdevteam.cleanerx.CleanerX
 import pl.syntaxdevteam.cleanerx.util.SchedulerAdapter
 import java.io.File
 import java.io.InputStreamReader
+import java.io.StringReader
+import java.net.URI
+import java.net.http.HttpClient
+import java.net.http.HttpRequest
+import java.net.http.HttpResponse
 import java.nio.charset.StandardCharsets
+import java.time.Duration
 import java.util.Locale
 
 /**
@@ -33,37 +39,46 @@ class BannedWordsSynchronizer(private val plugin: CleanerX) {
 
                 val serverConfig = YamlConfiguration.loadConfiguration(serverFile)
                 val serverWords = serverConfig.getStringList(BANNED_WORDS_KEY).toMutableList()
-                val resourceWords = loadResourceWords()
+                val syncEnabled = plugin.config.getBoolean(REMOTE_SYNC_ENABLED_KEY, false)
+                val includeResourceWords = plugin.config.getBoolean(INCLUDE_RESOURCE_WORDS_KEY, true)
+                val timeoutMillis = plugin.config.getLong(REMOTE_SYNC_TIMEOUT_KEY, DEFAULT_REMOTE_TIMEOUT_MS).coerceAtLeast(500L)
+                val remoteSources = plugin.config.getStringList(REMOTE_SYNC_SOURCES_KEY).filter { it.isNotBlank() }
 
-                if (resourceWords.isEmpty()) {
-                    plugin.logger.warning("The resource banned_words.yml file is empty or missing the bannedWords section.")
-                    complete(onComplete, serverWords.toList())
-                    return@runAsync
-                }
-
-                val normalizedExisting = serverWords
+                val mergedWords = serverWords.toMutableList()
+                val normalizedExisting = mergedWords
                     .map { it.lowercase(Locale.ROOT) }
                     .toMutableSet()
 
-                var modified = false
-                for (word in resourceWords) {
-                    val normalized = word.lowercase(Locale.ROOT)
-                    if (!normalizedExisting.contains(normalized)) {
-                        serverWords.add(word)
-                        normalizedExisting.add(normalized)
-                        modified = true
-                    }
+                if (includeResourceWords) {
+                    mergeWords(mergedWords, normalizedExisting, loadResourceWords())
                 }
+
+                if (syncEnabled && remoteSources.isNotEmpty()) {
+                    val remoteWords = loadRemoteWords(remoteSources, timeoutMillis)
+                    mergeWords(mergedWords, normalizedExisting, remoteWords)
+                }
+
+                val modified = mergedWords.size != serverWords.size
 
                 if (modified) {
-                    serverConfig.set(BANNED_WORDS_KEY, serverWords)
+                    serverConfig.set(BANNED_WORDS_KEY, mergedWords)
                     serverConfig.save(serverFile)
-                    plugin.logger.info("Synchronized banned_words.yml with plugin resources.")
+                    plugin.logger.info("Synchronized banned_words.yml with configured sources.")
                 }
 
-                complete(onComplete, serverWords.toList())
+                complete(onComplete, mergedWords.toList())
             } catch (exception: Exception) {
                 plugin.logger.err("Failed to synchronize banned words: ${exception.message}")
+            }
+        }
+    }
+
+    private fun mergeWords(target: MutableList<String>, normalized: MutableSet<String>, words: List<String>) {
+        for (word in words) {
+            val normalizedWord = word.lowercase(Locale.ROOT)
+            if (!normalized.contains(normalizedWord)) {
+                target.add(word)
+                normalized.add(normalizedWord)
             }
         }
     }
@@ -78,9 +93,48 @@ class BannedWordsSynchronizer(private val plugin: CleanerX) {
         resourceStream.use { stream ->
             InputStreamReader(stream, StandardCharsets.UTF_8).use { reader ->
                 val config = YamlConfiguration.loadConfiguration(reader)
-                return config.getStringList(BANNED_WORDS_KEY)
+                return sanitizeWords(config.getStringList(BANNED_WORDS_KEY))
             }
         }
+    }
+
+    private fun loadRemoteWords(sources: List<String>, timeoutMillis: Long): List<String> {
+        val client = HttpClient.newBuilder()
+            .connectTimeout(Duration.ofMillis(timeoutMillis))
+            .build()
+
+        val words = mutableListOf<String>()
+        for (source in sources) {
+            runCatching {
+                val request = HttpRequest.newBuilder(URI.create(source))
+                    .timeout(Duration.ofMillis(timeoutMillis))
+                    .header("Accept", "text/plain, text/yaml, application/yaml, application/json")
+                    .GET()
+                    .build()
+
+                val response = client.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8))
+                if (response.statusCode() in 200..299) {
+                    words.addAll(extractWordsFromPayload(response.body()))
+                } else {
+                    plugin.logger.warning("Banned words sync skipped source $source due to HTTP ${response.statusCode()}.")
+                }
+            }.onFailure { exception ->
+                plugin.logger.warning("Banned words sync failed for $source: ${exception.message}")
+            }
+        }
+
+        return sanitizeWords(words)
+    }
+
+    private fun extractWordsFromPayload(payload: String): List<String> = parsePayloadToWords(payload)
+
+    private fun sanitizeWords(words: List<String>): List<String> {
+        return words.asSequence()
+            .map { it.trim().lowercase(Locale.ROOT) }
+            .filter { it.length >= MIN_WORD_LENGTH }
+            .filter { CANDIDATE_WORD_REGEX.matches(it) }
+            .distinct()
+            .toList()
     }
 
     private fun complete(onComplete: ((List<String>) -> Unit)?, result: List<String>) {
@@ -92,8 +146,47 @@ class BannedWordsSynchronizer(private val plugin: CleanerX) {
         }
     }
 
-    private companion object {
+    companion object {
         private const val BANNED_WORDS_FILE = "banned_words.yml"
-        private const val BANNED_WORDS_KEY = "bannedWords"
+        internal const val BANNED_WORDS_KEY = "bannedWords"
+        private const val REMOTE_SYNC_ENABLED_KEY = "banned-words-sync.enabled"
+        private const val INCLUDE_RESOURCE_WORDS_KEY = "banned-words-sync.include-default-resource"
+        private const val REMOTE_SYNC_TIMEOUT_KEY = "banned-words-sync.timeout-ms"
+        private const val REMOTE_SYNC_SOURCES_KEY = "banned-words-sync.remote-sources"
+        private const val DEFAULT_REMOTE_TIMEOUT_MS = 2500L
+        private const val MIN_WORD_LENGTH = 3
+        private val CANDIDATE_WORD_REGEX = Regex("^[\\p{L}\\p{Nd}@!$+|]+$")
+
+        internal fun parsePayloadToWords(payload: String): List<String> {
+            val trimmed = payload.trim()
+            if (trimmed.isEmpty()) {
+                return emptyList()
+            }
+
+            val fromYaml = runCatching {
+                val config = YamlConfiguration.loadConfiguration(StringReader(trimmed))
+                config.getStringList(BANNED_WORDS_KEY)
+            }.getOrNull().orEmpty()
+
+            val candidates = if (fromYaml.isNotEmpty()) {
+                fromYaml
+            } else {
+                trimmed.lineSequence()
+                    .map { line ->
+                        line.substringBefore("#")
+                            .substringBefore("//")
+                            .trim()
+                    }
+                    .filter { it.isNotEmpty() }
+                    .toList()
+            }
+
+            return candidates.asSequence()
+                .map { it.trim().lowercase(Locale.ROOT) }
+                .filter { it.length >= MIN_WORD_LENGTH }
+                .filter { CANDIDATE_WORD_REGEX.matches(it) }
+                .distinct()
+                .toList()
+        }
     }
 }

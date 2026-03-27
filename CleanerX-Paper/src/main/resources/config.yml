@@ -32,3 +32,11 @@ debug: false
 # Should StatsCollector be enabled? Recommended setting: true
 stats:
   enabled: true
+
+# Optional synchronization of banned words with external sources (e.g. multilingual lists).
+# Sources can be plain text (one word per line) or YAML with key: bannedWords.
+banned-words-sync:
+  enabled: false
+  include-default-resource: true
+  timeout-ms: 2500
+  remote-sources: []
