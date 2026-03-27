@@ -38,8 +38,9 @@ class CleanerXChat(
             // Blokowanie linków
             if (blockLinks && urlDetectors.any { it.containsUrl(message) }) {
                 event.isCancelled = true
+                val msg = plugin.messageHandler.legacyComponentSerializer(plugin.messageHandler.stringMessageToComponent("error", "no-link"))
                 event.player.sendMessage(
-                    plugin.messageHandler.stringMessageToString("error", "no-link")
+                    msg
                 )
                 return
             }
