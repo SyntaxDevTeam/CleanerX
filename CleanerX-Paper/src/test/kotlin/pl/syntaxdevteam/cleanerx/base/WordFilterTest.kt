@@ -66,4 +66,12 @@ class WordFilterTest {
         val partiallyCensored = wordFilter.censorMessage("To KURWA test", fullCensorship = false)
         assertEquals("To KU*** test", partiallyCensored)
     }
+
+    @Test
+    fun `wykrywa odmiane slowa ale nie lapie fragmentu w srodku innego wyrazu`() {
+        wordFilter.updateBannedWords(listOf("chuje"))
+
+        assertTrue(wordFilter.containsBannedWord("nie badz chujem"))
+        assertFalse(wordFilter.containsBannedWord("wymachuje rekami"))
+    }
 }

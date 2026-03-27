@@ -52,7 +52,7 @@ class WordFilter(private val plugin: CleanerX) {
         whitelistWords = config.getStringList("whitelistWords")
             .map { it.lowercase(Locale.ROOT) }
             .toMutableList()
-        whitelistPatterns = whitelistWords.mapNotNull { toFilterPattern(it) }
+        whitelistPatterns = whitelistWords.mapNotNull { toFilterPattern(it, allowSuffix = false) }
     }
 
     /**
@@ -149,7 +149,7 @@ class WordFilter(private val plugin: CleanerX) {
         val lowerWord = word.lowercase(Locale.ROOT)
         if (!bannedWords.contains(lowerWord)) {
             bannedWords.add(lowerWord)
-            bannedPatterns = bannedWords.mapNotNull { toFilterPattern(it) }
+            bannedPatterns = bannedWords.mapNotNull { toFilterPattern(it, allowSuffix = true) }
             saveBannedWords()
             plugin.logger.info("Word $word added to banned words list.")
         }
@@ -182,7 +182,7 @@ class WordFilter(private val plugin: CleanerX) {
         val lowerWord = word.lowercase(Locale.ROOT)
         if (!whitelistWords.contains(lowerWord)) {
             whitelistWords.add(lowerWord)
-            whitelistPatterns = whitelistWords.mapNotNull { toFilterPattern(it) }
+            whitelistPatterns = whitelistWords.mapNotNull { toFilterPattern(it, allowSuffix = false) }
             saveWhitelistWords()
             plugin.logger.info("Word $word added to whitelist.")
         }
@@ -224,7 +224,7 @@ class WordFilter(private val plugin: CleanerX) {
         bannedWords = words
             .map { it.lowercase(Locale.ROOT) }
             .toMutableList()
-        bannedPatterns = bannedWords.mapNotNull { toFilterPattern(it) }
+        bannedPatterns = bannedWords.mapNotNull { toFilterPattern(it, allowSuffix = true) }
     }
 
     /**
@@ -257,16 +257,16 @@ class WordFilter(private val plugin: CleanerX) {
     }
 
 
-    private fun toFilterPattern(word: String): FilterPattern? {
+    private fun toFilterPattern(word: String, allowSuffix: Boolean): FilterPattern? {
         val normalized = normalizeWord(word)
         if (normalized.isEmpty()) {
             return null
         }
 
-        return FilterPattern(word, normalized, buildFuzzyRegex(normalized))
+        return FilterPattern(word, normalized, buildFuzzyRegex(normalized, allowSuffix))
     }
 
-    private fun buildFuzzyRegex(normalizedWord: String): Regex {
+    private fun buildFuzzyRegex(normalizedWord: String, allowSuffix: Boolean): Regex {
         val builder = StringBuilder()
         builder.append("(?<![a-z])")
         normalizedWord.forEachIndexed { index, character ->
@@ -274,6 +274,11 @@ class WordFilter(private val plugin: CleanerX) {
             if (index < normalizedWord.lastIndex) {
                 builder.append("[^a-z]*")
             }
+        }
+        if (allowSuffix) {
+            builder.append("(?:[^a-z]*[a-z]{1,")
+            builder.append(MAX_SUFFIX_LENGTH)
+            builder.append("})?")
         }
         builder.append("(?![a-z])")
         return Regex(builder.toString())
@@ -401,6 +406,7 @@ class WordFilter(private val plugin: CleanerX) {
     }
 
     companion object {
+        private const val MAX_SUFFIX_LENGTH = 3
         private val NON_SPACING_MARKS_REGEX = "\\p{Mn}+".toRegex()
         private val CHARACTER_REPLACEMENTS: Map<Char, String> = mapOf(
             '4' to "a",
