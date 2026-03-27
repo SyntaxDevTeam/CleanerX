@@ -132,10 +132,14 @@ class BannedWordsSynchronizer(private val plugin: CleanerX) {
             return emptyList()
         }
 
-        val fromYaml = runCatching {
-            val config = YamlConfiguration.loadConfiguration(StringReader(trimmed))
-            config.getStringList(BANNED_WORDS_KEY)
-        }.getOrNull().orEmpty()
+        val fromYaml = if (looksLikeYamlWithBannedWords(trimmed)) {
+            runCatching {
+                val config = YamlConfiguration.loadConfiguration(StringReader(trimmed))
+                config.getStringList(BANNED_WORDS_KEY)
+            }.getOrNull().orEmpty()
+        } else {
+            emptyList()
+        }
 
         if (fromYaml.isNotEmpty()) {
             return fromYaml
@@ -149,6 +153,12 @@ class BannedWordsSynchronizer(private val plugin: CleanerX) {
             }
             .filter { it.isNotEmpty() }
             .toList()
+    }
+
+    private fun looksLikeYamlWithBannedWords(payload: String): Boolean {
+        return payload.lineSequence()
+            .map { it.trimStart() }
+            .any { it.startsWith("$BANNED_WORDS_KEY:") }
     }
 
     private fun sanitizeWords(words: List<String>): List<String> {
