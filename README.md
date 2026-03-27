@@ -43,7 +43,8 @@ If you have any questions, you might find answers on our [Discord](https://disco
   * Modrinth ![Modrinth Downloads](https://img.shields.io/modrinth/dt/zJ4dsnYc)
   * Hangar   [![Available on Hangar](https://img.shields.io/hangar/dt/CleanerX)](https://hangar.papermc.io/SyntaxDevTeam/CleanerX)
 * SNAPSHOT and DEV versions available immediately on Github [![GitHub Release Date](https://img.shields.io/github/release-date/SyntaxDevTeam/CleanerX)](https://github.com/SyntaxDevTeam/CleanerX/releases)
-* You can also build the development version yourself [![Available on GitHub](https://img.shields.io/badge/GitHub.com-CleanerX-green)](https://github.com/SyntaxDevTeam/CleanerX) or download the last valid build [![Build Plugin](https://github.com/SyntaxDevTeam/CleanerX/actions/workflows/gradle.yml/badge.svg?branch=main)](https://github.com/SyntaxDevTeam/CleanerX/actions/workflows/gradle.yml)
+* You can also build the development version yourself [![Available on GitHub](https://img.shields.io/badge/GitHub.com-CleanerX-green)](https://github.com/SyntaxDevTeam/CleanerX)
+  or download the last valid build [![Build Plugin](https://github.com/SyntaxDevTeam/CleanerX/actions/workflows/gradle.yml/badge.svg?branch=main)](https://github.com/SyntaxDevTeam/CleanerX/actions/workflows/gradle.yml)
 
 ## 🚀 Installation
 
