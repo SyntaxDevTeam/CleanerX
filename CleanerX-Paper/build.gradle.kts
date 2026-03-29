@@ -8,10 +8,6 @@ plugins {
     id("pl.syntaxdevteam.plugindeployer")
 }
 
-group = "pl.syntaxdevteam"
-version = "1.5.6-DEV"
-description = "A sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment."
-
 repositories {
     maven("https://nexus.syntaxdevteam.pl/repository/maven-snapshots/") //SyntaxDevTeam
     maven("https://nexus.syntaxdevteam.pl/repository/maven-releases/") //SyntaxDevTeam

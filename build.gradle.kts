@@ -6,8 +6,13 @@ plugins {
 
 group = "pl.syntaxdevteam"
 version = "1.5.6-DEV"
+description = "A sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment."
 
 allprojects {
+    group = rootProject.group
+    version = rootProject.version
+    description = rootProject.description
+
     repositories {
         mavenCentral()
     }
