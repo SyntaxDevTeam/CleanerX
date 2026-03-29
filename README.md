@@ -29,17 +29,22 @@ If you have any questions, you might find answers on our [Discord](https://disco
 ## 🛠️ Commands and Permissions
 | Command                               | Permission               | Description                                        |
 |---------------------------------------|--------------------------|----------------------------------------------------|
-| `/whitelistx <add/remove/list>`        | `cleanerx.cmd.whitelist` | Adds, removes or displays words from the whitelist |
-| `/blacklistx <add/remove/list>`        | `cleanerx.cmd.blacklist` | Adds, removes or displays words from the blacklist |
-| `/cleanx`                              | `cleanerx.cmd.clean`     | Clears the in-game chat                            |
+| `/whitelistx <add/remove/list>`       | `cleanerx.cmd.whitelist` | Adds, removes or displays words from the whitelist |
+| `/blacklistx <add/remove/list>`       | `cleanerx.cmd.blacklist` | Adds, removes or displays words from the blacklist |
+| `/cleanx`                             | `cleanerx.cmd.clean`     | Clears the in-game chat                            |
+| `/crx reset <player>`                 | `cleanerx.cmd.crx`       | Resets the player's curse counter                  |
 | `/cleanerx help` or `/crx help`       | `cleanerx.cmd.crx`       | Displays a list of available commands              |
-| `/cleanerx reload` or `/crx reload`   | `cleanerx.cmd.crx`    | Reloads the configuration file.                    |
-| `/cleanerx version` or `/crx version` | `cleanerx.cmd.crx`   | Shows plugin info                                  |
+| `/cleanerx reload` or `/crx reload`   | `cleanerx.cmd.crx`       | Reloads the configuration file.                    |
+| `/cleanerx version` or `/crx version` | `cleanerx.cmd.crx`       | Shows plugin info                                  |
 
 ## 📥 Download
 
-- **The latest stable version is available on Hangar:**  [![Available on Hangar](https://img.shields.io/hangar/dt/CleanerX)](https://hangar.papermc.io/SyntaxDevTeam/CleanerX)
-- **You can also build the latest development version from:**  [![Available on GitHub](https://img.shields.io/badge/GitHub.com-CleanerX-green)](https://github.com/SyntaxDevTeam/CleanerX)
+* Always up-to-date stable version available for download on:
+  * Modrinth ![Modrinth Downloads](https://img.shields.io/modrinth/dt/zJ4dsnYc)
+  * Hangar   [![Available on Hangar](https://img.shields.io/hangar/dt/CleanerX)](https://hangar.papermc.io/SyntaxDevTeam/CleanerX)
+* SNAPSHOT and DEV versions available immediately on Github [![GitHub Release Date](https://img.shields.io/github/release-date/SyntaxDevTeam/CleanerX)](https://github.com/SyntaxDevTeam/CleanerX/releases)
+* You can also build the development version yourself [![Available on GitHub](https://img.shields.io/badge/GitHub.com-CleanerX-green)](https://github.com/SyntaxDevTeam/CleanerX)
+  or download the last valid build [![Build Plugin](https://github.com/SyntaxDevTeam/CleanerX/actions/workflows/gradle.yml/badge.svg?branch=main)](https://github.com/SyntaxDevTeam/CleanerX/actions/workflows/gradle.yml)
 
 ## 🚀 Installation
 
