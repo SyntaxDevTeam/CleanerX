@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "pl.syntaxdevteam"
-version = "1.5.5-DEV"
+version = "1.5.6-DEV"
 description = "A sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment."
 
 repositories {
@@ -34,7 +34,7 @@ dependencies {
     compileOnly("net.kyori:adventure-text-serializer-gson:4.26.1")
     compileOnly("net.kyori:adventure-text-serializer-plain:4.26.1")
     compileOnly("net.kyori:adventure-text-serializer-ansi:4.26.1")
-    compileOnly("pl.syntaxdevteam:core:1.3.0-R0.1-SNAPSHOT")
+    compileOnly("pl.syntaxdevteam:core:1.3.0-R0.2-SNAPSHOT")
     compileOnly("pl.syntaxdevteam:messageHandler-paper:1.1.1-R0.1-SNAPSHOT")
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.1")
 
@@ -42,7 +42,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
     testImplementation("io.mockk:mockk:1.14.9")
     testImplementation("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
-    testImplementation("pl.syntaxdevteam:core:1.3.0-R0.1-SNAPSHOT")
+    testImplementation("pl.syntaxdevteam:core:1.3.0-R0.1.2-SNAPSHOT")
     testImplementation("pl.syntaxdevteam:messageHandler-paper:1.1.2-R0.1-SNAPSHOT")
     testRuntimeOnly("org.slf4j:slf4j-simple:2.0.17")
 

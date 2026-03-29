@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "pl.syntaxdevteam"
-version = "1.5.5-DEV"
+version = "1.5.6-DEV"
 
 allprojects {
     repositories {

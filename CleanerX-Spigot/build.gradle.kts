@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "pl.syntaxdevteam"
-version = "1.5.5-DEV"
+version = "1.5.6-DEV"
 description = "A sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment."
 
 repositories {
@@ -42,7 +42,7 @@ dependencies {
     compileOnly("net.kyori:examination-api:1.3.0")
     compileOnly("net.kyori:examination-string:1.3.0")
     compileOnly("net.kyori:option:1.1.0")
-    compileOnly("pl.syntaxdevteam:core:1.3.0-R0.1-SNAPSHOT")
+    compileOnly("pl.syntaxdevteam:core:1.3.0-R0.2-SNAPSHOT")
     compileOnly("pl.syntaxdevteam:messageHandler-spigot:1.1.2-R0.1-SNAPSHOT")
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.1")
     //implementation(files("libs/SyntaxCore-1.2.6n-SNAPSHOT-all.jar"))
