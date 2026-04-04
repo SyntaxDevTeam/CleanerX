@@ -2,7 +2,7 @@
 ![GitHub commits since latest release (branch)](https://img.shields.io/github/commits-since/SyntaxDevTeam/CleanerX/latest/main) ![Hangar Downloads](https://img.shields.io/hangar/dt/CleanerX?style=flat)
 # CleanerX
 
-CleanerX is an advanced plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment. It allows you to configure automatic execution of commands, for example, to punish players who repeatedly use offensive language after a specified number of infractions. The plugin also blocks the ability to send links in chat, and if needed, you can clear the chat with a simple command.
+CleanerX is an advanced chat moderation plugin for Spigot and Paper/Folia servers. It filters and censors inappropriate language (partial or full), can block links in chat, and supports automatic punishment commands after configurable swear-count thresholds. You can also manage blacklist/whitelist entries in-game, clear chat with a command, and optionally synchronize banned words from external sources.
 
 
 ## 🔹 Features
@@ -14,14 +14,14 @@ CleanerX is an advanced plugin designed to filter and replace inappropriate lang
 - ✅ Automatic execution of commands based on configuration – recommended integration with PunisherX
 - ✅ Ability to clear chat using a command
 - ✅ Plugin update notifications with an option to enable automatic updates
-- ✅ Extensive configuration file for flexible settings. Check the default settings [here](https://github.com/SyntaxDevTeam/CleanerX/blob/main/src/main/resources/config.yml)
+- ✅ Extensive configuration file for flexible settings (including optional remote banned-words synchronization). Check defaults here: [Paper config](https://github.com/SyntaxDevTeam/CleanerX/blob/main/CleanerX-Paper/src/main/resources/config.yml), [Spigot config](https://github.com/SyntaxDevTeam/CleanerX/blob/main/CleanerX-Spigot/src/main/resources/config.yml)
 - ✅ Multi-language support via `messages_xx.yml` files
 
 ## ⚙️ Technical Information
 
-- 🟢 **Designed for the latest Minecraft versions 1.20.6–1.21.11**
-- 🟢 **Optimized for Paper and its forks (Pufferfish, Purpur, Leaves)**
-- 🟢 **Requires Java 21 or newer**
+- 🟢 **Supports Minecraft versions 1.20.6, 1.21–1.21.11, 26.1 and 26.1.1 (see in-code version checker)**
+- 🟢 **Maintains separate modules for Spigot and Paper (Paper build is Folia-compatible)**
+- 🟢 **CleanerX 1.5.6+ requires at least Java 25; versions older than 1.5.6 require Java 21**
 - 🟢 **Written in Kotlin – a modern, expressive, and safer alternative to Java**
 
 If you have any questions, you might find answers on our [Discord](https://discord.gg/Q343kjA2YP).
@@ -75,7 +75,7 @@ This plugin is available under the **MIT License**. You can find the details in 
 
 # CleanerX
 
-CleanerX to zaawansowana wtyczka zaprojektowana do filtrowania i zastępowania nieodpowiedniego języka ocenzurowanymi alternatywami lub całkowitego usuwania go, zapewniając czyste i pełne szacunku środowisko gry. Pozwala na skonfigurowanie automatycznego wykonywanie poleceń, na przykład, aby ukarać graczy, którzy wielokrotnie używają obraźliwego języka po określonej liczbie przekleństw. Wtyczka blokuje również, możliwość wysyłania na czacie linków do stron, a w razie potrzeby możesz wyczyścić czat za pomocą polecenia.
+CleanerX to zaawansowana wtyczka moderacji czatu dla serwerów Spigot oraz Paper/Folia. Filtruje i cenzuruje nieodpowiedni język (częściowo lub całkowicie), może blokować linki na czacie i obsługuje automatyczne wykonywanie komend kar po przekroczeniu progów liczby wykroczeń. Pozwala też zarządzać blacklistą/whitelistą bez restartu serwera, czyścić czat komendą oraz opcjonalnie synchronizować listę zakazanych słów ze źródeł zewnętrznych.
 
 Pełny spis komend i uprawnień znajdziesz [tutaj](https://github.com/SyntaxDevTeam/CleanerX/wiki) 
 
@@ -88,13 +88,13 @@ Pełny spis komend i uprawnień znajdziesz [tutaj](https://github.com/SyntaxDevT
 * Automatyczne wykonywanie poleceń w zależności od konfiguracji - zalecana współpraca z PunisherX
 * Możliwość czyszczenia czatu za pomocą polecenia
 * Powiadomienia o aktualizacjach wtyczki z opcją ustawienia automatycznych aktualizacji
-* Rozbudowany plik konfiguracyjny do elastycznych ustawień. Sprawdź domyślne ustawienia [tutaj](https://github.com/SyntaxDevTeam/CleanerX/blob/main/src/main/resources/config.yml)
+* Rozbudowany plik konfiguracyjny do elastycznych ustawień (w tym opcjonalna synchronizacja zakazanych słów ze źródeł zewnętrznych). Domyślne ustawienia: [Paper config](https://github.com/SyntaxDevTeam/CleanerX/blob/main/CleanerX-Paper/src/main/resources/config.yml), [Spigot config](https://github.com/SyntaxDevTeam/CleanerX/blob/main/CleanerX-Spigot/src/main/resources/config.yml)
 * Wsparcie dla wielu języków przez plik messages_xx.yml
 
 ## Informacje techniczne
-* [x] CleanerX został zaprojektowany specjalnie pod najnowszą wersję Minecraft 1.20.6-1.21.4+
-* [x] Napisany i zoptymalizowano pod silnik Paper oraz jego modyfikacje tj. Pufferfish, Purpur i Leaves
-* [x] Wymaga Javy 21 lub nowszej, aby działać poprawnie
+* [x] Obsługiwane wersje Minecraft: 1.20.6, 1.21–1.21.11 oraz 26.1 i 26.1.1 (zgodnie z checkerem wersji w kodzie)
+* [x] Projekt posiada osobne moduły dla Spigot i Paper (Paper jest kompatybilny z Folią)
+* [x] CleanerX 1.5.6+ wymaga minimum Java 25; wersje starsze niż 1.5.6 wymagają Java 21
 * [x] Napisany w nowoczesnym języku programowania Kotlin, który jest bardziej ekspresyjny i bezpieczny niż Java.
 
 Jeśli masz jakieś pytania, być może znajdziesz na nie rozwiązanie na naszym [discordzie](https://discord.gg/Q343kjA2YP)
