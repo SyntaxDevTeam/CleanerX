@@ -1,11 +1,11 @@
 plugins {
-    kotlin("jvm") version "2.3.20" apply false
-    id("com.gradleup.shadow") version "9.4.0" apply false
+    kotlin("jvm") version "2.4.0-Beta1" apply false
+    id("com.gradleup.shadow") version "9.4.1" apply false
     id("pl.syntaxdevteam.plugindeployer") version "1.0.5-R0.1-SNAPSHOT" apply false
 }
 
 group = "pl.syntaxdevteam"
-version = "1.5.6-DEV"
+version = "1.5.6-SNAPSHOT"
 description = "A sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment."
 
 allprojects {
@@ -34,4 +34,10 @@ tasks.register("deployPaperOnly") {
     group = "deployment"
     description = "Deploys only the Paper module artifact"
     dependsOn(":CleanerX-Paper:deployPluginToPaper")
+}
+
+tasks.register("deployFoliaOnly") {
+    group = "deployment"
+    description = "Deploys only the Folia module artifact"
+    dependsOn(":CleanerX-Paper:deployPluginToFolia")
 }

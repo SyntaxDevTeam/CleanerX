@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.spigotmc:spigot-api:26.1-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot-api:26.1.1-R0.1-SNAPSHOT")
     compileOnly("org.eclipse.aether:aether-api:1.1.0")
     compileOnly("org.yaml:snakeyaml:2.6")
     compileOnly("com.google.code.gson:gson:2.13.2")
@@ -48,7 +48,7 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation("org.mockito:mockito-core:5.23.0")
     testImplementation("org.mockito:mockito-inline:5.2.0")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:6.2.3")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:6.3.0")
 }
 
 val targetJavaVersion = 21
@@ -75,7 +75,7 @@ tasks.processResources {
 }
 
 plugindeployer {
-    paper { dir = "/home/debian/server/Paper/1.21.11/plugins" } //ostatnia wersja dla Paper
+    paper { dir = "/home/debian/server/Paper/26.1.1/plugins" } //ostatnia wersja dla Paper
     folia { dir = "/home/debian/server/Folia/1.21.11/plugins" } //ostatnia wersja dla Folia
-    spigot { dir = "/home/debian/server/Spigot/26.1/plugins" } //ostatnia wersja dla Spigot
+    spigot { dir = "/home/debian/server/Spigot/26.1.1/plugins" } //ostatnia wersja dla Spigot
 }
