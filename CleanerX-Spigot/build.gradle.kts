@@ -41,8 +41,6 @@ dependencies {
     compileOnly("pl.syntaxdevteam:core:1.3.0-R0.2-SNAPSHOT")
     compileOnly("pl.syntaxdevteam:messageHandler-spigot:1.1.2-R0.1-SNAPSHOT")
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.1")
-    //implementation(files("libs/SyntaxCore-1.2.6n-SNAPSHOT-all.jar"))
-    //implementation(files("libs/MessageHandler-Spigot-1.0.4a-DEV-all.jar"))
     implementation("net.byteflux:libby-bukkit:1.3.1")
 
     testImplementation(kotlin("test"))
@@ -51,7 +49,7 @@ dependencies {
     testImplementation("org.mockito.kotlin:mockito-kotlin:6.3.0")
 }
 
-val targetJavaVersion = 21
+val targetJavaVersion = 25
 kotlin {
     jvmToolchain(targetJavaVersion)
 }
@@ -77,5 +75,5 @@ tasks.processResources {
 plugindeployer {
     paper { dir = "/home/debian/server/Paper/26.1.1/plugins" } //ostatnia wersja dla Paper
     folia { dir = "/home/debian/server/Folia/1.21.11/plugins" } //ostatnia wersja dla Folia
-    spigot { dir = "/home/debian/server/Spigot/26.1.1/plugins" } //ostatnia wersja dla Spigot
+    spigot { dir = "/home/debian/server/Spigot/26.1/plugins" } //ostatnia wersja dla Spigot
 }
