@@ -18,10 +18,14 @@ repositories {
     maven("https://oss.sonatype.org/content/groups/public/") {
         name = "sonatype"
     }
+    maven {
+        name = "faststatsReleases"
+        url = uri("https://repo.faststats.dev/releases")
     }
+}
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:26.1.1.build.+")
+    compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
     compileOnly("org.eclipse.aether:aether-api:1.1.0")
     compileOnly("org.yaml:snakeyaml:2.6")
     compileOnly("com.google.code.gson:gson:2.13.2")
@@ -33,18 +37,24 @@ dependencies {
     compileOnly("pl.syntaxdevteam:core:1.3.0-R0.2-SNAPSHOT")
     compileOnly("pl.syntaxdevteam:messageHandler-paper:1.1.2-R0.1-SNAPSHOT")
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.1")
+    compileOnly("dev.faststats.metrics:bukkit:0.21.0")
 
     testImplementation(kotlin("test"))
     testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
     testImplementation("io.mockk:mockk:1.14.9")
-    testImplementation("io.papermc.paper:paper-api:26.1.1.build.+")
+    testImplementation("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
     testImplementation("pl.syntaxdevteam:core:1.3.0-R0.1.2-SNAPSHOT")
     testImplementation("pl.syntaxdevteam:messageHandler-paper:1.1.2-R0.1-SNAPSHOT")
+    testImplementation("dev.faststats.metrics:bukkit:0.21.0")
     testRuntimeOnly("org.slf4j:slf4j-simple:2.0.17")
 
 }
 
-val targetJavaVersion = 25
+val targetJavaVersion = 21
+java {
+    toolchain.languageVersion.set(org.gradle.jvm.toolchain.JavaLanguageVersion.of(targetJavaVersion))
+}
+
 kotlin {
     jvmToolchain(targetJavaVersion)
 }
@@ -62,6 +72,10 @@ tasks{
     test {
         useJUnitPlatform()
         jvmArgs("-XX:+EnableDynamicAgentLoading", "-Xshare:off")
+    }
+
+    shadowJar {
+        relocate("dev.faststats", "${rootProject.group}.libs.faststats")
     }
 }
 

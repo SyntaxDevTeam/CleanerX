@@ -25,6 +25,7 @@ class LibraryLoader(private val plugin: JavaPlugin) {
         libraryManager.addMavenCentral()
         libraryManager.addRepository("https://nexus.syntaxdevteam.pl/repository/maven-releases/")
         libraryManager.addRepository("https://nexus.syntaxdevteam.pl/repository/maven-snapshots/")
+        libraryManager.addRepository("https://repo.faststats.dev/releases")
 
         val runtimeLibraries = loadLibrariesFromConfig()
 

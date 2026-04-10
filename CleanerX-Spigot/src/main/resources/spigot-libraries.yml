@@ -23,3 +23,6 @@ libraries:
   - com.google.code.gson:gson:2.13.2
   - org.yaml:snakeyaml:2.6
   - org.eclipse.aether:aether-api:1.1.0
+
+  # FastStats dependencies
+  - dev.faststats.metrics:bukkit:0.21.0
