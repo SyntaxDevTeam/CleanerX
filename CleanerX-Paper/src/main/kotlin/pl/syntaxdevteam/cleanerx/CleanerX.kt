@@ -66,12 +66,16 @@ class CleanerX : JavaPlugin(), Listener {
         pluginInitializer.onDisable()
     }
 
+    fun reportError(throwable: Throwable) {
+        fastStatsBridge.trackError(throwable)
+    }
+
     fun restartMyTask() {
         try {
             messageHandler.reloadMessages()
         } catch (e: Exception) {
             logger.err("${messageHandler.stringMessageToComponent("error", "reload")} ${e.message}")
-            fastStatsBridge.trackError(e)
+            reportError(e)
         }
 
         saveDefaultConfig()
@@ -84,7 +88,7 @@ class CleanerX : JavaPlugin(), Listener {
             pluginInitializer.registerEvents()
         } catch (ee: Exception) {
             logger.err("An error occurred while reloading the configuration: " + ee.message)
-            fastStatsBridge.trackError(ee)
+            reportError(ee)
         }
     }
 
@@ -110,7 +114,7 @@ class CleanerX : JavaPlugin(), Listener {
             logger.success("$prefix Converted placeholders in ${langFile.name}.")
         } catch (e: Exception) {
             logger.err("$prefix Failed to convert placeholders: ${e.message}")
-            fastStatsBridge.trackError(e)
+            reportError(e)
         }
     }
 }

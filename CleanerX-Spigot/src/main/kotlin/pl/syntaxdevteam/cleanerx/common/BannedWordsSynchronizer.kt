@@ -69,6 +69,7 @@ class BannedWordsSynchronizer(private val plugin: CleanerX) {
                 complete(onComplete, mergedWords.toList())
             } catch (exception: Exception) {
                 plugin.logger.err("Failed to synchronize banned words: ${exception.message}")
+                plugin.reportError(exception)
             }
         })
     }
@@ -120,6 +121,7 @@ class BannedWordsSynchronizer(private val plugin: CleanerX) {
                 }
             }.onFailure { exception ->
                 plugin.logger.warning("Banned words sync failed for $source: ${exception.message}")
+                plugin.reportError(exception)
             }
         }
 

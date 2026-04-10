@@ -66,6 +66,7 @@ class CleanerXChat(
         } catch (e: Exception) {
             plugin.logger.severe("Critical error! Send a message to the plugin author with the subject \"Error in onChat\" and the content: ${e.message}")
             plugin.logger.severe("[CLX-CHAT-001] Stacktrace: ${e.stackTraceToString()}")
+            plugin.reportError(e)
         }
     }
 
@@ -84,6 +85,7 @@ class CleanerXChat(
             isMuted || isJailed
         } catch (exception: Exception) {
             plugin.logger.severe("Could not check penalty status for ${player.name}: ${exception.message}")
+            plugin.reportError(exception)
             false
         }
     }
