@@ -69,9 +69,6 @@ tasks {
     build {
         dependsOn("shadowJar")
     }
-    shadowJar {
-        relocate("dev.faststats", "${rootProject.group}.libs.faststats")
-    }
     test {
         useJUnitPlatform()
     }

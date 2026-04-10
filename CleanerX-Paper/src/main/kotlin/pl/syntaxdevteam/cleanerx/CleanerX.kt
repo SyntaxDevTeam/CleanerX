@@ -1,7 +1,5 @@
 package pl.syntaxdevteam.cleanerx
 
-import dev.faststats.bukkit.BukkitMetrics
-import dev.faststats.core.ErrorTracker
 import io.papermc.paper.event.player.AsyncChatEvent
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.event.HandlerList
@@ -26,16 +24,8 @@ import java.io.File
 import java.util.Locale
 
 class CleanerX : JavaPlugin(), Listener {
-    companion object {
-        @JvmField
-        val ERROR_TRACKER: ErrorTracker = ErrorTracker.contextAware()
-    }
-
-    private val metrics: BukkitMetrics by lazy {
-        BukkitMetrics.factory()
-            .token("YOUR_TOKEN")
-            .errorTracker(ERROR_TRACKER)
-            .create(this)
+    private val fastStatsBridge: FastStatsBridge by lazy {
+        FastStatsBridge(this, "f32783ff0554d455034d573bfef0e6c2")
     }
 
     private lateinit var pluginInitializer: PluginInitializer
@@ -65,14 +55,14 @@ class CleanerX : JavaPlugin(), Listener {
         SyntaxCore.init(this, versionType = "paper")
         pluginInitializer = PluginInitializer(this)
         pluginInitializer.onEnable()
-        metrics.ready()
+        fastStatsBridge.ready()
         placeholderFix()
         versionChecker.checkAndLog()
     }
 
     override fun onDisable() {
         AsyncChatEvent.getHandlerList().unregister(this as Plugin)
-        metrics.shutdown()
+        fastStatsBridge.shutdown()
         pluginInitializer.onDisable()
     }
 
@@ -81,7 +71,7 @@ class CleanerX : JavaPlugin(), Listener {
             messageHandler.reloadMessages()
         } catch (e: Exception) {
             logger.err("${messageHandler.stringMessageToComponent("error", "reload")} ${e.message}")
-            ERROR_TRACKER.trackError(e)
+            fastStatsBridge.trackError(e)
         }
 
         saveDefaultConfig()
@@ -94,7 +84,7 @@ class CleanerX : JavaPlugin(), Listener {
             pluginInitializer.registerEvents()
         } catch (ee: Exception) {
             logger.err("An error occurred while reloading the configuration: " + ee.message)
-            ERROR_TRACKER.trackError(ee)
+            fastStatsBridge.trackError(ee)
         }
     }
 
@@ -120,7 +110,7 @@ class CleanerX : JavaPlugin(), Listener {
             logger.success("$prefix Converted placeholders in ${langFile.name}.")
         } catch (e: Exception) {
             logger.err("$prefix Failed to convert placeholders: ${e.message}")
-            ERROR_TRACKER.trackError(e)
+            fastStatsBridge.trackError(e)
         }
     }
 }

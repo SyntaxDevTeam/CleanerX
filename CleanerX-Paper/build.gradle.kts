@@ -74,9 +74,6 @@ tasks{
         jvmArgs("-XX:+EnableDynamicAgentLoading", "-Xshare:off")
     }
 
-    shadowJar {
-        relocate("dev.faststats", "${rootProject.group}.libs.faststats")
-    }
 }
 
 
