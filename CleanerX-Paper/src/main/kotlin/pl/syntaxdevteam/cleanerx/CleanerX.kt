@@ -48,16 +48,21 @@ class CleanerX : JavaPlugin(), Listener {
     var lpcMode: Boolean = false
 
     override fun onEnable() {
-        SyntaxCore.registerUpdateSources(
-            GitHubSource("SyntaxDevTeam/CleanerX"),
-            ModrinthSource("zJ4dsnYc")
-        )
-        SyntaxCore.init(this, versionType = "paper")
-        pluginInitializer = PluginInitializer(this)
-        pluginInitializer.onEnable()
-        fastStatsBridge.ready()
-        placeholderFix()
-        versionChecker.checkAndLog()
+        try {
+            SyntaxCore.registerUpdateSources(
+                GitHubSource("SyntaxDevTeam/CleanerX"),
+                ModrinthSource("zJ4dsnYc")
+            )
+            SyntaxCore.init(this, versionType = "paper")
+            pluginInitializer = PluginInitializer(this)
+            pluginInitializer.onEnable()
+            fastStatsBridge.ready()
+            placeholderFix()
+            versionChecker.checkAndLog()
+        } catch (exception: Exception) {
+            reportError(exception)
+            throw exception
+        }
     }
 
     override fun onDisable() {

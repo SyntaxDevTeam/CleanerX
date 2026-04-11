@@ -21,6 +21,7 @@ class FastStatsBridge(
     }
 
     fun trackError(throwable: Throwable) {
+        ensureInitialized()
         invokeOneArg(errorTracker, "trackError", Throwable::class.java, throwable)
     }
 

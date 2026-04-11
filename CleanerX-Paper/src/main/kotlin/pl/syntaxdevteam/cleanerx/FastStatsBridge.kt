@@ -21,6 +21,7 @@ class FastStatsBridge(
     }
 
     fun trackError(throwable: Throwable) {
+        ensureInitialized()
         invokeOneArg(errorTracker, "trackError", Throwable::class.java, throwable)
     }
 
@@ -77,5 +78,15 @@ class FastStatsBridge(
 
         candidate.isAccessible = true
         return candidate.invoke(target, argument)
+    }
+
+    companion object {
+        fun trackBootstrapError(throwable: Throwable) {
+            runCatching {
+                val errorTrackerClass = Class.forName("dev.faststats.core.ErrorTracker")
+                val tracker = errorTrackerClass.getMethod("contextAware").invoke(null)
+                tracker.javaClass.getMethod("trackError", Throwable::class.java).invoke(tracker, throwable)
+            }
+        }
     }
 }

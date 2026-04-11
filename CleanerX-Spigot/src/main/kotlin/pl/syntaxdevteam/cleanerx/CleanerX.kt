@@ -50,18 +50,28 @@ class CleanerX : JavaPlugin(), Listener {
 
     override fun onLoad() {
         libraryLoader = LibraryLoader(this)
-        libraryLoader.loadRuntimeLibraries()
+        try {
+            libraryLoader.loadRuntimeLibraries()
+        } catch (exception: Exception) {
+            reportError(exception)
+            throw exception
+        }
     }
 
     override fun onEnable() {
-        SyntaxCore.registerUpdateSources(
-            GitHubSource("SyntaxDevTeam/CleanerX"),
-            ModrinthSource("zJ4dsnYc")
-        )
-        SyntaxCore.init(this, versionType = "spigot")
-        pluginInitializer = PluginInitializer(this)
-        pluginInitializer.onEnable()
-        fastStatsBridge.ready()
+        try {
+            SyntaxCore.registerUpdateSources(
+                GitHubSource("SyntaxDevTeam/CleanerX"),
+                ModrinthSource("zJ4dsnYc")
+            )
+            SyntaxCore.init(this, versionType = "spigot")
+            pluginInitializer = PluginInitializer(this)
+            pluginInitializer.onEnable()
+            fastStatsBridge.ready()
+        } catch (exception: Exception) {
+            reportError(exception)
+            throw exception
+        }
     }
 
     override fun onDisable() {

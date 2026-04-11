@@ -37,7 +37,7 @@ dependencies {
     compileOnly("pl.syntaxdevteam:core:1.3.0-R0.2-SNAPSHOT")
     compileOnly("pl.syntaxdevteam:messageHandler-paper:1.1.2-R0.1-SNAPSHOT")
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.1")
-    compileOnly("dev.faststats.metrics:bukkit:0.21.0")
+    compileOnly("dev.faststats.metrics:bukkit:0.22.0")
 
     testImplementation(kotlin("test"))
     testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
@@ -45,7 +45,7 @@ dependencies {
     testImplementation("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
     testImplementation("pl.syntaxdevteam:core:1.3.0-R0.1.2-SNAPSHOT")
     testImplementation("pl.syntaxdevteam:messageHandler-paper:1.1.2-R0.1-SNAPSHOT")
-    testImplementation("dev.faststats.metrics:bukkit:0.21.0")
+    testImplementation("dev.faststats.metrics:bukkit:0.22.0")
     testRuntimeOnly("org.slf4j:slf4j-simple:2.0.17")
 
 }
