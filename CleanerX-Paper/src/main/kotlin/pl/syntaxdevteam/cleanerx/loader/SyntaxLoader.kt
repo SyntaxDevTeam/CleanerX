@@ -7,6 +7,7 @@ import org.eclipse.aether.artifact.DefaultArtifact
 import org.eclipse.aether.graph.Dependency
 import org.eclipse.aether.repository.RemoteRepository
 import org.yaml.snakeyaml.Yaml
+import pl.syntaxdevteam.cleanerx.FastStatsBridge
 import java.io.IOException
 import java.io.InputStream
 import java.util.logging.Level
@@ -31,6 +32,8 @@ class SyntaxLoader : PluginLoader {
         resolver.addRepository(RemoteRepository.Builder("central-mirror", "default", "https://repo.papermc.io/repository/maven-central/").build())
         resolver.addRepository(RemoteRepository.Builder("jitpack", "default", "https://jitpack.io/").build())
         resolver.addRepository(RemoteRepository.Builder("codemc-snapshots", "default", "https://repo.codemc.io/repository/maven-snapshots/").build())
+        resolver.addRepository(RemoteRepository.Builder("faststatsReleases", "default", "https://repo.faststats.dev/releases").build())
+
         pluginClasspath.addLibrary(resolver)
     }
 
@@ -39,6 +42,7 @@ class SyntaxLoader : PluginLoader {
             readLibraryListFromYaml()
         } catch (e: IOException) {
             LOGGER.log(Level.SEVERE, "Failed to resolve libraries from paper-libraries.yml", e)
+            FastStatsBridge.trackBootstrapError(e)
             emptyList()
         }
     }

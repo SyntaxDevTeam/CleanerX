@@ -4,6 +4,7 @@ import net.byteflux.libby.BukkitLibraryManager
 import net.byteflux.libby.Library
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.plugin.java.JavaPlugin
+import pl.syntaxdevteam.cleanerx.CleanerX
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
 
@@ -25,6 +26,7 @@ class LibraryLoader(private val plugin: JavaPlugin) {
         libraryManager.addMavenCentral()
         libraryManager.addRepository("https://nexus.syntaxdevteam.pl/repository/maven-releases/")
         libraryManager.addRepository("https://nexus.syntaxdevteam.pl/repository/maven-snapshots/")
+        libraryManager.addRepository("https://repo.faststats.dev/releases")
 
         val runtimeLibraries = loadLibrariesFromConfig()
 
@@ -39,6 +41,7 @@ class LibraryLoader(private val plugin: JavaPlugin) {
                 plugin.logger.info("[CleanerX] Loaded runtime library: $coordinates")
             } catch (exception: Exception) {
                 plugin.logger.severe("[CleanerX] Failed to load runtime library $coordinates: ${exception.message}")
+                (plugin as? CleanerX)?.reportError(exception)
                 throw IllegalStateException("Unable to load runtime library $coordinates", exception)
             }
         }

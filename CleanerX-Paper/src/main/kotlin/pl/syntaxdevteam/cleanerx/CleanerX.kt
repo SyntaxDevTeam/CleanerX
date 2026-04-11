@@ -24,6 +24,9 @@ import java.io.File
 import java.util.Locale
 
 class CleanerX : JavaPlugin(), Listener {
+    private val fastStatsBridge: FastStatsBridge by lazy {
+        FastStatsBridge(this, "f32783ff0554d455034d573bfef0e6c2")
+    }
 
     private lateinit var pluginInitializer: PluginInitializer
 
@@ -45,20 +48,31 @@ class CleanerX : JavaPlugin(), Listener {
     var lpcMode: Boolean = false
 
     override fun onEnable() {
-        SyntaxCore.registerUpdateSources(
-            GitHubSource("SyntaxDevTeam/CleanerX"),
-            ModrinthSource("zJ4dsnYc")
-        )
-        SyntaxCore.init(this, versionType = "paper")
-        pluginInitializer = PluginInitializer(this)
-        pluginInitializer.onEnable()
-        placeholderFix()
-        versionChecker.checkAndLog()
+        try {
+            SyntaxCore.registerUpdateSources(
+                GitHubSource("SyntaxDevTeam/CleanerX"),
+                ModrinthSource("zJ4dsnYc")
+            )
+            SyntaxCore.init(this, versionType = "paper")
+            pluginInitializer = PluginInitializer(this)
+            pluginInitializer.onEnable()
+            fastStatsBridge.ready()
+            placeholderFix()
+            versionChecker.checkAndLog()
+        } catch (exception: Exception) {
+            reportError(exception)
+            throw exception
+        }
     }
 
     override fun onDisable() {
         AsyncChatEvent.getHandlerList().unregister(this as Plugin)
+        fastStatsBridge.shutdown()
         pluginInitializer.onDisable()
+    }
+
+    fun reportError(throwable: Throwable) {
+        fastStatsBridge.trackError(throwable)
     }
 
     fun restartMyTask() {
@@ -66,6 +80,7 @@ class CleanerX : JavaPlugin(), Listener {
             messageHandler.reloadMessages()
         } catch (e: Exception) {
             logger.err("${messageHandler.stringMessageToComponent("error", "reload")} ${e.message}")
+            reportError(e)
         }
 
         saveDefaultConfig()
@@ -78,6 +93,7 @@ class CleanerX : JavaPlugin(), Listener {
             pluginInitializer.registerEvents()
         } catch (ee: Exception) {
             logger.err("An error occurred while reloading the configuration: " + ee.message)
+            reportError(ee)
         }
     }
 
@@ -103,6 +119,7 @@ class CleanerX : JavaPlugin(), Listener {
             logger.success("$prefix Converted placeholders in ${langFile.name}.")
         } catch (e: Exception) {
             logger.err("$prefix Failed to convert placeholders: ${e.message}")
+            reportError(e)
         }
     }
 }

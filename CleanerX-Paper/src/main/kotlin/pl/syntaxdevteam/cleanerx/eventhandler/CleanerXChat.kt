@@ -69,7 +69,7 @@ class CleanerXChat(
             plugin.logger.severe(
                 "Critical error in onLegacyChat: ${e.message}"
             )
-            e.printStackTrace()
+            plugin.reportError(e)
         }
     }
 
@@ -109,6 +109,7 @@ class CleanerXChat(
                 "Critical error in onChat: ${e.message}"
             )
             plugin.logger.severe("[CLX-CHAT-001] Stacktrace: ${e.stackTraceToString()}")
+            plugin.reportError(e)
         }
     }
 
@@ -127,6 +128,7 @@ class CleanerXChat(
             isMuted || isJailed
         } catch (exception: Exception) {
             plugin.logger.severe("Could not check penalty status for ${player.name}: ${exception.message}")
+            plugin.reportError(exception)
             false
         }
     }

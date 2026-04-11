@@ -97,9 +97,11 @@ class PluginInitializer(private val plugin: CleanerX) {
             Class.forName("pl.syntaxdevteam.punisher.api.PunisherXApi", false, punisherPlugin.javaClass.classLoader)
         } catch (exception: ClassNotFoundException) {
             plugin.logger.warning("PunisherX wykryty, ale brakuje API (PunisherXApi). Pomijam integrację.")
+            plugin.reportError(exception)
             return
         } catch (exception: Throwable) {
             plugin.logger.warning("PunisherX wykryty, ale API jest niedostępne (${exception.javaClass.simpleName}). Pomijam integrację.")
+            plugin.reportError(exception)
             return
         }
 
@@ -107,6 +109,7 @@ class PluginInitializer(private val plugin: CleanerX) {
             plugin.server.servicesManager.load(apiClass)
         } catch (exception: Throwable) {
             plugin.logger.warning("PunisherX wykryty, ale nie udało się pobrać API (${exception.javaClass.simpleName}). Pomijam integrację.")
+            plugin.reportError(exception)
             return
         } ?: run {
             plugin.logger.warning("PunisherX wykryty, ale nie udostępnia API. Pomijam integrację.")
