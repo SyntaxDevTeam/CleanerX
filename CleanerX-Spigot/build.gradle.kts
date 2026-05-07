@@ -42,7 +42,7 @@ dependencies {
     compileOnly("net.kyori:examination-api:1.3.0")
     compileOnly("net.kyori:examination-string:1.3.0")
     compileOnly("net.kyori:option:1.1.0")
-    compileOnly("pl.syntaxdevteam:core:1.3.0-R0.2-SNAPSHOT")
+    compileOnly("pl.syntaxdevteam:core:1.3.0-R0.4-SNAPSHOT")
     compileOnly("pl.syntaxdevteam:messageHandler-spigot:1.1.2-R0.1-SNAPSHOT")
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.1")
     implementation("net.byteflux:libby-bukkit:1.3.1")
@@ -56,7 +56,7 @@ dependencies {
     testImplementation("dev.faststats.metrics:bukkit:0.21.0")
 }
 
-val targetJavaVersion = 21
+val targetJavaVersion = 25
 java {
     toolchain.languageVersion.set(org.gradle.jvm.toolchain.JavaLanguageVersion.of(targetJavaVersion))
 }
@@ -84,7 +84,7 @@ tasks.processResources {
 }
 
 plugindeployer {
-    paper { dir = "/home/debian/server/Paper/26.1.1/plugins" } //ostatnia wersja dla Paper
+    paper { dir = "/home/debian/server/Paper/26.1.2/plugins" } //ostatnia wersja dla Paper
     folia { dir = "/home/debian/server/Folia/1.21.11/plugins" } //ostatnia wersja dla Folia
-    spigot { dir = "/home/debian/server/Spigot/26.1/plugins" } //ostatnia wersja dla Spigot
+    spigot { dir = "/home/debian/server/Spigot/26.1.2/plugins" } //ostatnia wersja dla Spigot
 }
