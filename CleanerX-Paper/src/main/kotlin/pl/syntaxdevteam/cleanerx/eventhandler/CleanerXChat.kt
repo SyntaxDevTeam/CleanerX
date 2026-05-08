@@ -26,7 +26,8 @@ class CleanerXChat(
     private val wordFilter: WordFilter,
     private val fullCensorship: Boolean,
     private val swearCounter: SwearCounter,
-    private val lpcMode: Boolean
+    private val lpcMode: Boolean,
+    private val flectonePulseMode: Boolean
 ) : Listener {
 
     private val blockLinks = plugin.config.getBoolean("block-links", true)
@@ -73,16 +74,26 @@ class CleanerXChat(
         }
     }
 
-    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
     fun onChat(event: AsyncChatEvent) {
         if (lpcMode) {
+            return
+        }
+        if (event.isCancelled && !flectonePulseMode) {
             return
         }
         try {
             if (shouldSkipCensorship(event.player)) {
                 return
             }
-            val message = plugin.messageHandler.getPlainText(event.originalMessage())
+            val sourceMessage = if (flectonePulseMode && plugin.flectonePulseFormattingHooked) {
+                event.originalMessage()
+            } else if (flectonePulseMode) {
+                event.message()
+            } else {
+                event.originalMessage()
+            }
+            val message = plugin.messageHandler.getPlainText(sourceMessage)
 
             if (blockLinks && urlDetectors.any { it.containsUrl(message) }) {
                 event.isCancelled = true
@@ -97,12 +108,15 @@ class CleanerXChat(
             val swearCount = words.count { wordFilter.containsBannedWord(it) }
 
             if (swearCount > 0) {
-                event.message(
-                    Component.text(wordFilter.censorMessage(message, fullCensorship))
-                )
                 if (usePunishment) {
                     swearCounter.incrementSwearCount(event.player, swearCount)
                 }
+                if (flectonePulseMode && plugin.flectonePulseFormattingHooked) {
+                    return
+                }
+                event.message(
+                    Component.text(wordFilter.censorMessage(message, fullCensorship))
+                )
             }
         } catch (e: Exception) {
             plugin.logger.severe(

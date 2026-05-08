@@ -11,7 +11,7 @@ website: https://github.com/SyntaxDevTeam
 loader: pl.syntaxdevteam.cleanerx.loader.SyntaxLoader
 has-open-classloader: false
 
-softdepend: [LPC, PunisherX]
+softdepend: [LPC, FlectonePulse, PunisherX]
 
 commands:
   cleanerx:

@@ -14,8 +14,10 @@ import pl.syntaxdevteam.cleanerx.common.ListenerRegistrationMetrics
 import pl.syntaxdevteam.cleanerx.eventhandler.CleanerXChat
 import pl.syntaxdevteam.cleanerx.eventhandler.PlayerQuitListener
 import pl.syntaxdevteam.cleanerx.eventhandler.PlayerJoinListener
+import pl.syntaxdevteam.cleanerx.integration.rewriteFlectonePulseFormatting
 import pl.syntaxdevteam.core.SyntaxCore
 import pl.syntaxdevteam.message.SyntaxMessages
+import java.util.function.UnaryOperator
 
 class PluginInitializer(private val plugin: CleanerX) {
 
@@ -57,6 +59,8 @@ class PluginInitializer(private val plugin: CleanerX) {
         }
         hookPunisherX()
         detectLpc()
+        detectFlectonePulse()
+        hookFlectonePulseFormatting()
     }
 
     private fun registerCommands(){
@@ -71,7 +75,8 @@ class PluginInitializer(private val plugin: CleanerX) {
                 plugin.wordFilter,
                 plugin.config.getBoolean("fullCensorship"),
                 plugin.swearCounter,
-                plugin.lpcMode
+                plugin.lpcMode,
+                plugin.flectonePulseMode
             ),
             plugin
         )
@@ -126,6 +131,85 @@ class PluginInitializer(private val plugin: CleanerX) {
         }
     }
 
+
+    private fun detectFlectonePulse() {
+        val flectonePulsePlugin = plugin.server.pluginManager.getPlugin("FlectonePulse")
+        plugin.flectonePulseMode = flectonePulsePlugin != null && flectonePulsePlugin.isEnabled
+        if (plugin.flectonePulseMode) {
+            plugin.logger.info("FlectonePulse detected - enabling chat compatibility mode.")
+        }
+    }
+
+    @Suppress("TooGenericExceptionCaught")
+    private fun hookFlectonePulseFormatting() {
+        plugin.flectonePulseFormattingHooked = false
+        if (!plugin.flectonePulseMode) return
+
+        try {
+            val flectonePlugin = plugin.server.pluginManager.getPlugin("FlectonePulse") ?: return
+            val pulseClassLoader = flectonePlugin.javaClass.classLoader
+
+            val pulseApiClass = Class.forName("net.flectone.pulse.FlectonePulseAPI", false, pulseClassLoader)
+            val pulseInstance = pulseApiClass.getMethod("getInstance").invoke(null) ?: return
+            val getMethod = pulseInstance.javaClass.getMethod("get", Class::class.java)
+
+            val listenerRegistryClass = Class.forName("net.flectone.pulse.platform.registry.ListenerRegistry", false, pulseClassLoader)
+            val messageFormattingEventClass = Class.forName("net.flectone.pulse.model.event.message.MessageFormattingEvent", false, pulseClassLoader)
+            val messageContextClass = Class.forName("net.flectone.pulse.model.event.message.context.MessageContext", false, pulseClassLoader)
+            val messageFlagClass = Class.forName("net.flectone.pulse.util.constant.MessageFlag", false, pulseClassLoader)
+            val eventPriorityClass = Class.forName("net.flectone.pulse.model.event.Event\$Priority", false, pulseClassLoader)
+            val lowestPriority = java.lang.Enum.valueOf(eventPriorityClass.asSubclass(Enum::class.java), "LOWEST")
+            val playerMessageFlag = java.lang.Enum.valueOf(messageFlagClass.asSubclass(Enum::class.java), "PLAYER_MESSAGE")
+
+            val listenerRegistry = getMethod.invoke(pulseInstance, listenerRegistryClass)
+            val registerMethod = listenerRegistryClass.getMethod("register", Class::class.java, eventPriorityClass, UnaryOperator::class.java)
+            val contextMethod = messageFormattingEventClass.getMethod("context")
+            val withContextMethod = messageFormattingEventClass.getMethod("withContext", messageContextClass)
+            val messageMethod = messageContextClass.getMethod("message")
+            val userMessageMethod = messageContextClass.getMethod("userMessage")
+            val isFlagMethod = messageContextClass.getMethod("isFlag", messageFlagClass)
+            val withMessageMethod = messageContextClass.getMethod("withMessage", String::class.java)
+            val withUserMessageMethod = messageContextClass.getMethod("withUserMessage", String::class.java)
+
+            val formatterHook = UnaryOperator<Any> { event ->
+                try {
+                    val context = contextMethod.invoke(event) ?: return@UnaryOperator event
+                    val rawMessage = messageMethod.invoke(context) as? String ?: ""
+                    val userMessage = userMessageMethod.invoke(context) as? String ?: ""
+                    val isPlayerMessage = isFlagMethod.invoke(context, playerMessageFlag) as? Boolean ?: false
+
+                    val rewrite = rewriteFlectonePulseFormatting(
+                        message = rawMessage,
+                        userMessage = userMessage,
+                        isPlayerMessage = isPlayerMessage,
+                        fullCensorship = plugin.config.getBoolean("fullCensorship"),
+                        censor = plugin.wordFilter::censorMessage
+                    )
+
+                    if (rewrite.changed) {
+                        var updatedContext = context
+                        if (rewrite.message != rawMessage) {
+                            updatedContext = withMessageMethod.invoke(updatedContext, rewrite.message)
+                        }
+                        if (rewrite.userMessage != userMessage) {
+                            updatedContext = withUserMessageMethod.invoke(updatedContext, rewrite.userMessage)
+                        }
+                        return@UnaryOperator withContextMethod.invoke(event, updatedContext)
+                    }
+                } catch (_: Throwable) {
+                    return@UnaryOperator event
+                }
+                event
+            }
+
+            registerMethod.invoke(listenerRegistry, messageFormattingEventClass, lowestPriority, formatterHook)
+            plugin.flectonePulseFormattingHooked = true
+            plugin.logger.info("Zarejestrowano hak cenzury bezpośrednio do pipeline FlectonePulse (MessageFormattingEvent).")
+        } catch (exception: Throwable) {
+            plugin.logger.warning("Nie udało się podpiąć pod API FlectonePulse (${exception.javaClass.simpleName}).")
+            plugin.reportError(exception)
+        }
+    }
     private fun checkForUpdates() {
         plugin.statsCollector = SyntaxCore.statsCollector
         val updateChecker = runCatching { SyntaxCore.updateChecker }.getOrNull()
