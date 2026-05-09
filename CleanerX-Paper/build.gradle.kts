@@ -135,6 +135,6 @@ publishing {
 }
 plugindeployer {
     paper { dir = "/home/debian/server/Paper/26.1.2/plugins" } //ostatnia wersja dla Paper
-    folia { dir = "/home/debian/server/Folia/1.21.11/plugins" } //ostatnia wersja dla Folia
+    folia { dir = "/home/debian/server/Folia/26.1.2/plugins" } //ostatnia wersja dla Folia
     spigot { dir = "/home/debian/server/Spigot/26.1.2/plugins" } //ostatnia wersja dla Spigot
 }
