@@ -22,7 +22,7 @@ class WordFilter(private val plugin: CleanerX) {
      * Loads the banned words and whitelist words from the configuration files.
      */
     init {
-        loadBannedWords()
+        reloadBannedWordsFromFile()
         loadWhitelistWords()
     }
 
@@ -30,7 +30,7 @@ class WordFilter(private val plugin: CleanerX) {
      * Loads the banned words from the 'banned_words.yml' configuration file.
      * If the file does not exist, it creates a default one.
      */
-    private fun loadBannedWords() {
+    fun reloadBannedWordsFromFile() {
         val file = File(plugin.dataFolder, "banned_words.yml")
         if (!file.exists()) {
             plugin.saveResource("banned_words.yml", false)
@@ -271,11 +271,11 @@ class WordFilter(private val plugin: CleanerX) {
         normalizedWord.forEachIndexed { index, character ->
             builder.append(Regex.escape(character.toString()))
             if (index < normalizedWord.lastIndex) {
-                builder.append("[^a-z]*")
+                builder.append("[^a-z\\s]*")
             }
         }
         if (allowSuffix) {
-            builder.append("(?:[^a-z]*[a-z]{1,")
+            builder.append("(?:[^a-z\\s]*[a-z]{1,")
             builder.append(MAX_SUFFIX_LENGTH)
             builder.append("})?")
         }

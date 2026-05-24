@@ -24,7 +24,12 @@ class BlackListCommand(private val plugin: CleanerX, private val audiences: Bukk
         when (args[0].lowercase()) {
             "add" -> {
                 if (args.size > 1) {
-                    val newWord = args[1]
+                    val newWord = args.drop(1).joinToString(" ").trim()
+                    if (newWord.isEmpty()) {
+                        sendMessage(sender, mH.stringMessageToComponent("word", "no_word_provided"))
+                        return true
+                    }
+                    plugin.wordFilter.reloadBannedWordsFromFile()
                     plugin.wordFilter.addBannedWord(newWord)
                     plugin.restartMyTask()
                     sendMessage(sender, mH.stringMessageToComponent("word", "word_added", mapOf("word" to newWord)))
@@ -34,7 +39,12 @@ class BlackListCommand(private val plugin: CleanerX, private val audiences: Bukk
             }
             "remove" -> {
                 if (args.size > 1) {
-                    val wordToRemove = args[1]
+                    val wordToRemove = args.drop(1).joinToString(" ").trim()
+                    if (wordToRemove.isEmpty()) {
+                        sendMessage(sender, mH.stringMessageToComponent("word", "no_word_provided"))
+                        return true
+                    }
+                    plugin.wordFilter.reloadBannedWordsFromFile()
                     if (plugin.wordFilter.removeBannedWord(wordToRemove)) {
                         plugin.restartMyTask()
                         sendMessage(
