@@ -27,7 +27,7 @@ dependencies {
     compileOnly("org.spigotmc:spigot-api:1.21.11-R0.1-SNAPSHOT")
     compileOnly("org.eclipse.aether:aether-api:1.1.0")
     compileOnly("org.yaml:snakeyaml:2.6")
-    compileOnly("com.google.code.gson:gson:2.13.2")
+    compileOnly("com.google.code.gson:gson:2.14.0")
     compileOnly("net.kyori:adventure-key:4.26.1")
     compileOnly("net.kyori:adventure-platform-bukkit:4.4.1")
     compileOnly("net.kyori:adventure-platform-api:4.4.1")
@@ -46,14 +46,14 @@ dependencies {
     compileOnly("pl.syntaxdevteam:messageHandler-spigot:1.1.2-R0.1-SNAPSHOT")
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.1")
     implementation("net.byteflux:libby-bukkit:1.3.1")
-    compileOnly("dev.faststats.metrics:bukkit:0.21.0")
+    compileOnly("dev.faststats.metrics:bukkit:0.23.0")
 
     testImplementation(kotlin("test"))
     testImplementation("org.mockito:mockito-core:5.23.0")
     testImplementation("org.mockito:mockito-inline:5.2.0")
     testImplementation("org.mockito.kotlin:mockito-kotlin:6.3.0")
 
-    testImplementation("dev.faststats.metrics:bukkit:0.21.0")
+    testImplementation("dev.faststats.metrics:bukkit:0.23.0")
 }
 
 val targetJavaVersion = 25

@@ -28,7 +28,7 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
     compileOnly("org.eclipse.aether:aether-api:1.1.0")
     compileOnly("org.yaml:snakeyaml:2.6")
-    compileOnly("com.google.code.gson:gson:2.13.2")
+    compileOnly("com.google.code.gson:gson:2.14.0")
     compileOnly("net.kyori:adventure-text-serializer-legacy:4.26.1")
     compileOnly("net.kyori:adventure-text-minimessage:4.26.1")
     compileOnly("net.kyori:adventure-text-serializer-gson:4.26.1")
@@ -37,7 +37,7 @@ dependencies {
     compileOnly("pl.syntaxdevteam:core:1.3.0-R0.4-SNAPSHOT")
     compileOnly("pl.syntaxdevteam:messageHandler-paper:1.1.2-R0.1-SNAPSHOT")
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.1")
-    compileOnly("dev.faststats.metrics:bukkit:0.22.0")
+    compileOnly("dev.faststats.metrics:bukkit:0.23.0")
 
     testImplementation(kotlin("test"))
     testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
@@ -45,7 +45,7 @@ dependencies {
     testImplementation("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
     testImplementation("pl.syntaxdevteam:core:1.3.0-R0.4-SNAPSHOT")
     testImplementation("pl.syntaxdevteam:messageHandler-paper:1.1.2-R0.1-SNAPSHOT")
-    testImplementation("dev.faststats.metrics:bukkit:0.22.0")
+    testImplementation("dev.faststats.metrics:bukkit:0.23.0")
     testRuntimeOnly("org.slf4j:slf4j-simple:2.0.17")
 
 }
