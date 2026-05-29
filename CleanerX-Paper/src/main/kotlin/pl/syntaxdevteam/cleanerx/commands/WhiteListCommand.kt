@@ -21,7 +21,11 @@ class WhiteListCommand(private var plugin: CleanerX) : BasicCommand {
         when (args[0].lowercase()) {
             "add" -> {
                 if (args.size > 1) {
-                    val newWord = args[1]
+                    val newWord = parseExpressionArgument(args)
+                    if (newWord.isEmpty()) {
+                        stack.sender.sendMessage(mH.stringMessageToComponent("word", "no_word_provided"))
+                        return
+                    }
                     plugin.wordFilter.addWhitelistWord(newWord)
                     plugin.restartMyTask()
                     stack.sender.sendMessage(mH.stringMessageToComponent("word", "word_added", mapOf("word" to newWord)))
@@ -31,7 +35,11 @@ class WhiteListCommand(private var plugin: CleanerX) : BasicCommand {
             }
             "remove" -> {
                 if (args.size > 1) {
-                    val wordToRemove = args[1]
+                    val wordToRemove = parseExpressionArgument(args)
+                    if (wordToRemove.isEmpty()) {
+                        stack.sender.sendMessage(mH.stringMessageToComponent("word", "no_word_provided"))
+                        return
+                    }
                     if(plugin.wordFilter.removeWhitelistWord(wordToRemove)) {
                         plugin.restartMyTask()
                         stack.sender.sendMessage(

@@ -67,6 +67,27 @@ class WordFilterTest {
         assertEquals("To KU*** test", partiallyCensored)
     }
 
+
+    @Test
+    fun `wykrywa i cenzuruje pelne wyrazenia z wieloma slowami`() {
+        wordFilter.updateBannedWords(listOf("kurwa mać"))
+
+        assertTrue(wordFilter.containsBannedWord("No i kurwa mać, znowu."))
+        assertTrue(wordFilter.containsBannedWord("No i k.u.r.w.a m.a.ć, znowu."))
+        assertFalse(wordFilter.containsBannedWord("kurwa, ale bez drugiego slowa"))
+
+        val fullyCensored = wordFilter.censorMessage("No i kurwa mać, znowu.", fullCensorship = true)
+        assertEquals("No i ***** ***, znowu.", fullyCensored)
+    }
+
+    @Test
+    fun `whitelist obsluguje pelne wyrazenia`() {
+        wordFilter.addWhitelistWord("kurwa mać")
+
+        assertFalse(wordFilter.containsBannedWord("cytat: kurwa mać."))
+        assertTrue(wordFilter.containsBannedWord("pojedyncza kurwa nadal jest blokowana"))
+    }
+
     @Test
     fun `wykrywa odmiane slowa ale nie lapie fragmentu w srodku innego wyrazu`() {
         wordFilter.updateBannedWords(listOf("chuje"))

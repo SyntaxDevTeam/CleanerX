@@ -21,7 +21,7 @@ class BlackListCommand(private var plugin: CleanerX) : BasicCommand {
         when (args[0].lowercase()) {
             "add" -> {
                 if (args.size > 1) {
-                    val newWord = args.drop(1).joinToString(" ").trim()
+                    val newWord = parseExpressionArgument(args)
                     if (newWord.isEmpty()) {
                         stack.sender.sendMessage(mH.stringMessageToComponent("word", "no_word_provided"))
                         return
@@ -36,7 +36,7 @@ class BlackListCommand(private var plugin: CleanerX) : BasicCommand {
             }
             "remove" -> {
                 if (args.size > 1) {
-                    val wordToRemove = args.drop(1).joinToString(" ").trim()
+                    val wordToRemove = parseExpressionArgument(args)
                     if (wordToRemove.isEmpty()) {
                         stack.sender.sendMessage(mH.stringMessageToComponent("word", "no_word_provided"))
                         return

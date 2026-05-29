@@ -257,22 +257,22 @@ class WordFilter(private val plugin: CleanerX) {
     }
 
     private fun toFilterPattern(word: String, allowSuffix: Boolean): FilterPattern? {
-        val normalized = normalizeWord(word)
-        if (normalized.isEmpty()) {
+        val normalizedTokens = normalizeExpression(word)
+        if (normalizedTokens.isEmpty()) {
             return null
         }
 
-        return FilterPattern(word, normalized, buildFuzzyRegex(normalized, allowSuffix))
+        return FilterPattern(word, normalizedTokens.joinToString(" "), buildFuzzyRegex(normalizedTokens, allowSuffix))
     }
 
-    private fun buildFuzzyRegex(normalizedWord: String, allowSuffix: Boolean): Regex {
+    private fun buildFuzzyRegex(normalizedTokens: List<String>, allowSuffix: Boolean): Regex {
         val builder = StringBuilder()
         builder.append("(?<![a-z])")
-        normalizedWord.forEachIndexed { index, character ->
-            builder.append(Regex.escape(character.toString()))
-            if (index < normalizedWord.lastIndex) {
-                builder.append("[^a-z\\s]*")
+        normalizedTokens.forEachIndexed { tokenIndex, token ->
+            if (tokenIndex > 0) {
+                builder.append("[^a-z]+")
             }
+            appendFuzzyTokenRegex(builder, token)
         }
         if (allowSuffix) {
             builder.append("(?:[^a-z\\s]*[a-z]{1,")
@@ -283,25 +283,43 @@ class WordFilter(private val plugin: CleanerX) {
         return Regex(builder.toString())
     }
 
-    private fun normalizeWord(word: String): String {
-        if (word.isBlank()) {
-            return ""
+    private fun appendFuzzyTokenRegex(builder: StringBuilder, token: String) {
+        token.forEachIndexed { index, character ->
+            builder.append(Regex.escape(character.toString()))
+            if (index < token.lastIndex) {
+                builder.append("[^a-z\\s]*")
+            }
+        }
+    }
+
+    private fun normalizeExpression(expression: String): List<String> {
+        if (expression.isBlank()) {
+            return emptyList()
         }
 
-        val normalizedBuilder = StringBuilder()
-        word.lowercase(Locale.ROOT).forEach { character ->
+        val tokens = mutableListOf<String>()
+        val currentToken = StringBuilder()
+
+        expression.lowercase(Locale.ROOT).forEach { character ->
             val replacement = CHARACTER_REPLACEMENTS[character] ?: character.toString()
             replacement.forEach { replacementChar ->
                 val normalized = stripDiacritics(replacementChar.lowercaseChar().toString())
                 normalized.forEach { normalizedChar ->
                     if (normalizedChar in 'a'..'z') {
-                        normalizedBuilder.append(normalizedChar)
+                        currentToken.append(normalizedChar)
+                    } else if (currentToken.isNotEmpty()) {
+                        tokens.add(currentToken.toString())
+                        currentToken.clear()
                     }
                 }
             }
         }
 
-        return normalizedBuilder.toString()
+        if (currentToken.isNotEmpty()) {
+            tokens.add(currentToken.toString())
+        }
+
+        return tokens
     }
 
     private fun buildNormalizedMessage(message: String): NormalizedMessage {
