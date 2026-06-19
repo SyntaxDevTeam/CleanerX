@@ -19,9 +19,8 @@ CleanerX is an advanced chat moderation plugin for Spigot and Paper/Folia server
 
 ## ⚙️ Technical Information
 
-- 🟢 **Supports Minecraft versions 1.20.6, 1.21–1.21.11, 26.1 and 26.1.1 (see in-code version checker)**
+- 🟢 **Supports Minecraft versions 1.20.6, 1.21–1.21.11, 26.1 and 26.1.1/2**
 - 🟢 **Maintains separate modules for Spigot and Paper (Paper build is Folia-compatible)**
-- 🟢 **CleanerX 1.5.6+ requires at least Java 25; versions older than 1.5.6 require Java 21**
 - 🟢 **Written in Kotlin – a modern, expressive, and safer alternative to Java**
 
 If you have any questions, you might find answers on our [Discord](https://discord.gg/Q343kjA2YP).
