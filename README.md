@@ -5,7 +5,7 @@
 CleanerX is an advanced chat moderation plugin for Spigot and Paper/Folia servers. It filters and censors inappropriate language (partial or full), can block links in chat, and supports automatic punishment commands after configurable swear-count thresholds. You can also manage blacklist/whitelist entries in-game, clear chat with a command, and optionally synchronize banned words from external sources.
 
 
-## 🔹 Features
+## Features
 
 - ✅ Partial or complete word censorship depending on configuration
 - ✅ Ability to block unwanted links
@@ -91,7 +91,7 @@ Pełny spis komend i uprawnień znajdziesz [tutaj](https://github.com/SyntaxDevT
 * Wsparcie dla wielu języków przez plik messages_xx.yml
 
 ## Informacje techniczne
-* [x] Obsługiwane wersje Minecraft: 1.20.6, 1.21–1.21.11 oraz 26.1 i 26.1.1 (zgodnie z checkerem wersji w kodzie)
+* [x] Obsługiwane wersje Minecraft: 1.20.6, 1.21–1.21.11 oraz 26.1 i 26.1.1/2
 * [x] Projekt posiada osobne moduły dla Spigot i Paper (Paper jest kompatybilny z Folią)
 * [x] CleanerX 1.5.6+ wymaga minimum Java 25; wersje starsze niż 1.5.6 wymagają Java 21
 * [x] Napisany w nowoczesnym języku programowania Kotlin, który jest bardziej ekspresyjny i bezpieczny niż Java.
