@@ -2,16 +2,22 @@ name: Build and publish CleanerX
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - 'experimental/**'
+      - 'experimental-*'
   pull_request:
-    branches: [main]
+    branches:
+      - main
+      - 'experimental/**'
+      - 'experimental-*'
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 env:
   MINI_PORTAL_URL: https://syntaxdevteam.pl
-  BUILD_CHANNEL: dev
 
 jobs:
   detect:
@@ -44,48 +50,44 @@ jobs:
           if os.environ.get("EVENT_NAME") == "pull_request":
               before = os.environ.get("PR_BASE_SHA", before)
 
-          all_zero = "0" * 40
-          if not before or before == all_zero:
+          if os.environ.get("EVENT_NAME") == "workflow_dispatch" or not before or before == "0" * 40:
               changed = ["__all__"]
           else:
-              raw = subprocess.check_output(
-                  ["git", "diff", "--name-only", f"{before}..{after}"],
-                  text=True,
-              )
+              raw = subprocess.check_output(["git", "diff", "--name-only", f"{before}..{after}"], text=True)
               changed = [line.strip() for line in raw.splitlines() if line.strip()]
 
           products = [
               {
-                  "slug": "cleanerx-paper",
-                  "server": "Paper",
-                  "gradle_project": ":cleanerx-paper",
-                  "gradle_task": ":cleanerx-paper:build",
+                  "project": "cleanerx",
+                  "platform": "paper",
+                  "platform_family": "server",
+                  "gradle_project": ":CleanerX-Paper",
+                  "gradle_task": ":CleanerX-Paper:build",
                   "jar_dir": "CleanerX-Paper/build/libs",
                   "artifact_prefix": "CleanerX-Paper-",
-                  "paths": ["cleanerx-paper/"],
+                  "version_source": "CleanerX-Paper/src/main/kotlin/pl/syntaxdevteam/cleanerx/loader/VersionChecker.kt",
+                  "paths": ["CleanerX-Paper/"],
               },
               {
-                  "slug": "cleanerx-spigot",
-                  "server": "Spigot",
-                  "gradle_project": ":cleanerx-spigot",
-                  "gradle_task": ":cleanerx-spigot:build",
+                  "project": "cleanerx",
+                  "platform": "spigot",
+                  "platform_family": "server",
+                  "gradle_project": ":CleanerX-Spigot",
+                  "gradle_task": ":CleanerX-Spigot:build",
                   "jar_dir": "CleanerX-Spigot/build/libs",
                   "artifact_prefix": "CleanerX-Spigot-",
-                  "paths": ["cleanerx-spigot/"],
+                  "version_source": "CleanerX-Spigot/src/main/kotlin/pl/syntaxdevteam/cleanerx/loader/VersionChecker.kt",
+                  "paths": ["CleanerX-Spigot/"],
               },
           ]
           shared = [
               ".github/workflows/",
-              "common/",
-              "buildSrc/",
+              "build.gradle.kts",
+              "settings.gradle.kts",
+              "gradle.properties",
               "gradle/",
               "gradlew",
               "gradlew.bat",
-              "settings.gradle",
-              "settings.gradle.kts",
-              "build.gradle",
-              "build.gradle.kts",
-              "gradle.properties",
           ]
 
           def touches(prefixes):
@@ -95,10 +97,12 @@ jobs:
 
           include_all = touches(shared)
           include = []
-          keys = ("slug", "server", "gradle_project", "gradle_task", "jar_dir", "artifact_prefix")
           for product in products:
               if include_all or touches(product["paths"]):
-                  include.append({key: product[key] for key in keys})
+                  include.append({key: product[key] for key in (
+                      "project", "platform", "platform_family", "gradle_project", "gradle_task",
+                      "jar_dir", "artifact_prefix", "version_source"
+                  )})
 
           print("matrix=" + json.dumps({"include": include}, separators=(",", ":")))
           print("has_changes=" + ("true" if include else "false"))
@@ -111,157 +115,148 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Set up Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: "21"
-
+          java-version: "25"
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
-
       - name: Test all modules
         run: |
           chmod +x ./gradlew
           ./gradlew test --console=plain --no-daemon
 
   publish:
-    name: Publish ${{ matrix.slug }}
+    name: Publish ${{ matrix.project }} / ${{ matrix.platform }}
     runs-on: ubuntu-latest
     needs: [detect, verify]
-    if: github.event_name == 'push' && needs.detect.outputs.has_changes == 'true'
+    if: github.event_name != 'pull_request' && needs.detect.outputs.has_changes == 'true'
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.detect.outputs.matrix) }}
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - name: Set up Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: "21"
-
+          java-version: "25"
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
-
       - name: Build selected product
         run: |
           chmod +x ./gradlew
           ./gradlew "${{ matrix.gradle_task }}" --console=plain --no-daemon
-
-      - name: Publish artifact to BuildExplorer
+      - name: Publish artifact to Build Explorer v2
         env:
           BUILD_CI_TOKEN: ${{ secrets.BUILD_CI_TOKEN }}
           GITHUB_BEFORE: ${{ github.event.before }}
           GITHUB_AFTER: ${{ github.sha }}
           GITHUB_RUN_ID_VALUE: ${{ github.run_id }}
           GITHUB_RUN_NUMBER_VALUE: ${{ github.run_number }}
-          BUILD_SLUG: ${{ matrix.slug }}
-          BUILD_SERVER: ${{ matrix.server }}
+          GITHUB_REF_NAME_VALUE: ${{ github.ref_name }}
+          BUILD_PROJECT: ${{ matrix.project }}
+          BUILD_PLATFORM: ${{ matrix.platform }}
+          BUILD_PLATFORM_FAMILY: ${{ matrix.platform_family }}
           BUILD_GRADLE_PROJECT: ${{ matrix.gradle_project }}
           BUILD_JAR_DIR: ${{ matrix.jar_dir }}
           BUILD_ARTIFACT_PREFIX: ${{ matrix.artifact_prefix }}
+          BUILD_VERSION_SOURCE: ${{ matrix.version_source }}
         run: |
           set -euo pipefail
-
-          if [ -z "${BUILD_CI_TOKEN}" ]; then
-            echo "Missing BUILD_CI_TOKEN repository secret." >&2
-            exit 1
-          fi
-
-          if [ ! -d "${BUILD_JAR_DIR}" ]; then
-            echo "Directory ${BUILD_JAR_DIR} does not exist for ${BUILD_SLUG}." >&2
-            exit 1
-          fi
+          if [ -z "${BUILD_CI_TOKEN}" ]; then echo "Missing BUILD_CI_TOKEN repository secret." >&2; exit 1; fi
 
           jar="$(python3 - <<'PY'
           from pathlib import Path
-          import os
-          import sys
-
-          jar_dir = Path(os.environ["BUILD_JAR_DIR"])
+          import os, sys
+          directory = Path(os.environ["BUILD_JAR_DIR"])
           prefix = os.environ["BUILD_ARTIFACT_PREFIX"]
-          excluded_suffixes = ("-sources.jar", "-javadoc.jar", "-plain.jar", "-original.jar")
-          candidates = [
-              path for path in jar_dir.glob("*.jar")
-              if not path.name.endswith(excluded_suffixes)
-          ]
-          preferred = [path for path in candidates if path.name.startswith(prefix)]
+          excluded = ("-sources.jar", "-javadoc.jar", "-plain.jar", "-original.jar")
+          candidates = [p for p in directory.glob("*.jar") if not p.name.endswith(excluded)]
+          preferred = [p for p in candidates if p.name.startswith(prefix)]
           pool = preferred or candidates
-          if not pool:
-              sys.exit(1)
-          print(max(pool, key=lambda path: path.stat().st_size))
+          if not pool: sys.exit(1)
+          print(max(pool, key=lambda p: p.stat().st_size))
           PY
           )"
-          if [ -z "${jar}" ]; then
-            echo "No JAR found for ${BUILD_SLUG} in ${BUILD_JAR_DIR}." >&2
-            exit 1
-          fi
+          if [ -z "${jar}" ]; then echo "No JAR found for ${BUILD_PROJECT}/${BUILD_PLATFORM}." >&2; exit 1; fi
 
           version="$(./gradlew -q "${BUILD_GRADLE_PROJECT}:properties" --console=plain --no-daemon | awk -F': ' '$1 == "version" {print $2; exit}' | tr -d '\r')"
-          if [ -z "${version}" ] || [ "${version}" = "unspecified" ]; then
-            version="${GITHUB_SHA::12}"
-          fi
+          if [ -z "${version}" ] || [ "${version}" = "unspecified" ]; then version="${GITHUB_SHA::12}"; fi
+
           artifact_base="$(basename "${jar}" .jar)"
-          if [ "${artifact_base%-${GITHUB_RUN_NUMBER_VALUE}}" != "${artifact_base}" ]; then
-            filename="${artifact_base}.jar"
-          else
-            filename="${artifact_base}-${GITHUB_RUN_NUMBER_VALUE}.jar"
-          fi
+          artifact_upper="${artifact_base^^}"
+          if [[ "${GITHUB_REF_NAME_VALUE}" == experimental/* || "${GITHUB_REF_NAME_VALUE}" == experimental-* ]]; then channel="wip"
+          elif [[ "${artifact_upper}" == *"-WIP"* || "${artifact_upper}" == *"-PREALPHA"* || "${artifact_upper}" == *"-ALPHA"* ]]; then channel="wip"
+          elif [[ "${artifact_upper}" == *"-DEV"* ]]; then channel="dev"
+          elif [[ "${artifact_upper}" == *"-SNAPSHOT"* || "${artifact_upper}" == *"-BETA"* || "${artifact_upper}" == *"-RC"* ]]; then channel="snapshot"
+          else channel="release"; fi
+
+          game_versions="$(python3 - <<'PY'
+          from pathlib import Path
+          import json, os, re
+          source = Path(os.environ["BUILD_VERSION_SOURCE"])
+          if not source.is_file(): raise SystemExit(f"VersionChecker source {source} does not exist.")
+          text = source.read_text(encoding='utf-8')
+          triples = re.findall(r"SemanticVersion\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)", text)
+          versions = [".".join(parts) for parts in triples]
+          if not versions:
+              versions = re.findall(r'"(\d+(?:\.\d+){1,2})"', text)
+          normalized, seen = [], set()
+          for value in versions:
+              parts = value.split('.')
+              if len(parts) == 3 and parts[2] == '0': value = '.'.join(parts[:2])
+              if value not in seen: seen.add(value); normalized.append(value)
+          if not normalized: raise SystemExit(f"No Minecraft versions found in {source}.")
+          print(json.dumps(normalized, separators=(',', ':')))
+          PY
+          )"
+
+          if [ "${artifact_base%-${GITHUB_RUN_NUMBER_VALUE}}" != "${artifact_base}" ]; then filename="${artifact_base}.jar"; else filename="${artifact_base}-${GITHUB_RUN_NUMBER_VALUE}.jar"; fi
           sha256="$(sha256sum "${jar}" | awk '{print $1}')"
           size="$(stat -c%s "${jar}")"
-
-          export BUILD_VERSION="${version}"
-          export BUILD_FILENAME="${filename}"
-          export BUILD_SHA256="${sha256}"
-          export BUILD_SIZE="${size}"
+          export BUILD_CHANNEL="${channel}" BUILD_GAME_VERSIONS="${game_versions}" BUILD_VERSION="${version}" BUILD_FILENAME="${filename}" BUILD_SHA256="${sha256}" BUILD_SIZE="${size}"
+          echo "Build Explorer channel: ${BUILD_CHANNEL}"
+          echo "Minecraft versions: ${BUILD_GAME_VERSIONS}"
 
           python3 - <<'PY' > build-info.json
-          import json
-          import os
-          import subprocess
+          import json, os, subprocess
           from datetime import datetime, timezone
-
-          before = os.environ.get("GITHUB_BEFORE", "")
-          after = os.environ["GITHUB_AFTER"]
-          rev_range = after
-          if before and before != "0000000000000000000000000000000000000000":
-              rev_range = f"{before}..{after}"
-
-          raw = subprocess.check_output(
-              ["git", "log", "--format=%H%x1f%cI%x1f%s", rev_range],
-              text=True,
-          ).strip()
+          before = os.environ.get('GITHUB_BEFORE', '')
+          after = os.environ['GITHUB_AFTER']
+          rev_range = f"{before}..{after}" if before and before != '0' * 40 else after
+          raw = subprocess.check_output(['git', 'log', '--format=%H%x1f%cI%x1f%s', rev_range], text=True).strip()
           commits = []
           for line in raw.splitlines():
-              if not line:
-                  continue
-              sha, time, message = line.split("\x1f", 2)
-              commits.append({"sha": sha, "time": time, "message": message})
-
+              if line:
+                  sha, time, message = line.split('\x1f', 2)
+                  commits.append({'sha': sha, 'time': time, 'message': message})
           payload = {
-              "id": int(os.environ["GITHUB_RUN_ID_VALUE"]),
-              "time": datetime.now(timezone.utc).isoformat(),
-              "channel": os.environ["BUILD_CHANNEL"],
-              "server": os.environ["BUILD_SERVER"],
-              "version": os.environ["BUILD_VERSION"],
-              "build_number": os.environ["GITHUB_RUN_NUMBER_VALUE"],
-              "filename": os.environ["BUILD_FILENAME"],
-              "sha256": os.environ["BUILD_SHA256"],
-              "size": int(os.environ["BUILD_SIZE"]),
-              "commits": commits[:100],
+              'id': int(os.environ['GITHUB_RUN_ID_VALUE']),
+              'time': datetime.now(timezone.utc).isoformat(),
+              'channel': os.environ['BUILD_CHANNEL'],
+              'platform': os.environ['BUILD_PLATFORM'],
+              'compatible_platforms': [os.environ['BUILD_PLATFORM']],
+              'platform_family': os.environ['BUILD_PLATFORM_FAMILY'],
+              'game_versions': json.loads(os.environ['BUILD_GAME_VERSIONS']),
+              'version': os.environ['BUILD_VERSION'],
+              'build_number': os.environ['GITHUB_RUN_NUMBER_VALUE'],
+              'branch': os.environ['GITHUB_REF_NAME_VALUE'],
+              'commit_sha': after,
+              'filename': os.environ['BUILD_FILENAME'],
+              'sha256': os.environ['BUILD_SHA256'],
+              'size': int(os.environ['BUILD_SIZE']),
+              'commits': commits[:100],
           }
           print(json.dumps(payload, ensure_ascii=False))
           PY
 
           curl --fail-with-body \
-            -X POST "${MINI_PORTAL_URL}/api/builds/ci/${BUILD_SLUG}" \
+            -X POST "${MINI_PORTAL_URL}/api/v2/builds/ci/${BUILD_PROJECT}" \
             -H "X-Build-Token: ${BUILD_CI_TOKEN}" \
             -F "metadata=<build-info.json;type=application/json" \
             -F "artifact=@${jar};filename=${filename};type=application/java-archive"
