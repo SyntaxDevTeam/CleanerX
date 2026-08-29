@@ -95,4 +95,14 @@ class WordFilterTest {
         assertTrue(wordFilter.containsBannedWord("nie badz chujem"))
         assertFalse(wordFilter.containsBannedWord("wymachuje rekami"))
     }
+
+    @Test
+    fun `usuniecie slowa natychmiast przebudowuje aktywne wzorce`() {
+        assertTrue(wordFilter.containsBannedWord("kurwa"))
+
+        assertTrue(wordFilter.removeBannedWord("kurwa"))
+
+        assertFalse(wordFilter.containsBannedWord("kurwa"))
+        assertTrue(wordFilter.containsBannedWord("idiot"))
+    }
 }

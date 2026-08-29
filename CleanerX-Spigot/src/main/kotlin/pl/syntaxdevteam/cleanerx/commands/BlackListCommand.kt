@@ -31,7 +31,6 @@ class BlackListCommand(private val plugin: CleanerX, private val audiences: Bukk
                     }
                     plugin.wordFilter.reloadBannedWordsFromFile()
                     plugin.wordFilter.addBannedWord(newWord)
-                    plugin.restartMyTask()
                     sendMessage(sender, mH.stringMessageToComponent("word", "word_added", mapOf("word" to newWord)))
                 } else {
                     sendMessage(sender, mH.stringMessageToComponent("word", "no_word_provided"))
@@ -46,7 +45,6 @@ class BlackListCommand(private val plugin: CleanerX, private val audiences: Bukk
                     }
                     plugin.wordFilter.reloadBannedWordsFromFile()
                     if (plugin.wordFilter.removeBannedWord(wordToRemove)) {
-                        plugin.restartMyTask()
                         sendMessage(
                             sender,
                             mH.stringMessageToComponent("word", "word_removed", mapOf("word" to wordToRemove))

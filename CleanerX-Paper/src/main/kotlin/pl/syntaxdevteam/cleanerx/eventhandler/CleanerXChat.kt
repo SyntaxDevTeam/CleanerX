@@ -79,9 +79,6 @@ class CleanerXChat(
         if (lpcMode) {
             return
         }
-        if (event.isCancelled && !flectonePulseMode) {
-            return
-        }
         try {
             if (shouldSkipCensorship(event.player)) {
                 return
@@ -103,7 +100,6 @@ class CleanerXChat(
                 return
             }
 
-            // dalej klasyczna cenzura wulgaryzmów
             val words = message.split("\\s+".toRegex())
             val swearCount = words.count { wordFilter.containsBannedWord(it) }
 
@@ -112,6 +108,10 @@ class CleanerXChat(
                     swearCounter.incrementSwearCount(event.player, swearCount)
                 }
                 if (flectonePulseMode && plugin.flectonePulseFormattingHooked) {
+                    event.isCancelled = true
+                    event.player.sendMessage(
+                        plugin.messageHandler.stringMessageToComponent("error", "bad-word")
+                    )
                     return
                 }
                 event.message(

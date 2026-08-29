@@ -31,7 +31,6 @@ class WhiteListCommand(private val plugin: CleanerX, private val audiences: Bukk
                         return true
                     }
                     plugin.wordFilter.addWhitelistWord(newWord)
-                    plugin.restartMyTask()
                     audience.sendMessage(mH.stringMessageToComponent("word", "word_added", mapOf("word" to newWord)))
                 } else {
                     audience.sendMessage(mH.stringMessageToComponent("word", "no_word_provided"))
@@ -45,7 +44,6 @@ class WhiteListCommand(private val plugin: CleanerX, private val audiences: Bukk
                         return true
                     }
                     if (plugin.wordFilter.removeWhitelistWord(wordToRemove)) {
-                        plugin.restartMyTask()
                         audience.sendMessage(
                             mH.stringMessageToComponent("word", "word_removed", mapOf("word" to wordToRemove))
                         )

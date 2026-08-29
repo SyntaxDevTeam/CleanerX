@@ -28,7 +28,6 @@ class BlackListCommand(private var plugin: CleanerX) : BasicCommand {
                     }
                     plugin.wordFilter.reloadBannedWordsFromFile()
                     plugin.wordFilter.addBannedWord(newWord)
-                    plugin.restartMyTask()
                     stack.sender.sendMessage(mH.stringMessageToComponent("word", "word_added", mapOf("word" to newWord)))
                 } else {
                     stack.sender.sendMessage(mH.stringMessageToComponent("word", "no_word_provided"))
@@ -43,7 +42,6 @@ class BlackListCommand(private var plugin: CleanerX) : BasicCommand {
                     }
                     plugin.wordFilter.reloadBannedWordsFromFile()
                     if(plugin.wordFilter.removeBannedWord(wordToRemove)) {
-                        plugin.restartMyTask()
                         stack.sender.sendMessage(
                             mH.stringMessageToComponent(
                                 "word",

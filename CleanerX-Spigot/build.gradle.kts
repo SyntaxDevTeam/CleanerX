@@ -11,6 +11,9 @@ repositories {
     maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") {
         name = "spigotmc-repo"
     }
+    maven(url = "https://central.sonatype.com/repository/maven-snapshots/") {
+        name = "central-snapshots"
+    }
     maven("https://oss.sonatype.org/content/groups/public/") {
         name = "sonatype"
     }
@@ -28,37 +31,37 @@ dependencies {
     compileOnly("org.eclipse.aether:aether-api:1.1.0")
     compileOnly("org.yaml:snakeyaml:2.6")
     compileOnly("com.google.code.gson:gson:2.14.0")
-    compileOnly("net.kyori:adventure-key:4.26.1")
+    compileOnly("net.kyori:adventure-key:5.2.0")
     compileOnly("net.kyori:adventure-platform-bukkit:4.4.1")
     compileOnly("net.kyori:adventure-platform-api:4.4.1")
     compileOnly("net.kyori:adventure-platform-facet:4.4.1")
-    compileOnly("net.kyori:adventure-api:4.26.1")
-    compileOnly("net.kyori:adventure-text-serializer-json:4.26.1")
-    compileOnly("net.kyori:adventure-text-serializer-legacy:4.26.1")
-    compileOnly("net.kyori:adventure-text-minimessage:4.26.1")
-    compileOnly("net.kyori:adventure-text-serializer-gson:4.26.1")
-    compileOnly("net.kyori:adventure-text-serializer-plain:4.26.1")
-    compileOnly("net.kyori:adventure-text-serializer-ansi:4.26.1")
+    compileOnly("net.kyori:adventure-api:5.2.0")
+    compileOnly("net.kyori:adventure-text-serializer-json:5.2.0")
+    compileOnly("net.kyori:adventure-text-serializer-legacy:5.2.0")
+    compileOnly("net.kyori:adventure-text-minimessage:5.2.0")
+    compileOnly("net.kyori:adventure-text-serializer-gson:5.2.0")
+    compileOnly("net.kyori:adventure-text-serializer-plain:5.2.0")
+    compileOnly("net.kyori:adventure-text-serializer-ansi:5.2.0")
     compileOnly("net.kyori:examination-api:1.3.0")
     compileOnly("net.kyori:examination-string:1.3.0")
     compileOnly("net.kyori:option:1.1.0")
-    compileOnly("pl.syntaxdevteam:core:1.3.0-R0.4-SNAPSHOT")
-    compileOnly("pl.syntaxdevteam:messageHandler-spigot:1.1.2-R0.1-SNAPSHOT")
+    compileOnly("pl.syntaxdevteam:syntaxcore:1.4.1-R0.1-SNAPSHOT")
+    compileOnly("pl.syntaxdevteam:messageHandler-spigot:1.2.0-R0.3-SNAPSHOT")
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.1")
     implementation("net.byteflux:libby-bukkit:1.3.1")
-    compileOnly("dev.faststats.metrics:bukkit:0.23.0")
+    compileOnly("dev.faststats.metrics:bukkit:0.29.1")
 
     testImplementation(kotlin("test"))
     testImplementation("org.mockito:mockito-core:5.23.0")
     testImplementation("org.mockito:mockito-inline:5.2.0")
     testImplementation("org.mockito.kotlin:mockito-kotlin:6.3.0")
 
-    testImplementation("dev.faststats.metrics:bukkit:0.23.0")
+    testImplementation("dev.faststats.metrics:bukkit:0.29.1")
 }
 
 val targetJavaVersion = 25
 java {
-    toolchain.languageVersion.set(org.gradle.jvm.toolchain.JavaLanguageVersion.of(targetJavaVersion))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(targetJavaVersion))
 }
 
 kotlin {
@@ -84,7 +87,7 @@ tasks.processResources {
 }
 
 plugindeployer {
-    paper { dir = "/home/debian/server/Paper/26.1.2/plugins" } //ostatnia wersja dla Paper
+    paper { dir = "/home/debian/server/Paper/26.2/plugins" } //ostatnia wersja dla Paper
     folia { dir = "/home/debian/server/Folia/26.1.2/plugins" } //ostatnia wersja dla Folia
-    spigot { dir = "/home/debian/server/Spigot/26.1.2/plugins" } //ostatnia wersja dla Spigot
+    spigot { dir = "/home/debian/server/Spigot/26.2/plugins" } //ostatnia wersja dla Spigot
 }

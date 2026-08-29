@@ -27,7 +27,6 @@ class WhiteListCommand(private var plugin: CleanerX) : BasicCommand {
                         return
                     }
                     plugin.wordFilter.addWhitelistWord(newWord)
-                    plugin.restartMyTask()
                     stack.sender.sendMessage(mH.stringMessageToComponent("word", "word_added", mapOf("word" to newWord)))
                 } else {
                     stack.sender.sendMessage(mH.stringMessageToComponent("word", "no_word_provided"))
@@ -41,7 +40,6 @@ class WhiteListCommand(private var plugin: CleanerX) : BasicCommand {
                         return
                     }
                     if(plugin.wordFilter.removeWhitelistWord(wordToRemove)) {
-                        plugin.restartMyTask()
                         stack.sender.sendMessage(
                             mH.stringMessageToComponent(
                                 "word",

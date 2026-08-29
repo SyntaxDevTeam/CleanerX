@@ -23,7 +23,7 @@ class CleanerXChat(
     )
 
 
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = false)
     fun onChat(event: AsyncPlayerChatEvent) {
         handleChat(event)
     }
@@ -33,9 +33,8 @@ class CleanerXChat(
             if (shouldSkipCensorship(event.player)) {
                 return
             }
-            var message: String = event.message
+            val message: String = event.message
 
-            // Blokowanie linków
             if (blockLinks && urlDetectors.any { it.containsUrl(message) }) {
                 event.isCancelled = true
                 val msg = plugin.messageHandler.legacyComponentSerializer(plugin.messageHandler.stringMessageToComponent("error", "no-link"))
@@ -45,21 +44,13 @@ class CleanerXChat(
                 return
             }
 
-            // Sprawdzanie słów zakazanych
-            var swearWordCount = 0
             val words = message.split("\\s+".toRegex())
-            for (word in words) {
-                if (wordFilter.containsBannedWord(word)) {
-                    swearWordCount++
-                }
-            }
+            val swearCount = words.count { wordFilter.containsBannedWord(it) }
 
-            // Cenzura i kara
-            if (swearWordCount > 0) {
-                message = wordFilter.censorMessage(message, fullCensorship)
-                event.message = message
+            if (swearCount > 0) {
+                event.message = wordFilter.censorMessage(message, fullCensorship)
                 if (usePunishment) {
-                    swearCounter.incrementSwearCount(event.player, swearWordCount)
+                    swearCounter.incrementSwearCount(event.player, swearCount)
                 }
             }
 

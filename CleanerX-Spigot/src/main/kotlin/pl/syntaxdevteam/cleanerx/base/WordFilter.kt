@@ -164,6 +164,7 @@ class WordFilter(private val plugin: CleanerX) {
         val lowerWord = word.lowercase(Locale.ROOT)
         return if (bannedWords.contains(lowerWord)) {
             bannedWords.remove(lowerWord)
+            bannedPatterns = bannedWords.mapNotNull { toFilterPattern(it, allowSuffix = true) }
             saveBannedWords()
             plugin.logger.info("Word $word removed from banned words list.")
             true
