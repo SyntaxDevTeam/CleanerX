@@ -34,8 +34,7 @@ class CleanerXChat(
     private val usePunishment = plugin.config.getBoolean("use-punishment", false)
 
     private val urlDetectors: List<UrlDetector> = listOf(
-        UriUrlDetector(),
-        RegexUrlDetector()
+        UriUrlDetector()
     )
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
@@ -52,7 +51,7 @@ class CleanerXChat(
             if (blockLinks && urlDetectors.any { it.containsUrl(message) }) {
                 event.isCancelled = true
                 event.player.sendMessage(
-                    plugin.messageHandler.stringMessageToString("error", "no-link")
+                    plugin.messageHandler.stringMessageToComponent("error", "no-link")
                 )
                 return
             }

@@ -18,8 +18,7 @@ class CleanerXChat(
     private val blockLinks = plugin.config.getBoolean("block-links", false)
     private val usePunishment = plugin.config.getBoolean("use-punishment", false)
     private val urlDetectors: List<UrlDetector> = listOf(
-        UriUrlDetector(),
-        RegexUrlDetector()
+        UriUrlDetector()
     )
 
 
