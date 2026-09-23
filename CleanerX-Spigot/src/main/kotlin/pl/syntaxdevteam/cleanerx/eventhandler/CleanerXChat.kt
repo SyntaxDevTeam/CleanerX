@@ -22,7 +22,7 @@ class CleanerXChat(
     )
 
 
-    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
     fun onChat(event: AsyncPlayerChatEvent) {
         handleChat(event)
     }

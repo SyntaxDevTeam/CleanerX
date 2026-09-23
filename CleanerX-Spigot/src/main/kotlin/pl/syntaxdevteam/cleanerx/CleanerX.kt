@@ -47,6 +47,8 @@ class CleanerX : JavaPlugin(), Listener {
     lateinit var bannedWordsSynchronizer: BannedWordsSynchronizer
     var punisherXApi: Any? = null
     var lpcMode: Boolean = false
+    var flectonePulseMode: Boolean = false
+    var flectonePulseFormattingHooked: Boolean = false
 
     override fun onLoad() {
         libraryLoader = LibraryLoader(this)

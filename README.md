@@ -16,6 +16,7 @@ CleanerX is an advanced chat moderation plugin for Spigot and Paper/Folia server
 - ✅ Plugin update notifications with an option to enable automatic updates
 - ✅ Extensive configuration file for flexible settings (including optional remote banned-words synchronization). Check defaults here: [Paper config](https://github.com/SyntaxDevTeam/CleanerX/blob/main/CleanerX-Paper/src/main/resources/config.yml), [Spigot config](https://github.com/SyntaxDevTeam/CleanerX/blob/main/CleanerX-Spigot/src/main/resources/config.yml)
 - ✅ Multi-language support via `messages_xx.yml` files
+- ✅ Native chat-pipeline compatibility with FlectonePulse 1.13+ on Paper and Spigot
 
 ## ⚙️ Technical Information
 
@@ -89,6 +90,7 @@ Pełny spis komend i uprawnień znajdziesz [tutaj](https://github.com/SyntaxDevT
 * Powiadomienia o aktualizacjach wtyczki z opcją ustawienia automatycznych aktualizacji
 * Rozbudowany plik konfiguracyjny do elastycznych ustawień (w tym opcjonalna synchronizacja zakazanych słów ze źródeł zewnętrznych). Domyślne ustawienia: [Paper config](https://github.com/SyntaxDevTeam/CleanerX/blob/main/CleanerX-Paper/src/main/resources/config.yml), [Spigot config](https://github.com/SyntaxDevTeam/CleanerX/blob/main/CleanerX-Spigot/src/main/resources/config.yml)
 * Wsparcie dla wielu języków przez plik messages_xx.yml
+* Natywna współpraca z pipeline czatu FlectonePulse 1.13+ na Paper i Spigot
 
 ## Informacje techniczne
 * [x] Obsługiwane wersje Minecraft: 1.20.6, 1.21–1.21.11 oraz 26.1 i 26.1.1/2

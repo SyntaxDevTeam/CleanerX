@@ -37,11 +37,13 @@ dependencies {
     compileOnly("pl.syntaxdevteam:syntaxcore:1.4.1-R0.1-SNAPSHOT")
     compileOnly("pl.syntaxdevteam:messageHandler-paper:1.1.2-R0.1-SNAPSHOT")
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.1")
+    compileOnly("net.flectone.pulse:api:1.14.0")
     compileOnly("dev.faststats.metrics:bukkit:0.29.1")
 
     testImplementation(kotlin("test"))
     testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
     testImplementation("io.mockk:mockk:1.14.9")
+    testImplementation("net.flectone.pulse:api:1.14.0")
     testImplementation("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
     testImplementation("pl.syntaxdevteam:syntaxcore:1.4.1-R0.1-SNAPSHOT")
     testImplementation("pl.syntaxdevteam:messageHandler-paper:1.1.2-R0.1-SNAPSHOT")

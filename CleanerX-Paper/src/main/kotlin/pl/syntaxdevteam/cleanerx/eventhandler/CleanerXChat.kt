@@ -73,7 +73,7 @@ class CleanerXChat(
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
     fun onChat(event: AsyncChatEvent) {
         if (lpcMode) {
             return
@@ -82,13 +82,7 @@ class CleanerXChat(
             if (shouldSkipCensorship(event.player)) {
                 return
             }
-            val sourceMessage = if (flectonePulseMode && plugin.flectonePulseFormattingHooked) {
-                event.originalMessage()
-            } else if (flectonePulseMode) {
-                event.message()
-            } else {
-                event.originalMessage()
-            }
+            val sourceMessage = if (flectonePulseMode) event.message() else event.originalMessage()
             val message = plugin.messageHandler.getPlainText(sourceMessage)
 
             if (blockLinks && urlDetectors.any { it.containsUrl(message) }) {
@@ -105,13 +99,6 @@ class CleanerXChat(
             if (swearCount > 0) {
                 if (usePunishment) {
                     swearCounter.incrementSwearCount(event.player, swearCount)
-                }
-                if (flectonePulseMode && plugin.flectonePulseFormattingHooked) {
-                    event.isCancelled = true
-                    event.player.sendMessage(
-                        plugin.messageHandler.stringMessageToComponent("error", "bad-word")
-                    )
-                    return
                 }
                 event.message(
                     Component.text(wordFilter.censorMessage(message, fullCensorship))

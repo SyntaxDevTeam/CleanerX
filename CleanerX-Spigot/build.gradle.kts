@@ -48,6 +48,7 @@ dependencies {
     compileOnly("pl.syntaxdevteam:syntaxcore:1.4.1-R0.1-SNAPSHOT")
     compileOnly("pl.syntaxdevteam:messageHandler-spigot:1.2.0-R0.3-SNAPSHOT")
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.1")
+    compileOnly("net.flectone.pulse:api:1.14.0")
     implementation("net.byteflux:libby-bukkit:1.3.1")
     compileOnly("dev.faststats.metrics:bukkit:0.29.1")
 

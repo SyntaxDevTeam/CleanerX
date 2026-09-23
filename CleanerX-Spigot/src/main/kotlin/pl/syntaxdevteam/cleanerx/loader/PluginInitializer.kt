@@ -14,6 +14,9 @@ import pl.syntaxdevteam.cleanerx.common.ListenerRegistrationMetrics
 import pl.syntaxdevteam.cleanerx.eventhandler.CleanerXChat
 import pl.syntaxdevteam.cleanerx.eventhandler.PlayerJoinListener
 import pl.syntaxdevteam.cleanerx.eventhandler.PlayerQuitListener
+import net.flectone.pulse.FlectonePulseAPI
+import net.flectone.pulse.platform.registry.ListenerRegistry
+import pl.syntaxdevteam.cleanerx.integration.FlectonePulseListener
 import pl.syntaxdevteam.core.SyntaxCore
 import pl.syntaxdevteam.message.SyntaxMessages
 
@@ -59,6 +62,8 @@ class PluginInitializer(private val plugin: CleanerX) {
         plugin.pluginsManager = SyntaxCore.pluginManagerx
         hookPunisherX()
         detectLpc()
+        detectFlectonePulse()
+        hookFlectonePulseFormatting()
     }
 
     private fun registerCommands(){
@@ -121,6 +126,41 @@ class PluginInitializer(private val plugin: CleanerX) {
         plugin.lpcMode = lpcPlugin != null && lpcPlugin.isEnabled
         if (plugin.lpcMode) {
             plugin.logger.info("LPC detected - enabling chat compatibility mode.")
+        }
+    }
+
+    private fun detectFlectonePulse() {
+        val pulse = plugin.server.pluginManager.getPlugin("FlectonePulse")
+        plugin.flectonePulseMode = pulse != null && pulse.isEnabled
+        if (plugin.flectonePulseMode) {
+            plugin.logger.info("FlectonePulse detected - enabling chat compatibility mode.")
+        }
+    }
+
+    private fun hookFlectonePulseFormatting() {
+        plugin.flectonePulseFormattingHooked = false
+        if (!plugin.flectonePulseMode) return
+
+        try {
+            val pulse = FlectonePulseAPI.getInstance()
+            if (pulse == null || !pulse.isReady) {
+                plugin.logger.warning("FlectonePulse detected, but its API is not ready. Chat integration is disabled.")
+                return
+            }
+
+            pulse.get(ListenerRegistry::class.java).registerPermanent(
+                FlectonePulseListener(plugin.wordFilter) {
+                    plugin.config.getBoolean("fullCensorship")
+                }
+            )
+            plugin.flectonePulseFormattingHooked = true
+            plugin.logger.info("Registered a permanent CleanerX listener in the FlectonePulse formatting pipeline.")
+        } catch (exception: LinkageError) {
+            plugin.logger.warning("Unsupported FlectonePulse API version (${exception.javaClass.simpleName}); version 1.13 or newer is required.")
+            plugin.reportError(exception)
+        } catch (exception: RuntimeException) {
+            plugin.logger.warning("Could not hook the FlectonePulse API (${exception.javaClass.simpleName}).")
+            plugin.reportError(exception)
         }
     }
 
