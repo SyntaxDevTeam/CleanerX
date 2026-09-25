@@ -24,4 +24,6 @@ libraries:
   - org.yaml:snakeyaml:2.6
   - org.eclipse.aether:aether-api:1.1.0
   # FastStats dependencies
-  - dev.faststats.metrics:bukkit:0.29.1
+  - dev.faststats.metrics:core:0.30.1
+  - dev.faststats.metrics:config:0.30.1
+  - dev.faststats.metrics:bukkit:0.30.1

@@ -2,10 +2,10 @@ libraries:
   # Basic dependencies
   - org.eclipse.aether:aether-api:1.1.0
   - org.yaml:snakeyaml:2.6
-  - com.google.code.gson:gson:2.13.2
+  - com.google.code.gson:gson:2.14.0
   # SyntaxCore dependencies
   - com.github.ben-manes.caffeine:caffeine:3.2.4
   - pl.syntaxdevteam:syntaxcore:1.4.1-R0.1-SNAPSHOT
   - pl.syntaxdevteam:messageHandler-paper:1.1.2-R0.1-SNAPSHOT
   # FastStats dependencies
-  - dev.faststats.metrics:bukkit:0.29.1
+  - dev.faststats.metrics:bukkit:0.30.1

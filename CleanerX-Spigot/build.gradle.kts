@@ -50,7 +50,7 @@ dependencies {
     compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.1")
     compileOnly("net.flectone.pulse:api:1.14.0")
     implementation("net.byteflux:libby-bukkit:1.3.1")
-    compileOnly("dev.faststats.metrics:bukkit:0.29.1")
+    compileOnly("dev.faststats.metrics:bukkit:0.30.1")
 
     testImplementation(kotlin("test"))
     testImplementation("com.google.guava:guava:33.3.1-jre")
@@ -58,7 +58,7 @@ dependencies {
     testImplementation("org.mockito:mockito-inline:5.2.0")
     testImplementation("org.mockito.kotlin:mockito-kotlin:6.3.0")
 
-    testImplementation("dev.faststats.metrics:bukkit:0.29.1")
+    testImplementation("dev.faststats.metrics:bukkit:0.30.1")
 }
 
 val targetJavaVersion = 25
