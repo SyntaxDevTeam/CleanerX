@@ -28,7 +28,7 @@ jobs:
       has_changes: ${{ steps.products.outputs.has_changes }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -114,7 +114,7 @@ jobs:
     needs: detect
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Set up Java
         uses: actions/setup-java@v5
         with:
@@ -137,7 +137,7 @@ jobs:
       matrix: ${{ fromJSON(needs.detect.outputs.matrix) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Set up Java
