@@ -1,3 +1,6 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import org.gradle.api.file.DuplicatesStrategy
+
 plugins {
     kotlin("jvm")
     id("com.gradleup.shadow")
@@ -85,6 +88,20 @@ tasks.processResources {
     filteringCharset = "UTF-8"
     filesMatching("plugin.yml") {
         expand(props)
+    }
+}
+
+tasks.named<ShadowJar>("shadowJar") {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    mergeServiceFiles()
+
+    filesMatching("META-INF/services/**") {
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
+
+    filesMatching("META-INF/*.kotlin_module") {
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
     }
 }
 
