@@ -5,6 +5,7 @@ plugins {
     kotlin("jvm")
     id("com.gradleup.shadow")
     id("pl.syntaxdevteam.plugindeployer")
+    kotlin("plugin.lombok")
 }
 
 repositories {

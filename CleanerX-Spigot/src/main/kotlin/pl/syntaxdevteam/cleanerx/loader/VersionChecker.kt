@@ -22,7 +22,9 @@ class VersionChecker(private val plugin: CleanerX) {
             SemanticVersion(1, 21, 10),
             SemanticVersion(1, 21, 11),
             SemanticVersion(26, 1, 0),
-            SemanticVersion(26, 1, 1)
+            SemanticVersion(26, 1, 1),
+            SemanticVersion(26, 1, 2),
+            SemanticVersion(26, 2, 0),
         )
 
         fun isVersionSupported(version: String): Boolean =
