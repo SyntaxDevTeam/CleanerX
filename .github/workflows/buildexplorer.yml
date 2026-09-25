@@ -121,7 +121,7 @@ jobs:
           distribution: temurin
           java-version: "25"
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v6
       - name: Test all modules
         run: |
           chmod +x ./gradlew
@@ -146,7 +146,7 @@ jobs:
           distribution: temurin
           java-version: "25"
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v6
       - name: Build selected product
         run: |
           chmod +x ./gradlew
