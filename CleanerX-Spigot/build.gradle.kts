@@ -31,9 +31,9 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.spigotmc:spigot-api:1.21.11-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot-api:1.21.11-R0.2-SNAPSHOT")
     compileOnly("org.eclipse.aether:aether-api:1.1.0")
-    compileOnly("org.yaml:snakeyaml:2.6")
+    compileOnly("org.yaml:snakeyaml:2.7")
     compileOnly("com.google.code.gson:gson:2.14.0")
     compileOnly("net.kyori:adventure-key:5.2.0")
     compileOnly("net.kyori:adventure-platform-bukkit:4.4.1")
@@ -51,16 +51,16 @@ dependencies {
     compileOnly("net.kyori:option:1.1.0")
     compileOnly("pl.syntaxdevteam:syntaxcore:1.4.1-R0.1-SNAPSHOT")
     compileOnly("pl.syntaxdevteam:messageHandler-spigot:1.2.0-R0.3-SNAPSHOT")
-    compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.6.1")
+    compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.7.0")
     compileOnly("net.flectone.pulse:api:1.14.0")
-    implementation("net.byteflux:libby-bukkit:1.3.1")
+    implementation("net.byteflux:libby-bukkit:1.3.2")
     compileOnly("dev.faststats.metrics:bukkit:0.30.1")
 
     testImplementation(kotlin("test"))
-    testImplementation("com.google.guava:guava:33.3.1-jre")
-    testImplementation("org.mockito:mockito-core:5.23.0")
+    testImplementation("com.google.guava:guava:33.7.1-jre")
+    testImplementation("org.mockito:mockito-core:5.24.0")
     testImplementation("org.mockito:mockito-inline:5.2.0")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:6.3.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:6.4.0")
 
     testImplementation("dev.faststats.metrics:bukkit:0.30.1")
 }
