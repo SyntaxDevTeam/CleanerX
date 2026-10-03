@@ -39,6 +39,14 @@ If you have any questions, you might find answers on our [Discord](https://disco
 
 ## 📥 Download
 
+### Build
+
+```bash
+./gradlew clean buildAll
+```
+
+Wersja CleanerX jest zdefiniowana w głównym `build.gradle.kts` i dziedziczona przez moduły Paper oraz Spigot. Wszystkie wersje pluginów Gradle i bibliotek znajdują się w `gradle/libs.versions.toml`; manifesty bibliotek runtime są rozwijane z tych samych wartości. Artefakty mają nazwy `CleanerX-Paper-<wersja>.jar` i `CleanerX-Spigot-<wersja>.jar`.
+
 * Always up-to-date stable version available for download on:
   * Modrinth ![Modrinth Downloads](https://img.shields.io/modrinth/dt/zJ4dsnYc)
   * Hangar   [![Available on Hangar](https://img.shields.io/hangar/dt/CleanerX)](https://hangar.papermc.io/SyntaxDevTeam/CleanerX)

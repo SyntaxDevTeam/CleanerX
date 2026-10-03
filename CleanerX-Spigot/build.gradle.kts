@@ -31,38 +31,38 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.spigotmc:spigot-api:1.21.11-R0.2-SNAPSHOT")
-    compileOnly("org.eclipse.aether:aether-api:1.1.0")
-    compileOnly("org.yaml:snakeyaml:2.7")
-    compileOnly("com.google.code.gson:gson:2.14.0")
-    compileOnly("net.kyori:adventure-key:5.2.0")
-    compileOnly("net.kyori:adventure-platform-bukkit:4.4.1")
-    compileOnly("net.kyori:adventure-platform-api:4.4.1")
-    compileOnly("net.kyori:adventure-platform-facet:4.4.1")
-    compileOnly("net.kyori:adventure-api:5.2.0")
-    compileOnly("net.kyori:adventure-text-serializer-json:5.2.0")
-    compileOnly("net.kyori:adventure-text-serializer-legacy:5.2.0")
-    compileOnly("net.kyori:adventure-text-minimessage:5.2.0")
-    compileOnly("net.kyori:adventure-text-serializer-gson:5.2.0")
-    compileOnly("net.kyori:adventure-text-serializer-plain:5.2.0")
-    compileOnly("net.kyori:adventure-text-serializer-ansi:5.2.0")
-    compileOnly("net.kyori:examination-api:1.3.0")
-    compileOnly("net.kyori:examination-string:1.3.0")
-    compileOnly("net.kyori:option:1.1.0")
-    compileOnly("pl.syntaxdevteam:syntaxcore:1.4.1-R0.1-SNAPSHOT")
-    compileOnly("pl.syntaxdevteam:messageHandler-spigot:1.2.0-R0.3-SNAPSHOT")
-    compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.7.0")
-    compileOnly("net.flectone.pulse:api:1.14.0")
-    implementation("net.byteflux:libby-bukkit:1.3.2")
-    compileOnly("dev.faststats.metrics:bukkit:0.30.1")
+    compileOnly(libs.spigot.api)
+    compileOnly(libs.aether.api)
+    compileOnly(libs.snakeyaml)
+    compileOnly(libs.gson)
+    compileOnly(libs.adventure.key)
+    compileOnly(libs.adventure.platform.bukkit)
+    compileOnly(libs.adventure.platform.api)
+    compileOnly(libs.adventure.platform.facet)
+    compileOnly(libs.adventure.api)
+    compileOnly(libs.adventure.json)
+    compileOnly(libs.adventure.legacy)
+    compileOnly(libs.adventure.minimessage)
+    compileOnly(libs.adventure.gson)
+    compileOnly(libs.adventure.plain)
+    compileOnly(libs.adventure.ansi)
+    compileOnly(libs.examination.api)
+    compileOnly(libs.examination.string)
+    compileOnly(libs.kyori.option)
+    compileOnly(libs.syntaxcore)
+    compileOnly(libs.messagehandler.spigot)
+    compileOnly(libs.punisherx)
+    compileOnly(libs.flectone.pulse)
+    implementation(libs.libby.bukkit)
+    compileOnly(libs.faststats.bukkit)
 
-    testImplementation(kotlin("test"))
-    testImplementation("com.google.guava:guava:33.7.1-jre")
-    testImplementation("org.mockito:mockito-core:5.24.0")
-    testImplementation("org.mockito:mockito-inline:5.2.0")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:6.4.0")
+    testImplementation(libs.kotlin.test.junit5)
+    testImplementation(libs.guava)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.inline)
+    testImplementation(libs.mockito.kotlin)
 
-    testImplementation("dev.faststats.metrics:bukkit:0.30.1")
+    testImplementation(libs.faststats.bukkit)
 }
 
 val targetJavaVersion = 25
@@ -83,16 +83,37 @@ tasks {
     }
 }
 
+val runtimeLibraryVersions = mapOf(
+    "adventureVersion" to libs.versions.adventure.spigot.get(),
+    "adventurePlatformVersion" to libs.versions.adventure.platform.get(),
+    "examinationVersion" to libs.versions.examination.get(),
+    "optionVersion" to libs.versions.kyori.option.get(),
+    "caffeineVersion" to libs.versions.caffeine.get(),
+    "boostedYamlVersion" to libs.versions.boosted.yaml.get(),
+    "syntaxcoreVersion" to libs.versions.syntaxcore.get(),
+    "messagehandlerVersion" to libs.versions.messagehandler.get(),
+    "gsonVersion" to libs.versions.gson.get(),
+    "snakeyamlVersion" to libs.versions.snakeyaml.get(),
+    "aetherVersion" to libs.versions.aether.get(),
+    "faststatsVersion" to libs.versions.faststats.get(),
+)
+
 tasks.processResources {
     val props = mapOf("version" to version, "description" to description)
-    inputs.properties(props)
+    inputs.properties(props + runtimeLibraryVersions)
     filteringCharset = "UTF-8"
     filesMatching("plugin.yml") {
         expand(props)
     }
+    filesMatching("spigot-libraries.yml") {
+        expand(runtimeLibraryVersions)
+    }
 }
 
 tasks.named<ShadowJar>("shadowJar") {
+    archiveBaseName.set("CleanerX-Spigot")
+    archiveClassifier.set("")
+    archiveVersion.set(project.version.toString())
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
     mergeServiceFiles()
@@ -103,6 +124,16 @@ tasks.named<ShadowJar>("shadowJar") {
 
     filesMatching("META-INF/*.kotlin_module") {
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
+
+    relocate("net.byteflux.libby", "pl.syntaxdevteam.cleanerx.libs.libby")
+
+    dependencies {
+        include(dependency("net.byteflux:libby-bukkit"))
+        include(dependency("net.byteflux:libby-core"))
+        include(dependency("org.jetbrains.kotlin:kotlin-stdlib"))
+        include(dependency("org.jetbrains.kotlin:kotlin-stdlib-jdk7"))
+        include(dependency("org.jetbrains.kotlin:kotlin-stdlib-jdk8"))
     }
 }
 

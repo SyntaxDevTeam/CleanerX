@@ -1,7 +1,9 @@
 plugins {
-    kotlin("jvm") version "2.4.20" apply false
-    id("com.gradleup.shadow") version "9.6.1" apply false
-    id("pl.syntaxdevteam.plugindeployer") version "1.0.6-R0.2-SNAPSHOT" apply false
+    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.kotlin.lombok) apply false
+    alias(libs.plugins.shadow) apply false
+    alias(libs.plugins.run.paper) apply false
+    alias(libs.plugins.plugin.deployer) apply false
 }
 
 group = "pl.syntaxdevteam"

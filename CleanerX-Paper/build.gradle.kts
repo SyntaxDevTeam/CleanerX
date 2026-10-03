@@ -6,7 +6,7 @@ plugins {
     kotlin("jvm")
     id("com.gradleup.shadow")
     `maven-publish`
-    id("xyz.jpenilla.run-paper") version "3.1.0"
+    id("xyz.jpenilla.run-paper")
     id("pl.syntaxdevteam.plugindeployer")
 }
 
@@ -27,30 +27,30 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
-    compileOnly("org.eclipse.aether:aether-api:1.1.0")
-    compileOnly("org.yaml:snakeyaml:2.7")
-    compileOnly("com.google.code.gson:gson:2.14.0")
-    compileOnly("net.kyori:adventure-text-serializer-legacy:4.26.1")
-    compileOnly("net.kyori:adventure-text-minimessage:4.26.1")
-    compileOnly("net.kyori:adventure-text-serializer-gson:4.26.1")
-    compileOnly("net.kyori:adventure-text-serializer-plain:4.26.1")
-    compileOnly("net.kyori:adventure-text-serializer-ansi:4.26.1")
-    compileOnly("pl.syntaxdevteam:syntaxcore:1.4.1-R0.1-SNAPSHOT")
-    compileOnly("pl.syntaxdevteam:messageHandler-paper:1.2.0-R0.3-SNAPSHOT")
-    compileOnly("pl.syntaxdevteam.punisher:PunisherX:1.7.0")
-    compileOnly("net.flectone.pulse:api:1.14.0")
-    compileOnly("dev.faststats.metrics:bukkit:0.30.1")
+    compileOnly(libs.paper.api)
+    compileOnly(libs.aether.api)
+    compileOnly(libs.snakeyaml)
+    compileOnly(libs.gson)
+    compileOnly(libs.adventure.paper.legacy)
+    compileOnly(libs.adventure.paper.minimessage)
+    compileOnly(libs.adventure.paper.gson)
+    compileOnly(libs.adventure.paper.plain)
+    compileOnly(libs.adventure.paper.ansi)
+    compileOnly(libs.syntaxcore)
+    compileOnly(libs.messagehandler.paper)
+    compileOnly(libs.punisherx)
+    compileOnly(libs.flectone.pulse)
+    compileOnly(libs.faststats.bukkit)
 
-    testImplementation(kotlin("test"))
-    testImplementation("org.junit.jupiter:junit-jupiter:6.1.3")
-    testImplementation("io.mockk:mockk:1.14.11")
-    testImplementation("net.flectone.pulse:api:1.14.0")
-    testImplementation("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
-    testImplementation("pl.syntaxdevteam:syntaxcore:1.4.1-R0.1-SNAPSHOT")
-    testImplementation("pl.syntaxdevteam:messageHandler-paper:1.2.0-R0.3-SNAPSHOT")
-    testImplementation("dev.faststats.metrics:bukkit:0.30.1")
-    testRuntimeOnly("org.slf4j:slf4j-simple:2.0.20")
+    testImplementation(libs.kotlin.test.junit5)
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.flectone.pulse)
+    testImplementation(libs.paper.api)
+    testImplementation(libs.syntaxcore)
+    testImplementation(libs.messagehandler.paper)
+    testImplementation(libs.faststats.bukkit)
+    testRuntimeOnly(libs.slf4j.simple)
 
 }
 
@@ -81,16 +81,32 @@ tasks{
 }
 
 
+val runtimeLibraryVersions = mapOf(
+    "aetherVersion" to libs.versions.aether.get(),
+    "snakeyamlVersion" to libs.versions.snakeyaml.get(),
+    "gsonVersion" to libs.versions.gson.get(),
+    "caffeineVersion" to libs.versions.caffeine.get(),
+    "syntaxcoreVersion" to libs.versions.syntaxcore.get(),
+    "messagehandlerVersion" to libs.versions.messagehandler.get(),
+    "faststatsVersion" to libs.versions.faststats.get(),
+)
+
 tasks.processResources {
     val props = mapOf("version" to version, "description" to description)
-    inputs.properties(props)
+    inputs.properties(props + runtimeLibraryVersions)
     filteringCharset = "UTF-8"
     filesMatching("paper-plugin.yml") {
         expand(props)
     }
+    filesMatching("paper-libraries.yml") {
+        expand(runtimeLibraryVersions)
+    }
 }
 
 tasks.named<ShadowJar>("shadowJar") {
+    archiveBaseName.set("CleanerX-Paper")
+    archiveClassifier.set("")
+    archiveVersion.set(project.version.toString())
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
     mergeServiceFiles()
@@ -104,7 +120,7 @@ tasks.named<ShadowJar>("shadowJar") {
     }
 }
 
-val sourcesJar by tasks.registering(Jar::class) {
+val sourcesJar = tasks.register<Jar>("sourcesJar") {
     archiveClassifier.set("sources")
     from(sourceSets.main.get().allSource)
 }
