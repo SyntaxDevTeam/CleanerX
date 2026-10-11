@@ -27,6 +27,8 @@ repositories {
 }
 
 dependencies {
+    testImplementation(libs.aether.api)
+    testImplementation(libs.snakeyaml)
     compileOnly(libs.paper.api)
     compileOnly(libs.aether.api)
     compileOnly(libs.snakeyaml)
