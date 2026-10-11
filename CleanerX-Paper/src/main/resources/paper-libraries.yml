@@ -1,3 +1,12 @@
+repositories:
+  syntaxdevteam-snapshots: "https://nexus.syntaxdevteam.pl/repository/maven-snapshots/"
+  syntaxdevteam-releases: "https://nexus.syntaxdevteam.pl/repository/maven-releases/"
+  central: "MAVEN_CENTRAL_DEFAULT_MIRROR"
+  paper: "https://repo.papermc.io/repository/maven-public/"
+  jitpack: "https://jitpack.io/"
+  codemc-snapshots: "https://repo.codemc.io/repository/maven-snapshots/"
+  faststatsReleases: "https://repo.faststats.dev/releases"
+
 libraries:
   # Basic dependencies
   - org.eclipse.aether:aether-api:${aetherVersion}
@@ -8,4 +17,5 @@ libraries:
   - pl.syntaxdevteam:syntaxcore:${syntaxcoreVersion}
   - pl.syntaxdevteam:messageHandler-paper:${messagehandlerVersion}
   # FastStats dependencies
-  - dev.faststats.metrics:bukkit:${faststatsVersion}
+  - coordinate: dev.faststats.metrics:bukkit:${faststatsVersion}
+    repository: faststatsReleases
