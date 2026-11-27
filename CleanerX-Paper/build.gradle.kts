@@ -1,5 +1,7 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import org.gradle.api.attributes.java.TargetJvmVersion
 import org.gradle.api.file.DuplicatesStrategy
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.gradle.api.publish.maven.MavenPublication
 
 plugins {
@@ -8,6 +10,7 @@ plugins {
     `maven-publish`
     id("xyz.jpenilla.run-paper")
     id("pl.syntaxdevteam.plugindeployer")
+    kotlin("plugin.lombok")
 }
 
 repositories {
@@ -33,12 +36,7 @@ dependencies {
     compileOnly(libs.aether.api)
     compileOnly(libs.snakeyaml)
     compileOnly(libs.gson)
-    compileOnly(libs.adventure.paper.legacy)
-    compileOnly(libs.adventure.paper.minimessage)
-    compileOnly(libs.adventure.paper.gson)
-    compileOnly(libs.adventure.paper.plain)
-    compileOnly(libs.adventure.paper.ansi)
-    compileOnly(libs.syntaxcore)
+    implementation(libs.syntaxcore) { isTransitive = false }
     compileOnly(libs.messagehandler.paper)
     compileOnly(libs.punisherx)
     compileOnly(libs.flectone.pulse)
@@ -49,23 +47,37 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.flectone.pulse)
     testImplementation(libs.paper.api)
-    testImplementation(libs.syntaxcore)
     testImplementation(libs.messagehandler.paper)
     testImplementation(libs.faststats.bukkit)
     testRuntimeOnly(libs.slf4j.simple)
+    testImplementation(kotlin("test"))
 
 }
 
-val targetJavaVersion = 25
+val targetJavaVersion = 21
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(targetJavaVersion))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(25))
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 kotlin {
-    jvmToolchain(targetJavaVersion)
+    compilerOptions.jvmTarget.set(JvmTarget.JVM_21)
 }
 
-tasks{
+tasks.withType<JavaCompile>().configureEach {
+    options.release.set(targetJavaVersion)
+}
+
+// The optional FlectonePulse API requires Java 25. CleanerX itself targets Java 21.
+listOf(
+    configurations.compileClasspath,
+    configurations.testCompileClasspath,
+    configurations.testRuntimeClasspath
+).forEach {
+    it.configure { attributes.attribute(TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 25) }
+}
+
+tasks {
     build {
         dependsOn("shadowJar")
     }
@@ -87,8 +99,6 @@ val runtimeLibraryVersions = mapOf(
     "aetherVersion" to libs.versions.aether.get(),
     "snakeyamlVersion" to libs.versions.snakeyaml.get(),
     "gsonVersion" to libs.versions.gson.get(),
-    "caffeineVersion" to libs.versions.caffeine.get(),
-    "syntaxcoreVersion" to libs.versions.syntaxcore.get(),
     "messagehandlerVersion" to libs.versions.messagehandler.get(),
     "faststatsVersion" to libs.versions.faststats.get(),
 )
@@ -110,6 +120,9 @@ tasks.named<ShadowJar>("shadowJar") {
     archiveClassifier.set("")
     archiveVersion.set(project.version.toString())
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    // SyntaxCore is published as a fat JAR. Paper supplies the Adventure classes.
+    exclude("net/kyori/**", "META-INF/versions/*/net/kyori/**", "META-INF/services/net.kyori.*", "com/google/gson/**")
 
     mergeServiceFiles()
 

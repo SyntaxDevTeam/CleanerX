@@ -1,6 +1,46 @@
 # Changelog
 
+## [1.5.9] - Unreleased
+
+### Compatibility
+
+* Added support for Minecraft 26.2 and 26.3 on Paper and Folia.
+* The same JAR supports both Adventure 4.x and 5.x. Verified on Paper 1.20.6, 26.2, and 26.3, and on Folia 26.2 and 26.3.
+
+### Technical changes
+
+* Updated to `messageHandler-paper` 1.3.0-R0.4-SNAPSHOT. Chat and command output continue to use native Adventure components, and formatted messages retain their placeholders.
+* Compiled against Paper API 1.20.6 with Java 21 bytecode. The JAR uses Adventure supplied by the server and contains no bundled Adventure classes.
+* Removed the standalone Caffeine download. MessageHandler and SyntaxCore contain the Caffeine classes they use.
+
+## [1.5.8] - 2026-05-09
+
+## What's Changed
+
+### Functional Changes:
+* Added support for [FlectonePulse](https://github.com/Flectone/FlectonePulse)
+
+## Technical Changes:
+* Update Gradle wrapper to version 9.5.0
+
+## [1.5.7] - 2026-04-11
+
+## Changelog
+### Functional changes:
+* Added backward compatibility with Java 21
+* Added support for Minecraft version 1.20.6, 1.21 - 1.21.11, 26.1, 26.1.1/2
+* A new revolutionary statistics system, FastStats, has been added
+
+## [1.5.6] - 2026-04-04
+
+Changes:
+* **Added support for Minecraft 26.1.1**
+* Centralize Gradle project metadata in root build
+* Minor corrections
+* Updated dependencies and libraries
+
 ## [1.5.5] - 2026-03-28
+
 ### Function changes:
 - Add optional remote banned-words synchronization
   ```yaml

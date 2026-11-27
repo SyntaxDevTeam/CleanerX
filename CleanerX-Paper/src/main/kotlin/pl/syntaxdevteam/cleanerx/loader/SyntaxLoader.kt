@@ -45,7 +45,9 @@ class SyntaxLoader : PluginLoader {
             val configuredUrl = (value as? String)?.trim().orEmpty()
             require(id.isNotEmpty() && configuredUrl.isNotEmpty()) { "Invalid repository entry: $key" }
             val url = if (configuredUrl == "MAVEN_CENTRAL_DEFAULT_MIRROR") {
-                MavenLibraryResolver.MAVEN_CENTRAL_DEFAULT_MIRROR
+                System.getenv("PAPER_DEFAULT_CENTRAL_REPOSITORY")
+                    ?: System.getProperty("org.bukkit.plugin.java.LibraryLoader.centralURL")
+                    ?: "https://maven-central.storage-download.googleapis.com/maven2"
             } else {
                 configuredUrl
             }

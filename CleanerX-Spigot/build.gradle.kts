@@ -35,21 +35,13 @@ dependencies {
     compileOnly(libs.aether.api)
     compileOnly(libs.snakeyaml)
     compileOnly(libs.gson)
-    compileOnly(libs.adventure.key)
-    compileOnly(libs.adventure.platform.bukkit)
-    compileOnly(libs.adventure.platform.api)
-    compileOnly(libs.adventure.platform.facet)
-    compileOnly(libs.adventure.api)
-    compileOnly(libs.adventure.json)
-    compileOnly(libs.adventure.legacy)
-    compileOnly(libs.adventure.minimessage)
-    compileOnly(libs.adventure.gson)
-    compileOnly(libs.adventure.plain)
-    compileOnly(libs.adventure.ansi)
-    compileOnly(libs.examination.api)
-    compileOnly(libs.examination.string)
+    compileOnly(libs.adventure.platform.bukkit) { isTransitive = false }
+    compileOnly(libs.adventure.platform.api) { isTransitive = false }
+    compileOnly(libs.adventure.platform.facet) { isTransitive = false }
+    compileOnly(libs.adventure.json) { isTransitive = false }
+    compileOnly(libs.adventure.gson) { isTransitive = false }
     compileOnly(libs.kyori.option)
-    compileOnly(libs.syntaxcore)
+    implementation(libs.syntaxcore) { isTransitive = false }
     compileOnly(libs.messagehandler.spigot)
     compileOnly(libs.punisherx)
     compileOnly(libs.flectone.pulse)
@@ -86,11 +78,7 @@ tasks {
 val runtimeLibraryVersions = mapOf(
     "adventureVersion" to libs.versions.adventure.spigot.get(),
     "adventurePlatformVersion" to libs.versions.adventure.platform.get(),
-    "examinationVersion" to libs.versions.examination.get(),
     "optionVersion" to libs.versions.kyori.option.get(),
-    "caffeineVersion" to libs.versions.caffeine.get(),
-    "boostedYamlVersion" to libs.versions.boosted.yaml.get(),
-    "syntaxcoreVersion" to libs.versions.syntaxcore.get(),
     "messagehandlerVersion" to libs.versions.messagehandler.get(),
     "gsonVersion" to libs.versions.gson.get(),
     "snakeyamlVersion" to libs.versions.snakeyaml.get(),
@@ -116,6 +104,9 @@ tasks.named<ShadowJar>("shadowJar") {
     archiveVersion.set(project.version.toString())
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
+    // The loader supplies Adventure from MessageHandler and the platform bridge.
+    exclude("net/kyori/**", "META-INF/versions/*/net/kyori/**", "META-INF/services/net.kyori.*", "com/google/gson/**")
+
     mergeServiceFiles()
 
     filesMatching("META-INF/services/**") {
@@ -129,6 +120,7 @@ tasks.named<ShadowJar>("shadowJar") {
     relocate("net.byteflux.libby", "pl.syntaxdevteam.cleanerx.libs.libby")
 
     dependencies {
+        include(dependency("pl.syntaxdevteam:syntaxcore"))
         include(dependency("net.byteflux:libby-bukkit"))
         include(dependency("net.byteflux:libby-core"))
         include(dependency("org.jetbrains.kotlin:kotlin-stdlib"))

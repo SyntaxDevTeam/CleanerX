@@ -1,23 +1,15 @@
 libraries:
   # Adventure dependencies
-  - net.kyori:adventure-api:${adventureVersion}
-  - net.kyori:adventure-key:${adventureVersion}
   - net.kyori:adventure-platform-api:${adventurePlatformVersion}
   - net.kyori:adventure-platform-bukkit:${adventurePlatformVersion}
   - net.kyori:adventure-platform-facet:${adventurePlatformVersion}
-  - net.kyori:adventure-text-minimessage:${adventureVersion}
+  - net.kyori:adventure-text-serializer-bungeecord:${adventurePlatformVersion}
+  - net.kyori:adventure-nbt:${adventureVersion}
+  - net.kyori:adventure-text-serializer-commons:${adventureVersion}
   - net.kyori:adventure-text-serializer-json:${adventureVersion}
   - net.kyori:adventure-text-serializer-gson:${adventureVersion}
-  - net.kyori:adventure-text-serializer-legacy:${adventureVersion}
-  - net.kyori:adventure-text-serializer-plain:${adventureVersion}
-  - net.kyori:adventure-text-serializer-ansi:${adventureVersion}
-  - net.kyori:examination-api:${examinationVersion}
-  - net.kyori:examination-string:${examinationVersion}
   - net.kyori:option:${optionVersion}
   # SyntaxDevTeam shared libraries
-  - com.github.ben-manes.caffeine:caffeine:${caffeineVersion}
-  - dev.dejvokep:boosted-yaml:${boostedYamlVersion}
-  - pl.syntaxdevteam:syntaxcore:${syntaxcoreVersion}
   - pl.syntaxdevteam:messageHandler-spigot:${messagehandlerVersion}
   # Utility libraries
   - com.google.code.gson:gson:${gsonVersion}

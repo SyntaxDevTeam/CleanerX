@@ -12,7 +12,7 @@ class CleanerXCommand(private val plugin: CleanerX) : BasicCommand {
 
     override fun execute(@NotNull stack: CommandSourceStack, @NotNull args: Array<String>) {
         if (!stack.sender.hasPermission("cleanerx.cmd.crx")) {
-            stack.sender.sendMessage(mH.getMessage("error", "no_permission"))
+            stack.sender.sendMessage(mH.stringMessageToComponent("error", "no_permission"))
             return
         }
         val pluginMeta = (plugin as LifecycleEventOwner).pluginMeta
@@ -84,15 +84,15 @@ class CleanerXCommand(private val plugin: CleanerX) : BasicCommand {
                 args[0].equals("reload", ignoreCase = true) -> {
 
                         plugin.restartMyTask()
-                        stack.sender.sendMessage(mH.getMessage("reload", "success"))
+                        stack.sender.sendMessage(mH.stringMessageToComponent("reload", "success"))
 
                 }
                 else -> {
-                    stack.sender.sendMessage(mH.getMessage("error", "unknown_command"))
+                    stack.sender.sendMessage(mH.stringMessageToComponent("error", "unknown_command"))
                 }
             }
         } else {
-            stack.sender.sendMessage(mH.getMessage("error", "unknown_command"))
+            stack.sender.sendMessage(mH.stringMessageToComponent("error", "unknown_command"))
         }
     }
     override fun suggest(@NotNull stack: CommandSourceStack, @NotNull args: Array<String>): List<String> {

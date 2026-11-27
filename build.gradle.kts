@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "pl.syntaxdevteam"
-version = "1.5.9-DEV"
+version = "1.5.9-R0.1-SNAPSHOT"
 description = "A sophisticated plugin designed to filter and replace inappropriate language with censored alternatives or remove it entirely, ensuring a clean and respectful gaming environment."
 
 allprojects {

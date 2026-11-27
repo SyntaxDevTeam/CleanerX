@@ -12,9 +12,6 @@ libraries:
   - org.eclipse.aether:aether-api:${aetherVersion}
   - org.yaml:snakeyaml:${snakeyamlVersion}
   - com.google.code.gson:gson:${gsonVersion}
-  # SyntaxCore dependencies
-  - com.github.ben-manes.caffeine:caffeine:${caffeineVersion}
-  - pl.syntaxdevteam:syntaxcore:${syntaxcoreVersion}
   - pl.syntaxdevteam:messageHandler-paper:${messagehandlerVersion}
   # FastStats dependencies
   - coordinate: dev.faststats.metrics:bukkit:${faststatsVersion}
